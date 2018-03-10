@@ -46,4 +46,14 @@ public class RealMachine
 	{
 		this.TI = TI;
 	}
+	//Commands
+	public void ADD(string reg, int par1, int par2)
+	{
+		switch(reg){
+			case "DRA":
+				this.DRA = par1 + par2;
+			case "DRB":
+				this.DRB = par1 + par2;
+		}
+	} 
 }
