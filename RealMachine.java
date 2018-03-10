@@ -1,6 +1,6 @@
 public class RealMachine
 {
-	private int[] userMemory = int[1500];
+	private int[] userMemory = new int[1500];
 	//Processor
 	//Data Registers
 	private int DRA = 0000;
@@ -18,7 +18,7 @@ public class RealMachine
 	private int IC = 0000;
 	private int SP = 0000;
 	private int PTR = 0000;
-	private boolean MODE = 0000;
+	private boolean MODE = false;
 	private int SF = 0000;
 	
 	//getters and setters
@@ -86,18 +86,6 @@ public class RealMachine
 	{
 		this.CS = CS;
 	}
-	public int getCS()
-	{
-		return this.CS;
-	}
-	public void setCS(int CS)
-	{
-		this.CS = CS;
-	}
-	public int getSS()
-	{
-		return this.SS;
-	}
 	public void getSS(int SS)
 	{
 		this.SS = SS;
@@ -126,11 +114,11 @@ public class RealMachine
 	{
 		this.PTR = PTR;
 	}
-	public int getMODE()
+	public boolean getMODE()
 	{
 		return this.MODE;
 	}
-	public void setMODE(int MODE)
+	public void setMODE(boolean MODE)
 	{
 		this.MODE = MODE;
 	}
@@ -144,7 +132,7 @@ public class RealMachine
 	}
 
 	//Commands
-	public void ADD(string reg, int par1, int par2)
+	public void ADD(String reg, int par1, int par2)
 	{
 		switch(reg){
 			case "DRA":
