@@ -20,4 +20,30 @@ public class RealMachine
 	private int PTR = 0000;
 	private boolean MODE = 0000;
 	private int SF = 0000;
+	
+	//getters and setters
+	private int getDRA()
+	{
+		return this.DRA;
+	}
+	private void setDRA(int DRA)
+	{
+		this.DRA = DRA;
+	}
+	private int getDRB()
+	{
+		return this.DRB;
+	}
+	private void setDRB(int DRB)
+	{
+		this.DRB = DRB;
+	}
+	private int getTI()
+	{
+		return this.TI;
+	}
+	private void setTI(int TI)
+	{
+		this.TI = TI;
+	}
 }
