@@ -6,7 +6,7 @@ public class Main
 	{
 		Scanner input = new Scanner(System.in);
 		RealMachine realMachine = new RealMachine();
-		VirtualMachine vm = new VirtualMachine(realMachine);
+		//Machine 	machine		= new Machine(); //TODO: ištrinti testavimas
 		HashMap<String, Integer> command = new HashMap<String, Integer>();
 		ArrayList<VirtualMachine> virtualMachines = new ArrayList<VirtualMachine>();
 
@@ -88,5 +88,11 @@ public class Main
 	}
 	public static ArrayList<VirtualMachine> executeVirtuals(ArrayList<VirtualMachine> virtualMachines){
 		return virtualMachines;
+
+		//Set set = command.entrySet();
+		
+		//Iterator i = set.iterator();
+		//machine.ADD("DRB", -1, 11); //TODO: ištrinti testavimas
+	//System.out.println(machine.DRB); //TODO: ištrinti testavimas
 	}
 }
