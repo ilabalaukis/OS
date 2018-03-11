@@ -144,4 +144,144 @@ public class Machine
 				System.out.println("Incorrect register");
 		}
 	}
+	public void MUL(String reg, int par1, int par2)
+	{
+		switch(reg)
+		{
+			case "DRA":
+				this.DRA = par1 * par2;
+				break;
+			case "DRB":
+				this.DRB = par1 * par2;
+				break;
+			case "SF":
+				this.SF = par1 * par2;
+				break;
+			default:
+				System.out.println("Incorrect register");
+		}
+	}
+	public void DIV(String reg, int par1, int par2)
+	{
+		switch(reg)
+		{
+			case "DRA":
+				this.DRA = par1 / par2;
+				this.DRB = par1 % par2;
+				break;
+			case "DRB":
+				this.DRA = par1 / par2;
+				this.DRB = par1 % par2;
+				break;
+			default:
+				System.out.println("Incorrect register");
+		}
+	}
+	/*public void PUSH(int par1)
+	{
+		this.SS = SS + SP;
+	}
+	virtual memory or memory
+	*/
+	public void OR(String reg, int par1, int par2)
+	{
+		switch(reg)
+		{
+			case "IC":
+				this.IC = par1 | par2;
+				break;
+			case "SF":
+				this.SF = par1 | par2;
+				break;
+			case "DRA":
+				this.DRA = par1 | par2;
+				break;
+			case "DRB":
+				this.DRB = par1 | par2;
+				break;
+			default:
+				System.out.println("Incorrect register");
+		}
+	}
+	public void XOR(String reg, int par1, int par2)
+	{
+		switch(reg)
+		{
+			case "IC":
+				this.IC = par1 ^ par2;
+				break;
+			case "SF":
+				this.SF = par1 ^ par2;
+				break;
+			case "DRA":
+				this.DRA = par1 ^ par2;
+				break;
+			case "DRB":
+				this.DRB = par1 ^ par2;
+				break;
+			default:
+				System.out.println("Incorrect register");
+		}
+	}
+	public void AND(String reg, int par1, int par2)
+	{
+		switch(reg)
+		{
+			case "IC":
+				this.IC = par1 & par2;
+				break;
+			case "SF":
+				this.SF = par1 & par2;
+				break;
+			case "DRA":
+				this.DRA = par1 & par2;
+				break;
+			case "DRB":
+				this.DRB = par1 & par2;
+				break;
+			default:
+				System.out.println("Incorrect register");
+		}
+	}
+	public void NOT(String reg, int par1)
+	{
+		switch(reg)
+		{
+			case "IC":
+				this.IC = par1 + 1;
+				break;
+			case "SF":
+				this.SF = par1 + 1;
+				break;
+			case "DRA":
+				this.DRA = par1 + 1;
+				break;
+			case "DRB":
+				this.DRB = par1 + 1;
+				break;
+			default:
+				System.out.println("Incorrect register");
+		}
+	}
+	public void NEG(String reg, int par1)
+	{
+		switch(reg)
+		{
+			case "IC":
+				this.IC = par1 * (-1);
+				break;
+			case "SF":
+				this.SF = par1 * (-1);
+				break;
+			case "DRA":
+				this.DRA = par1 * (-1);
+				break;
+			case "DRB":
+				this.DRB = par1 * (-1);
+				break;
+			default:
+				System.out.println("Incorrect register");
+		}
+	}
+
 }
