@@ -1,75 +1,28 @@
-public class RealMachine
+public class RealMachine extends Machine
 {
 	private int[] userMemory = new int[1500];
-	//Processor
-	//Data Registers
-	private int DRA = 0000;
-	private int DRB = 0000;
+	//public RealMachine()
+	//{
+	//	super 
+	//}
+	
 	//Interrupt Registers
 	private int TI = 0000;
 	private int PI = 0000;
 	private int IOI = 0000;
 	private int SI = 0000;
 	//Segment Registers
-	private int DS = 0000;
-	private int CS = 0700;
-	private int SS = 1400;
+	//private int DS = 0000;
+	//private int CS = 0700;
+	//private int SS = 1400;
 	//Other Registers
-	private int IC = 0000;
-	private int SP = 0000;
+	//private int IC = 0000;
+	//private int SP = 0000;
 	private int PTR = 0000;
 	private boolean MODE = false;
-	private int SF = 0000;
+	//private int SF = 0000;
 	
 	//getters and setters
-	public int getDRA()
-	{
-		return this.DRA;
-	}
-	public void setDRA(int DRA)
-	{
-		this.DRA = DRA;
-	}
-	public int getDRB()
-	{
-		return this.DRB;
-	}
-	public void setDRB(int DRB)
-	{
-		this.DRB = DRB;
-	}
-	public int getTI()
-	{
-		return this.TI;
-	}
-	public void setTI(int TI)
-	{
-		this.TI = TI;
-	}
-	public int getPI()
-	{
-		return this.PI;
-	}
-	public void setPI(int PI)
-	{
-		this.PI = PI;
-	}
-	public int getIOI()
-	{
-		return this.IOI;
-	}
-	public void setIOI(int IOI)
-	{
-		this.IOI = IOI;
-	}
-	public int getSI()
-	{
-		return this.SI;
-	}
-	public void setSI(int setSI)
-	{
-		this.SI = SI;
-	}
 	public int getDS()
 	{
 		return this.DS;

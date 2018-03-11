@@ -4,8 +4,8 @@ public class Main
 	public static void main(String[] args)
 	{
 		RealMachine realMachine = new RealMachine();
-
-		HashMap command = new HashMap();
+		//VirtualMachine vm = new Virtualm(realMachine)
+		HashMap<String, Integer> command = new HashMap<String, Integer>();
 
 		command.put("ADD", new Integer(0001));
     	command.put("SUB", new Integer(0002));
