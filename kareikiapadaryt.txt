@@ -1,0 +1,5 @@
+>virtualios mašinos klasę sukurti.
+>Sukurti konteinerį Main klasėj (aka listą/linkedlistą ar panašiai), į kurį galėtume dėt virtualias mašinas.
+>Sukurti realios mašinos metodus (jų trūksta mūsų projekte).
+>Sukurti virtualios mašinos metodus (jie yra mūsų projektre)
+>Sukurti hashą, kad versti Komandų pavadinimus į kodus.
