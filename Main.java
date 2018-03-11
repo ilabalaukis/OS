@@ -35,5 +35,9 @@ public class Main
 
 		command.put("LUM", new Integer(0071));
 		command.put("LEM", new Integer(0072));
+
+		Set set = command.entrySet();
+		
+		Iterator i = set.iterator();
 	}
 }
