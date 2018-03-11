@@ -112,7 +112,8 @@ public class Machine
 	//Virtual Machine Commands Commands
 	public void ADD(String reg, int par1, int par2)
 	{
-		switch(reg){
+		switch(reg)
+		{
 			case "DRA":
 				this.DRA = par1 + par2;
 				break;
@@ -121,11 +122,15 @@ public class Machine
 				break;
 			case "SF":
 				this.SF = par1 + par2;
+				break;
+			default:
+				System.out.println ("Incorrect register");
 		}
 	}
 	public void SUB(String reg, int par1, int par2)
 	{
-		switch(reg){
+		switch(reg)
+		{
 			case "DRA":
 				this.DRA = par1 - par2;
 				break;
@@ -134,6 +139,9 @@ public class Machine
 				break;
 			case "SF":
 				this.SF = par1 - par2;
+				break;,,
+			default:
+				System.out.println("Incorrect register");
 		}
 	}
 }
