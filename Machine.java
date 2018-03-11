@@ -139,7 +139,7 @@ public class Machine
 				break;
 			case "SF":
 				this.SF = par1 - par2;
-				break;,,
+				break;
 			default:
 				System.out.println("Incorrect register");
 		}
