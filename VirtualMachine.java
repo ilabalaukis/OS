@@ -1,3 +1,16 @@
 public class VirtualMachine
 {
+	//private int[] userMemory = new int[1500];
+	//Processor
+	//Data Registers
+	private int DRA = 0000;
+	private int DRB = 0000;
+	//Segment Registers
+	private int DS = 0000;
+	private int CS = 0700;
+	private int SS = 1400;
+	//Other Registers
+	private int IC = 0000;
+	private int SP = 0000;
+	private int SF = 0000;
 }
