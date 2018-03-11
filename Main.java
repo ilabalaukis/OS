@@ -4,7 +4,9 @@ public class Main
 	public static void main(String[] args)
 	{
 		RealMachine realMachine = new RealMachine();
+
 		HashMap command = new HashMap();
+
 		command.put("ADD", new int(0001));
     	command.put("SUB", new int(0002));
       	command.put("MUL", new int(0003));
