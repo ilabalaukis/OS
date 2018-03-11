@@ -7,33 +7,33 @@ public class Main
 
 		HashMap command = new HashMap();
 
-		command.put("ADD", new int(0001));
-    	command.put("SUB", new int(0002));
-      	command.put("MUL", new int(0003));
-      	command.put("DIV", new int(0004));
+		command.put("ADD", new Integer(0001));
+    	command.put("SUB", new Integer(0002));
+      	command.put("MUL", new Integer(0003));
+      	command.put("DIV", new Integer(0004));
 
-      	command.put("LR", new int(0011));
-		command.put("LR", new int(0011));
+      	command.put("LR", new Integer(0011));
+		command.put("LR", new Integer(0011));
 
-		command.put("PUSH", new int(0021));
-		command.put("POP", new int(0022));
+		command.put("PUSH", new Integer(0021));
+		command.put("POP", new Integer(0022));
 
-		command.put("OR", new int(0031));
-		command.put("AND", new int(0032));
-		command.put("XOR", new int(0033));
-		command.put("NOT", new int(0034));
-		command.put("NEG", new int(0035));
-		command.put("CMP", new int(0036));
+		command.put("OR", new Integer(0031));
+		command.put("AND", new Integer(0032));
+		command.put("XOR", new Integer(0033));
+		command.put("NOT", new Integer(0034));
+		command.put("NEG", new Integer(0035));
+		command.put("CMP", new Integer(0036));
 
-		command.put("JMP", new int(0041));
-		command.put("JMG", new int(0042));
-		command.put("JME", new int(0043));
+		command.put("JMP", new Integer(0041));
+		command.put("JMG", new Integer(0042));
+		command.put("JME", new Integer(0043));
 
-		command.put("HALT", new int(0051));
+		command.put("HALT", new Integer(0051));
 
-		command.put("PRNT", new int(0061));
+		command.put("PRNT", new Integer(0061));
 
-		command.put("LUM", new int(0071));
-		command.put("LEM", new int(0072));
+		command.put("LUM", new Integer(0071));
+		command.put("LEM", new Integer(0072));
 	}
 }
