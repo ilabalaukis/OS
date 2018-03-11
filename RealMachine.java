@@ -7,10 +7,10 @@ public class RealMachine extends Machine
 	//}
 	
 	//Interrupt Registers
-	private int TI = 0000;
-	private int PI = 0000;
-	private int IOI = 0000;
-	private int SI = 0000;
+	private int TI = 0;
+	private int PI = 0;
+	private int IOI = 0;
+	private int SI = 0;
 	//Segment Registers
 	//private int DS = 0000;
 	//private int CS = 0700;
@@ -18,11 +18,43 @@ public class RealMachine extends Machine
 	//Other Registers
 	//private int IC = 0000;
 	//private int SP = 0000;
-	private int PTR = 0000;
+	private int PTR = 0;
 	private boolean MODE = false;
 	//private int SF = 0000;
 	
 	//getters and setters
+	public int getTI()
+	{
+		return this.TI;
+	}
+	public void setTI(int TI)
+	{
+		this.TI = TI;
+	}
+	public int getPI()
+	{
+		return this.PI;
+	}
+	public void setPI(int PI)
+	{
+		this.PI = PI;
+	}
+	public int getIOI()
+	{
+		return this.IOI;
+	}
+	public void setIOI(int IOI)
+	{
+		this.IOI = IOI;
+	}
+	public int getSI()
+	{
+		return this.SI;
+	}
+	public void setSI(int setSI)
+	{
+		this.SI = SI;
+	}
 	public int getDS()
 	{
 		return this.DS;

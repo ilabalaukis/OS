@@ -2,9 +2,11 @@ import java.util.*;
 import java.io.*;
 public class Main
 {
+	static int vmIterator = 0;
+	static Scanner input = new Scanner(System.in);
 	public static void main(String[] args)
 	{
-		Scanner input = new Scanner(System.in);
+		
 		RealMachine realMachine = new RealMachine();
 		//Machine 	machine		= new Machine(); //TODO: ištrinti testavimas
 		HashMap<String, Integer> command = new HashMap<String, Integer>();
@@ -59,12 +61,12 @@ public class Main
 					if( virtualMachines.isEmpty() )
 					{
 						System.out.println("vm is empty");
-						virtualMachines = executeVirtuals(virtualMachines);
+						System.out.println(vmIterator);
 					}
 					else
 					{
 						System.out.println("vm is not empty");
-						
+						virtualMachines = vmExecutionMode(virtualMachines);
 					}
 					
 					break;
@@ -86,7 +88,23 @@ public class Main
 		System.out.println("START - start programs execution mode.");
 		System.out.println("EXIT - turn off the machine.");
 	}
-	public static ArrayList<VirtualMachine> executeVirtuals(ArrayList<VirtualMachine> virtualMachines){
+	public static ArrayList<VirtualMachine> vmExecutionMode(ArrayList<VirtualMachine> virtualMachines)
+	{
+		VirtualMachine currentMachine = virtualMachines.get(vmIterator);
+		currentMachine.realMachine.setTI(10);
+		//Loopas sustos kiekvienu stepu, nebent parašysi SKIP
+		String dontStop = "";
+		while( currentMachine.realMachine.getTI() > 0 )
+		{
+			if( !dontStop.equals("SKIP"))
+			{
+				dontStop = input.next();
+			}
+			//Do Commands
+			//virtualMachines.get(vmIterator)
+			vmIterator =  (++vmIterator == virtualMachines.size()) ? 0 : vmIterator;
+			
+		}
 		return virtualMachines;
 
 		//Set set = command.entrySet();
@@ -94,5 +112,10 @@ public class Main
 		//Iterator i = set.iterator();
 		//machine.ADD("DRB", -1, 11); //TODO: ištrinti testavimas
 	//System.out.println(machine.DRB); //TODO: ištrinti testavimas
+	}
+	public static ArrayList<VirtualMachine> createVM(ArrayList<VirtualMachine> virtualMachines){
+		//realmMachine -> static?
+		//virtualMachines.add(new VirtualMachine(realMachine));
+		return virtualMachines;
 	}
 }
