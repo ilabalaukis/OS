@@ -4,6 +4,7 @@ public class Main
 	public static void main(String[] args)
 	{
 		RealMachine realMachine = new RealMachine();
+		Machine 	machine		= new Machine(); //TODO: ištrinti testavimas
 		//VirtualMachine vm = new Virtualm(realMachine)
 		HashMap<String, Integer> command = new HashMap<String, Integer>();
 
@@ -39,5 +40,7 @@ public class Main
 		Set set = command.entrySet();
 		
 		Iterator i = set.iterator();
+		machine.ADD("DRB", -1, 11); //TODO: ištrinti testavimas
+	System.out.println(machine.DRB); //TODO: ištrinti testavimas
 	}
 }
