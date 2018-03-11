@@ -1,3 +1,3 @@
-public class RealMachine
+public class VirtualMachine
 {
 }
