@@ -5,6 +5,11 @@ public class VirtualMachine
 	//Data Registers
 	private int DRA = 0000;
 	private int DRB = 0000;
+	//Interrupt Registers
+	//private int TI = 0000;
+	//private int PI = 0000;
+	//private int IOI = 0000;
+	//private int SI = 0000;
 	//Segment Registers
 	private int DS = 0000;
 	private int CS = 0700;
