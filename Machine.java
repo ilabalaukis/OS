@@ -1,20 +1,20 @@
 public class Machine
 {
-	private int DRA = 0000;
-	private int DRB = 0000;
+	protected int DRA = 0000;
+	protected int DRB = 0000;
 	//Interrupt Registers
 //	private int TI = 0000;
 //	private int PI = 0000;
 //	private int IOI = 0000;
 //	private int SI = 0000;
 	//Segment Registers
-	private int DS = 0000;
-	private int CS = 0700;
-	private int SS = 1400;
+	protected int DS = 0000;
+	protected int CS = 0700;
+	protected int SS = 1400;
 	//Other Registers
-	private int IC = 0000;
-	private int SP = 0000;
-	private int SF = 0000;
+	protected int IC = 0000;
+	protected int SP = 0000;
+	protected int SF = 0000;
 	//getters and setters
 	public int getDRA()
 	{
@@ -32,7 +32,7 @@ public class Machine
 	{
 		this.DRB = DRB;
 	}
-	public int getTI()
+	/*public int getTI()
 	{
 		return this.TI;
 	}
@@ -63,7 +63,7 @@ public class Machine
 	public void setSI(int setSI)
 	{
 		this.SI = SI;
-	}
+	}*/
 	public int getDS()
 	{
 		return this.DS;
