@@ -44,7 +44,7 @@ public class Main
 		showCommands();
 		while(true)
 		{
-			String comm = input.next();
+			String comm = input.next().toUpperCase();
 			if( comm.equals("EXIT") ){
 				System.out.println("Goodbye.");
 				break;
