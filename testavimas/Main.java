@@ -11,7 +11,6 @@ public class Main
 		//Machine 	machine		= new Machine(); //TODO: ištrinti testavimas
 		HashMap<String, Integer> command = new HashMap<String, Integer>();
 		ArrayList<VirtualMachine> virtualMachines = new ArrayList<VirtualMachine>();
-
 		//Registras + Registras
 		command.put("ADD", new Integer(0001));
     	command.put("SUB", new Integer(0002));
@@ -42,6 +41,22 @@ public class Main
 		command.put("LUM", new Integer(0071));
 		command.put("LEM", new Integer(0072));
 		System.out.println("Hello, this is Atlas machine.");
+/////////////////////////////SANDBOX////////////////////////////////
+virtualMachines.add(new VirtualMachine(realMachine));
+virtualMachines.add(new VirtualMachine(realMachine));
+virtualMachines.add(new VirtualMachine(realMachine));
+virtualMachines.add(new VirtualMachine(realMachine));
+virtualMachines.get(0).setDRA(5);
+virtualMachines.get(2).realMachine.setTI(5);
+//System.out.println(virtualMachines.get(1).realMachine.getTI());
+//System.out.println(realMachine.getTI());
+realMachine.setMODE(true);
+System.out.println(virtualMachines.get(1).realMachine.getMODE());
+//System.out.println(virtualMachines.get(1).getDRA());
+//System.out.println(realMachine.getDRA());
+
+////////////////////////////SANDBOX ENDS////////////////////////////
+/*		
 		showCommands();
 		while(true)
 		{
@@ -79,8 +94,9 @@ public class Main
 			}
 			
 		}
+*/
 	}
-	
+/*	
 	public static void showCommands(){
 		System.out.println("Available Commands:");
 		System.out.println("HELP - this help page.");
@@ -125,4 +141,5 @@ public class Main
 		//virtualMachines.add(new VirtualMachine(realMachine));
 		return virtualMachines;
 	}
+*/
 }

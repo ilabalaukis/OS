@@ -1,3 +1,4 @@
+import java.util.*;
 public class VirtualMachine extends Machine
 {
 	
