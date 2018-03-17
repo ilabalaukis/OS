@@ -46,14 +46,19 @@ virtualMachines.add(new VirtualMachine(realMachine));
 virtualMachines.add(new VirtualMachine(realMachine));
 virtualMachines.add(new VirtualMachine(realMachine));
 virtualMachines.add(new VirtualMachine(realMachine));
+//virtualMachines.get(1).blocksTaken = 1;
+//System.out.println(virtualMachines.get(3).blocksTaken);
+
 virtualMachines.get(0).setDRA(5);
-virtualMachines.get(2).realMachine.setTI(5);
+System.out.println(virtualMachines.get(1).getDRA());
+System.out.println(realMachine.getDRA());
+
+//virtualMachines.get(2).realMachine.setTI(5);
 //System.out.println(virtualMachines.get(1).realMachine.getTI());
 //System.out.println(realMachine.getTI());
-realMachine.setMODE(true);
-System.out.println(virtualMachines.get(1).realMachine.getMODE());
-//System.out.println(virtualMachines.get(1).getDRA());
-//System.out.println(realMachine.getDRA());
+
+//realMachine.setMODE(true);
+//System.out.println(virtualMachines.get(1).realMachine.getMODE());
 
 ////////////////////////////SANDBOX ENDS////////////////////////////
 /*		

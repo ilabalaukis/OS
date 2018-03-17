@@ -8,10 +8,6 @@ public class Machine
 //	private int PI = 0000;
 //	private int IOI = 0000;
 //	private int SI = 0000;
-	//Segment Registers
-	protected static int DS = 8;
-	protected static int CS = 700;
-	protected static int SS = 1400;
 	//Other Registers
 	protected static int IC = 0;
 	protected static int SP = 0;

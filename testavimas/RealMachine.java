@@ -12,9 +12,9 @@ public class RealMachine extends Machine
 	private int IOI = 0;
 	private int SI = 0;
 	//Segment Registers
-	//private int DS = 0000;
-	//private int CS = 0700;
-	//private int SS = 1400;
+	private int DS = 0000;
+	private int CS = 0700;
+	private int SS = 1400;
 	//Other Registers
 	//private int IC = 0000;
 	//private int SP = 0000;
