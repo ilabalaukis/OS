@@ -12,6 +12,7 @@ public class Main
 		HashMap<String, Integer> command = new HashMap<String, Integer>();
 		ArrayList<VirtualMachine> virtualMachines = new ArrayList<VirtualMachine>();
 
+		//Registras + Registras
 		command.put("ADD", new Integer(0001));
     	command.put("SUB", new Integer(0002));
       	command.put("MUL", new Integer(0003));
@@ -61,7 +62,7 @@ public class Main
 					if( virtualMachines.isEmpty() )
 					{
 						System.out.println("vm is empty");
-						System.out.println(vmIterator);
+						//System.out.println(vmIterator);
 					}
 					else
 					{
@@ -112,6 +113,12 @@ public class Main
 		//Iterator i = set.iterator();
 		//machine.ADD("DRB", -1, 11); //TODO: ištrinti testavimas
 	//System.out.println(machine.DRB); //TODO: ištrinti testavimas
+	}
+	public static VirtualMachine executeCommand( VirtualMachine virtualMachine )
+	{
+		int IC = virtualMachine.getIC;
+		
+		return virtualMachine;
 	}
 	public static ArrayList<VirtualMachine> createVM(ArrayList<VirtualMachine> virtualMachines){
 		//realmMachine -> static?
