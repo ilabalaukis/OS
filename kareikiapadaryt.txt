@@ -1,4 +1,5 @@
 >Sukurti realios mašinos metodus (jų trūksta mūsų projekte).
 >Sukurti virtualios mašinos metodus (jie yra mūsų projektre)
->Sukurti metodą kuris įvykdytų komandą (gauna mašiną, įvykdo komandą, grąžina mašiną)
+>Sukurti metodą kuris įvykdytų komandą
+>Pataisyti VM projekt1 (dingo VM segmentiniai registrai)
 

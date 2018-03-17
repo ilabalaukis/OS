@@ -4,10 +4,10 @@ public class Machine
 	protected static int DRA = 0;
 	protected static int DRB = 0;
 	//Interrupt Registers
-//	private int TI = 0000;
-//	private int PI = 0000;
-//	private int IOI = 0000;
-//	private int SI = 0000;
+	protected static int TI = 0;
+	protected static int PI = 0;
+	protected static int IOI = 0;
+	protected static int SI = 0;
 	//Other Registers
 	protected static int IC = 0;
 	protected static int SP = 0;
@@ -28,26 +28,6 @@ public class Machine
 	public void setDRB(int DRB)
 	{
 		this.DRB = DRB;
-	}
-	public int getDS()
-	{
-		return this.DS;
-	}
-	public void setDS(int DS)
-	{
-		this.DS = DS;
-	}
-	public int getCS()
-	{
-		return this.CS;
-	}
-	public void setCS(int CS)
-	{
-		this.CS = CS;
-	}
-	public void getSS(int SS)
-	{
-		this.SS = SS;
 	}
 	public int getIC()
 	{

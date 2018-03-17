@@ -42,6 +42,7 @@ public class Main
 		command.put("LEM", new Integer(0072));
 		System.out.println("Hello, this is Atlas machine.");
 /////////////////////////////SANDBOX////////////////////////////////
+/*
 virtualMachines.add(new VirtualMachine(realMachine));
 virtualMachines.add(new VirtualMachine(realMachine));
 virtualMachines.add(new VirtualMachine(realMachine));
@@ -60,8 +61,8 @@ System.out.println(realMachine.getDRA());
 //realMachine.setMODE(true);
 //System.out.println(virtualMachines.get(1).realMachine.getMODE());
 
-////////////////////////////SANDBOX ENDS////////////////////////////
-/*		
+*////////////////////////////SANDBOX ENDS////////////////////////////
+	
 		showCommands();
 		while(true)
 		{
@@ -76,6 +77,8 @@ System.out.println(realMachine.getDRA());
 					break;
 				case "NEWV":
 					System.out.println("NEWV called.");
+					virtualMachines.add(new VirtualMachine(realMachine));
+					createVMprogram(virtualMachines.get(virtualMachines.size()-1));
 					break;
 				case "START":
 					System.out.println("START called.");
@@ -87,7 +90,7 @@ System.out.println(realMachine.getDRA());
 					else
 					{
 						System.out.println("vm is not empty");
-						virtualMachines = vmExecutionMode(virtualMachines);
+						vmExecutionMode(virtualMachines);
 					}
 					
 					break;
@@ -99,9 +102,8 @@ System.out.println(realMachine.getDRA());
 			}
 			
 		}
-*/
 	}
-/*	
+	
 	public static void showCommands(){
 		System.out.println("Available Commands:");
 		System.out.println("HELP - this help page.");
@@ -110,7 +112,7 @@ System.out.println(realMachine.getDRA());
 		System.out.println("START - start programs execution mode.");
 		System.out.println("EXIT - turn off the machine.");
 	}
-	public static ArrayList<VirtualMachine> vmExecutionMode(ArrayList<VirtualMachine> virtualMachines)
+	public static void vmExecutionMode(ArrayList<VirtualMachine> virtualMachines)
 	{
 		VirtualMachine currentMachine = virtualMachines.get(vmIterator);
 		currentMachine.realMachine.setTI(10);
@@ -127,7 +129,6 @@ System.out.println(realMachine.getDRA());
 			vmIterator =  (++vmIterator == virtualMachines.size()) ? 0 : vmIterator;
 			
 		}
-		return virtualMachines;
 
 		//Set set = command.entrySet();
 		
@@ -135,16 +136,11 @@ System.out.println(realMachine.getDRA());
 		//machine.ADD("DRB", -1, 11); //TODO: ištrinti testavimas
 	//System.out.println(machine.DRB); //TODO: ištrinti testavimas
 	}
-	public static VirtualMachine executeCommand( VirtualMachine virtualMachine )
+	public static void executeCommand( VirtualMachine virtualMachine )
 	{
-		int IC = virtualMachine.getIC;
+		int IC = virtualMachine.getIC();
+	}
+	public static void createVMprogram(VirtualMachine virtualMachine){
 		
-		return virtualMachine;
 	}
-	public static ArrayList<VirtualMachine> createVM(ArrayList<VirtualMachine> virtualMachines){
-		//realmMachine -> static?
-		//virtualMachines.add(new VirtualMachine(realMachine));
-		return virtualMachines;
-	}
-*/
 }

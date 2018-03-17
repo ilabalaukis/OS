@@ -1,10 +1,6 @@
 public class RealMachine extends Machine
 {
 	private int[] userMemory = new int[1500];
-	//public RealMachine()
-	//{
-	//	super 
-	//}
 	
 	//Interrupt Registers
 	private int TI = 0;
