@@ -1,5 +1,25 @@
 >Sukurti realios mašinos metodus (jų trūksta mūsų projekte).
+   -> CHECK CHANEL STATUS - registras Ch. st., kuris rodys, kokie kanalai užimti. O Komanda patikrins, ar galima, naudotik kažkurį tai kanalą. Ši komanda naudojama komandoms PRNT, LEM, LUM.
+   Su dviejais kanalais komanda ?? Reikalinga ar ne?
+   Pakeičia mode į 1 ir žiūri, kuris interuptas.
+   ->
+   ->
 >Sukurti virtualios mašinos metodus (jie yra mūsų projektre)
 >Sukurti metodą kuris įvykdytų komandą
->Pataisyti VM projekt1 (dingo VM segmentiniai registrai)
-
+>Pataisyti VM projektą (dingo VM segmentiniai registrai)
+> Interuptai
+ -> 4 tipai: 
+ 	-Timerio tik vienas
+ 	-IOI: komanda prašo inputo ir ką su juo daryt? Viena komanda, kuri prašytų inputo ir jį kažkur padėtų.
+ 	Inputo interruptas žiūri, ar laisvas kanalas reikalingas.
+ 	Visi interruptai kviečia supervizorinį režimą
+ 	-Supervizoriaus: trūksta vietos mašinai(pasižiūri, ar dar galima duoti atminties).
+ 	-Programinis pertraukimas: programa per ilga, nėra halt, dalyba iš nulio, 
+ 	-Jei iškviečiamas Programinis interrupt'as - kilinam programą. 
+ 	-Kilinam tada kai rašo programą ar tada, kai vykdo programą, jei per daug atminties užima?
+> Papildyti komandas. Parašyti kokie flagai pasikeitė. 
+ 	- Reikia komandos įvesčiai gauti (INP) - kviest interruptą. Jei užimtas kanalas, tai skipins savo eilę/ liks pakibus.
+Data Format flag'as reikalingas, kad galėtumėm garantuoti jog bus išspausdintos raidės. 
+> Ką darys supervizorius?
+> Inputo komanda deda arba į steką, arba į duomenų regsitrus, arba į DS. 
+Susidėt viską su cikliuku į DS. 
