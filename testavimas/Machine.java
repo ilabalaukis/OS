@@ -246,7 +246,11 @@ public class Machine
 		{
 			if (_par < 0)
 			{
-				_par = _par + 10000;
+				_par = _par * (-1) + 5000;
+			}
+			if (_par > 5000)
+			{
+				_par = (_par - 5000) * (-1);
 			}
 		}
 		return _par;	
