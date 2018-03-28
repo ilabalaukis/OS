@@ -1,27 +1,34 @@
+import java.util.*;
 public class RealMachine extends Machine
 {
-	private int[] userMemory = new int[1500];
-	//public RealMachine()
-	//{
-	//	super 
-	//}
-	
+	private static int[] userMemory = new int[1500];
+	//Puslapiavimo lentelė:
+	private static List<Integer[]> PT = new ArrayList<Integer[]>();
+	//Bloko numeris 0-99; VM numeriai 5 bitai, t.y. negali viršyti 31; bloko numeris 3 bitai, t.y. negali viršyti 7.
+	//PTR susideda iš 4 skaičių: VM_Skaičius 2 skaičiai ir Einamosios_VM_Numeris 2 skaičiai.
 	//Interrupt Registers
 	private int TI = 0;
 	private int PI = 0;
 	private int IOI = 0;
 	private int SI = 0;
 	//Segment Registers
-	//private int DS = 0000;
-	//private int CS = 0700;
-	//private int SS = 1400;
+	private int DS = 0;
+	private int CS = 700;
+	private int SS = 1400;
 	//Other Registers
 	//private int IC = 0000;
 	//private int SP = 0000;
 	private int PTR = 0;
 	private boolean MODE = false;
 	//private int SF = 0000;
-	
+	//Constructor
+	RealMachine(){	
+		while(PT.size() < 100){
+			PT.add(new Integer[2]); //Bloko numeris yra indeksas
+			PT.get(PT.size()-1)[0] = 0; //VM numeris > 0
+			PT.get(PT.size()-1)[1] = 0; //Bloko VM-e numeris 0-7
+		}
+	}
 	//getters and setters
 	public int getTI()
 	{
@@ -114,6 +121,13 @@ public class RealMachine extends Machine
 	public void setSF(int SF)
 	{
 		this.SF = SF;
+	}
+
+	public List<Integer[]> getPT(){
+		return this.PT;
+	}
+	public void setPT(List<Integer[]> PT){
+		this.PT = PT;
 	}
 
 	//Commands

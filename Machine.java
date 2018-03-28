@@ -1,21 +1,17 @@
 public class Machine
 {
 //PASTABA: skaiciai neprasideda nuliu, nes taip pasidaro astuntaine sistema...
-	protected int DRA = 0;
-	protected int DRB = 0;
+	protected static int DRA = 0;
+	protected static int DRB = 0;
 	//Interrupt Registers
-//	private int TI = 0000;
-//	private int PI = 0000;
-//	private int IOI = 0000;
-//	private int SI = 0000;
-	//Segment Registers
-	protected int DS = 8;
-	protected int CS = 700;
-	protected int SS = 1400;
+	protected static int TI = 0;
+	protected static int PI = 0;
+	protected static int IOI = 0;
+	protected static int SI = 0;
 	//Other Registers
-	protected int IC = 0;
-	protected int SP = 0;
-	protected int SF = 0;
+	protected static int IC = 0;
+	protected static int SP = 0;
+	protected static int SF = 0;
 	//getters and setters
 	public int getDRA()
 	{
@@ -32,26 +28,6 @@ public class Machine
 	public void setDRB(int DRB)
 	{
 		this.DRB = DRB;
-	}
-	public int getDS()
-	{
-		return this.DS;
-	}
-	public void setDS(int DS)
-	{
-		this.DS = DS;
-	}
-	public int getCS()
-	{
-		return this.CS;
-	}
-	public void setCS(int CS)
-	{
-		this.CS = CS;
-	}
-	public void getSS(int SS)
-	{
-		this.SS = SS;
 	}
 	public int getIC()
 	{
