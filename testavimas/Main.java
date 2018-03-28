@@ -6,19 +6,21 @@ public class Main
 	static Scanner input = new Scanner(System.in);
 	public static void main(String[] args)
 	{
-		
+		String 		command;
+		String 		register, register2;
 		RealMachine realMachine = new RealMachine();
 		//Machine 	machine		= new Machine(); //TODO: ištrinti testavimas
 		HashMap<String, Integer> command = new HashMap<String, Integer>();
 		ArrayList<VirtualMachine> virtualMachines = new ArrayList<VirtualMachine>();
 		//Registras + Registras
+/*
 		command.put("ADD", new Integer(0001));
     	command.put("SUB", new Integer(0002));
       	command.put("MUL", new Integer(0003));
       	command.put("DIV", new Integer(0004));
 
       	command.put("LR", new Integer(0011));
-		command.put("LR", new Integer(0011));
+		command.put("SR", new Integer(0012));
 
 		command.put("PUSH", new Integer(0021));
 		command.put("POP", new Integer(0022));
@@ -40,6 +42,59 @@ public class Main
 
 		command.put("LUM", new Integer(0071));
 		command.put("LEM", new Integer(0072));
+*/
+	public static int[] parseCommands(String line, Integer SK = 0)
+	{
+		String[] parts = line.split(" ");
+		switch (parts[0])
+		{
+			case "ADD":
+				switch (parts[1])
+				{
+					if (SK != 0)
+					{
+						register2 = "SK";
+					}
+					case "DRA":
+						switch (parts[2])
+						{
+							case "DRB":
+								return {1000};
+								break;
+							case "SK":
+								return {1004, SK};  
+								break;	
+						}
+					break;
+					case "DRB":
+						switch (parts[2])
+						{
+							case "DRA":
+								return {1001};
+								break;
+							case "SK":
+								return {1005, SK};  
+								break;	
+						}
+					break;
+					case "SF":
+						switch (parts[2])
+						{
+							case "DRA":
+								return {1002};
+								break;
+							case "DRB":
+								return {1003};  
+								break;
+							case "SK":
+								return {1006, SK};  
+								break;	
+						}
+					break;
+				}
+			break;
+		}
+	}
 		System.out.println("Hello, this is Atlas machine.");
 /////////////////////////////SANDBOX////////////////////////////////
 /*
