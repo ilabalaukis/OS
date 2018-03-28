@@ -13,89 +13,8 @@ public class Main
 		HashMap<String, Integer> command = new HashMap<String, Integer>();
 
 		//Registras + Registras
-/*
-		command.put("ADD", new Integer(0001));
-    	command.put("SUB", new Integer(0002));
-      	command.put("MUL", new Integer(0003));
-      	command.put("DIV", new Integer(0004));
-
-      	command.put("LR", new Integer(0011));
-		command.put("SR", new Integer(0012));
-
-		command.put("PUSH", new Integer(0021));
-		command.put("POP", new Integer(0022));
-
-		command.put("OR", new Integer(0031));
-		command.put("AND", new Integer(0032));
-		command.put("XOR", new Integer(0033));
-		command.put("NOT", new Integer(0034));
-		command.put("NEG", new Integer(0035));
-		command.put("CMP", new Integer(0036));
-
-		command.put("JMP", new Integer(0041));
-		command.put("JMG", new Integer(0042));
-		command.put("JME", new Integer(0043));
-
-		command.put("HALT", new Integer(0051));
-
-		command.put("PRNT", new Integer(0061));
-
-		command.put("LUM", new Integer(0071));
-		command.put("LEM", new Integer(0072));
-*/
-	public static int[] parseCommands(String line, Integer SK = 0)
-	{
-		String[] parts = line.split(" ");
-		switch (parts[0])
-		{
-			case "ADD":
-				switch (parts[1])
-				{
-					if (SK != 0)
-					{
-						register2 = "SK";
-					}
-					case "DRA":
-						switch (parts[2])
-						{
-							case "DRB":
-								return {1000};
-								break;
-							case "SK":
-								return {1004, SK};  
-								break;	
-						}
-					break;
-					case "DRB":
-						switch (parts[2])
-						{
-							case "DRA":
-								return {1001};
-								break;
-							case "SK":
-								return {1005, SK};  
-								break;	
-						}
-					break;
-					case "SF":
-						switch (parts[2])
-						{
-							case "DRA":
-								return {1002};
-								break;
-							case "DRB":
-								return {1003};  
-								break;
-							case "SK":
-								return {1006, SK};  
-								break;	
-						}
-					break;
-				}
-			break;
-		}
-	}
 		System.out.println("Hello, this is Atlas machine.");
+
 /////////////////////////////SANDBOX////////////////////////////////
 /**/
 virtualMachines.add(new VirtualMachine(realMachine));
@@ -117,7 +36,8 @@ System.out.println(realMachine.getDRA());
 //System.out.println(virtualMachines.get(1).realMachine.getMODE());
 
 *////////////////////////////SANDBOX ENDS////////////////////////////
-	
+		 ArrayList<Integer> A = parseCommands("ADD DRA 09");
+		System.out.println(A.get(1));
 		showCommands();
 		while(true)
 		{
@@ -157,8 +77,88 @@ System.out.println(realMachine.getDRA());
 			}
 			
 		}
+
 	}
-	
+	public static ArrayList<Integer> parseCommands(String line)
+	{
+		String[] parts = line.split(" ");
+		ArrayList<Integer> A = new ArrayList<Integer>();
+		int SK = 0;
+		String regex = "\\d+";
+
+		if (parts[2].matches(regex))
+		{
+			SK = Integer.parseInt(parts[2]);
+			parts[2] = "SK";
+		}
+		switch (parts[0])
+		{
+			case "ADD":
+				switch (parts[1])
+				{
+					case "DRA":
+
+						switch (parts[2])
+						{
+							case "DRB":
+								A.clear();	
+								A.add(0, 1000);
+								return A;
+							case "SK":
+								A.clear();
+								A.add(0, 1004);
+								A.add(1, SK);
+								return A;
+							default:
+								A.clear();
+								System.out.Println("Invalid command");
+								break;     
+						}
+					break;
+					case "DRB":
+						switch (parts[2])
+						{
+							case "DRA":
+								A.clear();
+								A.add(0, 1001);
+								return A;  
+							case "SK":
+								A.clear();
+								A.add(0, 1005);
+								A.add(1, SK);
+								return A;
+							default:
+								A.clear();
+								System.out.Println("Invalid command");
+								break;       
+						}
+					break;
+					case "SF":
+						switch (parts[2])
+						{
+							case "DRA":
+								A.add(0, 1002);
+								return A;  
+							case "DRB":
+								A.add(0, 1003);
+								return A;
+							case "SK":
+								A.clear();
+								A.add(0, 1006);
+								A.add(1, SK);
+								return A;
+							default:
+								A.clear();
+								System.out.Println("Invalid command");
+								break;   
+						}
+					break;
+				}
+			break;
+		}
+	return A;
+	}
+
 	public static void showCommands(){
 		System.out.println("Available Commands:");
 		System.out.println("HELP - this help page.");

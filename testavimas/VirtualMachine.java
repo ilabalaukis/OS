@@ -19,7 +19,7 @@ public class VirtualMachine extends Machine
 	public VirtualMachine(RealMachine realMachine){
 		this.realMachine = realMachine;
 	}
-	public int[] getRegisterSpace
+	//public int[] getRegisterSpace
 	public void saveRegisters()
 	{
 		this.registerSpace[0] = realMachine.getDRA();
