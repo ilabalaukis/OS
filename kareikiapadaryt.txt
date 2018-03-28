@@ -23,3 +23,14 @@ Data Format flag'as reikalingas, kad galėtumėm garantuoti jog bus išspausdint
 > Ką darys supervizorius?
 > Inputo komanda deda arba į steką, arba į duomenų regsitrus, arba į DS. 
 Susidėt viską su cikliuku į DS. 
+
+
+
+SUPERVIZORINIAI INTERUPTAI!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+
+PROGRAMINIAI:
+metodas, kuris paima virtualios mašinos ID. (metodas(vm_id)){
+	virtualMachines.get(VM_ID) <- IC
+	perskaito cs. Paima tą kodą, kažką padarai ir tada IC+1/2/3
+}
+vm_id - nuo 0 iki kiek yra mašinų. (virtualMachine.Size()-1)

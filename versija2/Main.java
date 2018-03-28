@@ -43,58 +43,756 @@ public class Main
 		command.put("LUM", new Integer(0071));
 		command.put("LEM", new Integer(0072));
 */
-/*	public static int[] parseCommands(String line, Integer SK = 0)
+public static ArrayList<Integer> parseCommands(String line)
 	{
 		String[] parts = line.split(" ");
+		ArrayList<Integer> A = new ArrayList<Integer>();
+		A.add(0, 9999);
+		int SK = 0;
+		int SK1 = 0;
+		String regex = "\\d+";
+		if (parts.length > 1)
+		{
+			if (parts[1].equals("SK"))
+			{
+				return A;
+			}
+		}
+		if (parts.length > 2)
+		{
+			if (parts[2].equals("SK"))
+			{
+				return A;
+			}
+		}
+		if (parts.length > 2)
+		{
+			if (parts[2].matches(regex))
+			{
+				SK = Integer.parseInt(parts[2]);
+				parts[2] = "SK";
+			}
+		}
+		if (parts.length > 1)
+		{
+			if (parts[1].matches(regex))
+			{
+				SK1 = Integer.parseInt(parts[1]);
+				parts[1] = "SK";
+			}
+		}
 		switch (parts[0])
 		{
 			case "ADD":
 				switch (parts[1])
 				{
-					if (SK != 0)
-					{
-						register2 = "SK";
-					}
 					case "DRA":
+
 						switch (parts[2])
 						{
 							case "DRB":
-								return {1000};
-								break;
+								A.clear();	
+								A.add(0, 1000);
+								return A;
 							case "SK":
-								return {1004, SK};  
-								break;	
+								A.clear();
+								A.add(0, 1004);
+								A.add(1, SK);
+								return A;
+							default:
+								A.clear();
+								System.out.println("Invalid command");
+								break;     
 						}
 					break;
 					case "DRB":
 						switch (parts[2])
 						{
 							case "DRA":
-								return {1001};
-								break;
+								A.clear();
+								A.add(0, 1001);
+								return A;  
 							case "SK":
-								return {1005, SK};  
-								break;	
+								A.clear();
+								A.add(0, 1005);
+								A.add(1, SK);
+								return A;
+							default:
+								A.clear();
+								A.add(0, 9999);
+								break;       
 						}
 					break;
 					case "SF":
 						switch (parts[2])
 						{
 							case "DRA":
-								return {1002};
-								break;
+								A.add(0, 1002);
+								return A;  
 							case "DRB":
-								return {1003};  
-								break;
+								A.add(0, 1003);
+								return A;
 							case "SK":
-								return {1006, SK};  
-								break;	
+								A.clear();
+								A.add(0, 1006);
+								A.add(1, SK);
+								return A;
+							default:
+								A.clear();
+								A.add(0, 9999);
+								break;   
 						}
+							break;
+						default:
+							A.clear();
+							A.add(0, 9999);
+							break;   
+				}
 					break;
+			case "SUB":
+				switch (parts[1])
+				{
+					case "DRA":
+
+						switch (parts[2])
+						{
+							case "DRB":
+								A.clear();	
+								A.add(0, 1100);
+								return A;
+							case "SK":
+								A.clear();
+								A.add(0, 1104);
+								A.add(1, SK);
+								return A;
+							default:
+								A.clear();
+								A.add(0, 9999);
+								break;     
+						}
+						break;
+					case "DRB":
+						switch (parts[2])
+						{
+							case "DRA":
+								A.clear();
+								A.add(0, 1101);
+								return A;  
+							case "SK":
+								A.clear();
+								A.add(0, 1105);
+								A.add(1, SK);
+								return A;
+							default:
+								A.clear();
+								A.add(0, 9999);
+								break;       
+						}
+						break;
+					case "SF":
+						switch (parts[2])
+						{
+							case "DRA":
+								A.add(0, 1102);
+								return A;  
+							case "DRB":
+								A.add(0, 1103);
+								return A;
+							case "SK":
+								A.clear();
+								A.add(0, 1106);
+								A.add(1, SK);
+								return A;
+							default:
+								A.clear();
+								A.add(0, 9999);
+								break;   
+						}
+						break;
+					default:
+						A.clear();
+						A.add(0, 9999);
+						break;   					
+				}
+				break;
+			case "MUL":
+				switch (parts[1])
+				{
+					case "DRA":
+						switch (parts[2])
+						{
+							case "DRB":
+								A.clear();	
+								A.add(0, 1200);
+								return A;
+							case "SK":
+								A.clear();
+								A.add(0,1202);
+								A.add(1, SK);
+								return A;
+							default:
+								A.clear();
+								A.add(0, 9999);
+								break;
+						}
+						break;
+					case "DRB":
+						switch (parts[2])
+						{
+							case "DRA":
+								A.clear();	
+								A.add(0, 1201);
+								return A;
+							case "SK":
+								A.clear();
+								A.add(0,1203);
+								A.add(1, SK);
+								return A;
+							default:
+								A.clear();
+								A.add(0, 9999);
+								break;
+						}
+						break;	
+				}
+			case "DIV":
+				switch (parts[1])
+				{
+					case "DRA":
+						switch (parts[2])
+						{
+							case "DRB":
+								A.clear();	
+								A.add(0, 1300);
+								return A;
+							case "SK":
+								A.clear();
+								A.add(0,1302);
+								A.add(1, SK);
+								return A;
+							default:
+								A.clear();
+								A.add(0, 9999);
+								break;
+						}
+						break;
+					case "DRB":
+						switch (parts[2])
+						{
+							case "DRA":
+								A.clear();	
+								A.add(0, 1301);
+								return A;
+							case "SK":
+								A.clear();
+								A.add(0,1303);
+								A.add(1, SK);
+								return A;
+							default:
+								A.clear();
+								A.add(0, 9999);
+								break;
+						}
+						break;	
+				}
+			case "LR":
+				switch (parts[1])
+				{
+					case "DRA":
+						A.clear();	
+						A.add(0, 2000);
+						return A;						
+					case "DRB":
+						A.clear();
+						A.add(0, 2001);
+						return A;
+					default:
+						A.clear();
+						A.add(0, 9999);
+						break;   
+				}
+			case "SR":
+				switch (parts[1])
+				{
+					case "DRA":
+						A.clear();	
+						A.add(0, 2100);
+						return A;						
+					case "DRB":
+						A.clear();
+						A.add(0, 2101);
+						return A;
+					default:
+						A.clear();
+						A.add(0, 9999);
+						break;   
+				}
+			case "PUSH":
+				switch (parts[1])
+				{
+					case "DRA":
+						A.clear();	
+						A.add(0, 3000);
+						return A;						
+					case "DRB":
+						A.clear();
+						A.add(0, 3001);
+						return A;
+					case "SK":
+						A.clear();
+						A.add(0, 3002);
+						A.add(1, SK1);
+						return A;
+					default:
+						A.clear();
+						A.add(0, 9999);
+						break;   
+				}
+			case "POP":
+				switch (parts[1])
+				{
+					case "DRA":
+						A.clear();	
+						A.add(0, 3100);
+						return A;						
+					case "DRB":
+						A.clear();
+						A.add(0, 3101);
+						return A;
+					default:
+						A.clear();
+						A.add(0, 9999);
+						break;   
+				}
+			case "OR":
+				switch (parts[1])
+				{
+					case "DRA":
+
+						switch (parts[2])
+						{
+							case "DRB":
+								A.clear();	
+								A.add(0, 4000);
+								return A;
+							case "SK":
+								A.clear();
+								A.add(0, 4004);
+								A.add(1, SK);
+								return A;
+							default:
+								A.clear();
+								A.add(0, 9999);
+								break;     
+						}
+						break;
+					case "DRB":
+						switch (parts[2])
+						{
+							case "DRA":
+								A.clear();
+								A.add(0, 4001);
+								return A;  
+							case "SK":
+								A.clear();
+								A.add(0, 4005);
+								A.add(1, SK);
+								return A;
+							default:
+								A.clear();
+								A.add(0, 9999);
+								break;       
+						}
+						break;
+					case "SF":
+						switch (parts[2])
+						{
+							case "DRA":
+								A.add(0, 4002);
+								return A;  
+							case "DRB":
+								A.add(0, 4003);
+								return A;
+							case "SK":
+								A.clear();
+								A.add(0, 4006);
+								A.add(1, SK);
+								return A;
+							default:
+								A.clear();
+								A.add(0, 9999);
+								break;   
+						}
+						break;						
+					default:
+						A.clear();
+						A.add(0, 9999);
+						break;   					
+				}
+				break;
+			case "AND":
+				switch (parts[1])
+				{
+					case "DRA":
+
+						switch (parts[2])
+						{
+							case "DRB":
+								A.clear();	
+								A.add(0, 4100);
+								return A;
+							case "SK":
+								A.clear();
+								A.add(0, 4104);
+								A.add(1, SK);
+								return A;
+							default:
+								A.clear();
+								A.add(0, 9999);
+								break;     
+						}
+						break;
+					case "DRB":
+						switch (parts[2])
+						{
+							case "DRA":
+								A.clear();
+								A.add(0, 4101);
+								return A;  
+							case "SK":
+								A.clear();
+								A.add(0, 4105);
+								A.add(1, SK);
+								return A;
+							default:
+								A.clear();
+								A.add(0, 9999);
+								break;       
+						}
+						break;
+					case "SF":
+						switch (parts[2])
+						{
+							case "DRA":
+								A.add(0, 4102);
+								return A;  
+							case "DRB":
+								A.add(0, 4103);
+								return A;
+							case "SK":
+								A.clear();
+								A.add(0, 4106);
+								A.add(1, SK);
+								return A;
+							default:
+								A.clear();
+								A.add(0, 9999);
+								break;   
+						}
+						break;						
+					default:
+						A.clear();
+						A.add(0, 9999);
+						break;   					
+				}
+				break;
+			case "XOR":
+				switch (parts[1])
+				{
+					case "DRA":
+
+						switch (parts[2])
+						{
+							case "DRB":
+								A.clear();	
+								A.add(0, 4200);
+								return A;
+							case "SK":
+								A.clear();
+								A.add(0, 4204);
+								A.add(1, SK);
+								return A;
+							default:
+								A.clear();
+								A.add(0, 9999);
+								break;     
+						}
+						break;
+					case "DRB":
+						switch (parts[2])
+						{
+							case "DRA":
+								A.clear();
+								A.add(0, 4201);
+								return A;  
+							case "SK":
+								A.clear();
+								A.add(0, 4205);
+								A.add(1, SK);
+								return A;
+							default:
+								A.clear();
+								A.add(0, 9999);
+								break;       
+						}
+						break;
+					case "SF":
+						switch (parts[2])
+						{
+							case "DRA":
+								A.add(0, 4202);
+								return A;  
+							case "DRB":
+								A.add(0, 4203);
+								return A;
+							case "SK":
+								A.clear();
+								A.add(0, 4206);
+								A.add(1, SK);
+								return A;
+							default:
+								A.clear();
+								A.add(0, 9999);
+								break;   
+						}
+						break;						
+					default:
+						A.clear();
+						A.add(0, 9999);
+						break;   					
+				}
+				break;
+			case "NOT":
+				switch (parts[1])
+				{
+					case "DRA":
+						A.clear();	
+						A.add(0, 4300);
+						return A;						
+					case "DRB":
+						A.clear();
+						A.add(0, 4301);
+						return A;
+					case "SF":
+						A.clear();
+						A.add(0, 4302);
+						return A;
+					default:
+						A.clear();
+						A.add(0, 9999);
+						break;   
+				}
+				break;
+			case "NEG":
+				switch (parts[1])
+				{
+					case "DRA":
+						A.clear();	
+						A.add(0, 4400);
+						return A;						
+					case "DRB":
+						A.clear();
+						A.add(0, 4401);
+						return A;
+					case "SF":
+						A.clear();
+						A.add(0, 4402);
+						return A;
+					default:
+						A.clear();
+						A.add(0, 9999);
+						break;   
+				}	
+				break;
+			case "CMP":
+				switch (parts[1])
+				{
+					case "DRA":
+
+						switch (parts[2])
+						{
+							case "DRB":
+								A.clear();	
+								A.add(0, 4500);
+								return A;
+							case "SK":
+								A.clear();
+								A.add(0, 4504);
+								A.add(1, SK);
+								return A;
+							default:
+								A.clear();
+								A.add(0, 9999);
+								break;     
+						}
+						break;
+					case "DRB":
+						switch (parts[2])
+						{
+							case "DRA":
+								A.clear();
+								A.add(0, 4501);
+								return A;  
+							case "SK":
+								A.clear();
+								A.add(0, 4505);
+								A.add(1, SK);
+								return A;
+							default:
+								A.clear();
+								A.add(0, 9999);
+								break;       
+						}
+						break;
+					case "SF":
+						switch (parts[2])
+						{
+							case "DRA":
+								A.add(0, 4502);
+								return A;  
+							case "DRB":
+								A.add(0, 4503);
+								return A;
+							case "SK":
+								A.clear();
+								A.add(0, 4506);
+								A.add(1, SK);
+								return A;
+							default:
+								A.clear();
+								A.add(0, 9999);
+								break;   
+						}
+						break;						
+					default:
+						A.clear();
+						A.add(0, 9999);
+						break;   					
+				}
+				break;
+
+			case "HALT":
+				A.clear();
+				A.add(0, 6000);
+				return A;
+			case "PRNT":
+				switch (parts[1])
+				{
+					case "DRA":
+						A.clear();	
+						A.add(0, 7000);
+						return A;						
+					case "DRB":
+						A.clear();
+						A.add(0, 7001);
+						return A;
+					case "SF":
+						A.clear();
+						A.add(0, 7002);
+						return A;
+					default:
+						A.clear();
+						A.add(0, 9999);
+						break;   
+				}	
+				break;
+			case "LUM":
+					switch (parts[1])
+					{
+						case "SK":
+						switch (parts[2])
+						{
+							case "SK":
+									A.clear();	
+									A.add(0, 8000);
+									A.add(1, SK1);
+									A.add(2, SK);
+									return A;
+							default:
+								A.clear();
+								A.add(0, 9999);
+								break;   
+						}
+						break;
+						default:
+						A.clear();
+						A.add(0, 9999);
+						break;     
+					}
+				break;
+			case "LEM":
+					switch (parts[1])
+					{
+						case "SK":
+							switch (parts[2])
+							{
+								case "SK":
+										A.clear();	
+										A.add(0, 8100);
+										A.add(1, SK1);
+										A.add(2, SK);
+										return A;
+								default:
+									A.clear();
+									A.add(0, 9999);
+									break;   
+							}
+							break;
+							default:
+								A.clear();
+								A.add(0, 9999);
+						break;     
+					}
+				break;
+			case "JMP":
+				switch (parts[1])
+				{
+					case "SK":	
+						A.clear();
+						A.add(0, 5000);
+						A.add(1, SK1);
+						return A;
+					default:
+						A.clear();
+						A.add(0, 9999);
+						break;   					
+				}
+			break;	
+			case "JMG":
+				switch (parts[1])
+				{
+					case "SK":	
+						A.clear();
+						A.add(0, 5100);
+						A.add(1, SK1);
+						return A;
+					default:
+						A.clear();
+						A.add(0, 9999);
+						break;   					
 				}
 			break;
+			case "JME":
+				switch (parts[1])
+				{
+					case "SK":	
+						A.clear();
+						A.add(0, 5200);
+						A.add(1, SK1);
+						return A;
+					default:
+						A.clear();
+						A.add(0, 9999);
+						break;   					
+				}
+			break;				   					 																							
+			default:
+				A.clear();
+				A.add(0, 9999);
+				break;   
 		}
-	}*/
+	return A;
+	}
 		System.out.println("Hello, this is Atlas machine.");
 /////////////////////////////SANDBOX////////////////////////////////
 /**/
