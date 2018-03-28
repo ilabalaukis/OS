@@ -1,8 +1,5 @@
 import java.util.*;
 import java.io.*;
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileReader;
 public class Main
 {
 	static int vmIterator = 0;
@@ -16,90 +13,37 @@ public class Main
 		HashMap<String, Integer> command = new HashMap<String, Integer>();
 
 		//Registras + Registras
-		System.out.println("Hello, this is Atlas machine.");
-
-/////////////////////////////SANDBOX////////////////////////////////
-/**/
-virtualMachines.add(new VirtualMachine(realMachine));
-virtualMachines.add(new VirtualMachine(realMachine));
-virtualMachines.add(new VirtualMachine(realMachine));
-virtualMachines.add(new VirtualMachine(realMachine));
-//virtualMachines.get(1).blocksTaken = 1;
-//System.out.println(virtualMachines.get(3).blocksTaken);
-/**/
-virtualMachines.get(0).setDRA(5);
-System.out.println(virtualMachines.get(1).getDRA());
-System.out.println(realMachine.getDRA());
 /*
-//virtualMachines.get(2).realMachine.setTI(5);
-//System.out.println(virtualMachines.get(1).realMachine.getTI());
-//System.out.println(realMachine.getTI());
+		command.put("ADD", new Integer(0001));
+    	command.put("SUB", new Integer(0002));
+      	command.put("MUL", new Integer(0003));
+      	command.put("DIV", new Integer(0004));
 
-//realMachine.setMODE(true);
-//System.out.println(virtualMachines.get(1).realMachine.getMODE());
+      	command.put("LR", new Integer(0011));
+		command.put("SR", new Integer(0012));
 
-*////////////////////////////SANDBOX ENDS////////////////////////////
-		 //ArrayList<Integer> A = parseCommands("ADD DRA A");
-		 try{
-		File f= new File("testas.txt");
-		BufferedReader b = new BufferedReader(new FileReader(f));
+		command.put("PUSH", new Integer(0021));
+		command.put("POP", new Integer(0022));
 
-            String readLine = "";
+		command.put("OR", new Integer(0031));
+		command.put("AND", new Integer(0032));
+		command.put("XOR", new Integer(0033));
+		command.put("NOT", new Integer(0034));
+		command.put("NEG", new Integer(0035));
+		command.put("CMP", new Integer(0036));
 
-            System.out.println("Reading file using Buffered Reader");
+		command.put("JMP", new Integer(0041));
+		command.put("JMG", new Integer(0042));
+		command.put("JME", new Integer(0043));
 
-            while ((readLine = b.readLine()) != null) {
-  		ArrayList<Integer> A = parseCommands(readLine);
-  		if (!A.isEmpty())
-  			System.out.println(A.get(0));
-		}
-		b.close();
-		
-        } catch (IOException e) {
-            e.printStackTrace();
-        }		
-		showCommands();
-		while(true)
-		{
-			String comm = input.next().toUpperCase();
-			if( comm.equals("EXIT") ){
-				System.out.println("Goodbye.");
-				break;
-			}
-			switch(comm){
-				case "NEW":
-					System.out.println("NEW called.");
-					break;
-				case "NEWV":
-					System.out.println("NEWV called.");
-					virtualMachines.add(new VirtualMachine(realMachine));
-					createVMprogram(virtualMachines.get(virtualMachines.size()-1));
-					break;
-				case "START":
-					System.out.println("START called.");
-					if( virtualMachines.isEmpty() )
-					{
-						System.out.println("vm is empty");
-						//System.out.println(vmIterator);
-					}
-					else
-					{
-						System.out.println("vm is not empty");
-						vmExecutionMode(virtualMachines);
-					}
-					
-					break;
-				case "HELP":
-					showCommands();
-					break;
-				default:
-					System.out.println("Command not found.");
-			}
-			
-		}
+		command.put("HALT", new Integer(0051));
 
-	}
-	public static ArrayList<Integer> parseCommands(String line)
+		command.put("PRNT", new Integer(0061));
+
+		command.put("LUM", new Integer(0071));
+		command.put("LEM", new Integer(0072));
+*/
+public static ArrayList<Integer> parseCommands(String line)
 	{
 		String[] parts = line.split(" ");
 		ArrayList<Integer> A = new ArrayList<Integer>();
@@ -849,7 +793,98 @@ System.out.println(realMachine.getDRA());
 		}
 	return A;
 	}
+		System.out.println("Hello, this is Atlas machine.");
+/////////////////////////////SANDBOX////////////////////////////////
+/**/
+createVirtualMachine();
+createVirtualMachine();
+createVirtualMachine();
+createVirtualMachine();
+//virtualMachines.get(1).blocksTaken = 1;
+//System.out.println(virtualMachines.get(3).blocksTaken);
+/**/
+//virtualMachines.get(0).setDRA(5);
+System.out.println(virtualMachines.get(0).getCS().size());
+System.out.println("2");
+addBlock(1);
+System.out.println(virtualMachines.get(0).getCS().size());
+System.out.println("3");
+addBlock(1);
+System.out.println(virtualMachines.get(0).getCS().size());
+System.out.println("4");
+addBlock(1);
+System.out.println(virtualMachines.get(0).getCS().size());
+System.out.println("5");
+addBlock(1);
+System.out.println(virtualMachines.get(0).getCS().size());
+System.out.println("6");
+addBlock(1);
+System.out.println(virtualMachines.get(0).getCS().size());
+System.out.println("7");
+addBlock(1);
+System.out.println(virtualMachines.get(0).getCS().size());
+System.out.println("8");
+addBlock(1);
+System.out.println(virtualMachines.get(0).getCS().size());
+System.out.println("9+");
+addBlock(1);
+System.out.println(virtualMachines.get(0).getCS().size());
+addBlock(1);
+System.out.println(virtualMachines.get(0).getCS().size());
+addBlock(1);
+System.out.println(virtualMachines.get(0).getCS().size());
+//System.out.println(realMachine.getDRA());
+/*
+//virtualMachines.get(2).realMachine.setTI(5);
+//System.out.println(virtualMachines.get(1).realMachine.getTI());
+//System.out.println(realMachine.getTI());
 
+//realMachine.setMODE(true);
+//System.out.println(virtualMachines.get(1).realMachine.getMODE());
+
+*////////////////////////////SANDBOX ENDS////////////////////////////
+	
+		showCommands();
+		while(true)
+		{
+			String comm = input.next().toUpperCase();
+			if( comm.equals("EXIT") ){
+				System.out.println("Goodbye.");
+				break;
+			}
+			switch(comm){
+				case "NEW":
+					System.out.println("NEW called.");
+					break;
+				case "NEWV":
+					System.out.println("NEWV called.");
+					virtualMachines.add(new VirtualMachine(realMachine));
+					createVMprogram(virtualMachines.get(virtualMachines.size()-1));
+					break;
+				case "START":
+					System.out.println("START called.");
+					if( virtualMachines.isEmpty() )
+					{
+						System.out.println("vm is empty");
+						//System.out.println(vmIterator);
+					}
+					else
+					{
+						System.out.println("vm is not empty");
+						vmExecutionMode(virtualMachines);
+					}
+					
+					break;
+				case "HELP":
+					showCommands();
+					break;
+				default:
+					System.out.println("Command not found.");
+			}
+			
+		}
+	}
+	
 	public static void showCommands(){
 		System.out.println("Available Commands:");
 		System.out.println("HELP - this help page.");
@@ -887,12 +922,66 @@ System.out.println(realMachine.getDRA());
 		int IC = virtualMachine.getIC();
 	}
 	public static void createVirtualMachine(){
+		//Sukuria mašiną
 		virtualMachines.add(new VirtualMachine(realMachine));
-		// SUPRATAU! virtualMachines.get(1).realMachine.;
+		//Priskiria puslapiavimo lentelėje mašinai pirmąjį bloką.
+		List<Integer[]> alteredPT = realMachine.getPT();
+		for(int i=0 ; i<100 ; i++){
+			if( alteredPT.get(i)[0] == 0 ){
+				alteredPT.get(i)[0] = virtualMachines.size();
+				break;
+			}
+		}
+		realMachine.setPT(alteredPT);
+		//Išskirsto pirmą bloką į virtualios mašinos segmentus
+		ArrayList<Integer> DS = new ArrayList<Integer>();
+		ArrayList<Integer> CS = new ArrayList<Integer>();
+		ArrayList<Integer> SS = new ArrayList<Integer>();
+		for(int i = 0 ; i < 4 ; i++){
+			//Pirmas blokas pasidalina: 5 rezervas registrams, 4 DS, 4 CS ir 2 SS
+			DS.add(0);
+			CS.add(0);
+			if(i > 1){
+				SS.add(0);
+			}
+		}
+		virtualMachines.get(virtualMachines.size()-1).setDS(DS);
+		virtualMachines.get(virtualMachines.size()-1).setCS(CS);
+		virtualMachines.get(virtualMachines.size()-1).setSS(SS);
 	}
-	public static VirtualMachine addBlocks(VirtualMachine virtualMachine){
-		
-		return virtualMachine;
+	public static void addBlock(int virtualMachineID){
+		List<Integer[]> alteredPT = realMachine.getPT();
+		int numberOfBlock = 0; // 0-7
+		for(int i = 0 ; i < 100 ; i++){
+			if( alteredPT.get(i)[0] == virtualMachineID ){
+				numberOfBlock = alteredPT.get(i)[1] > numberOfBlock ? alteredPT.get(i)[1] : numberOfBlock;
+			}
+		}
+		if(numberOfBlock < 7){
+			for(int i=0 ; i<100 ; i++){
+				if( alteredPT.get(i)[0] == 0 ){
+					alteredPT.get(i)[0] = virtualMachineID;
+					alteredPT.get(i)[1] = ++numberOfBlock;
+					break;
+				}
+			}
+			realMachine.setPT(alteredPT);
+			//Išskirsto bloką į virtualios mašinos segmentus
+			ArrayList<Integer> DS = virtualMachines.get(virtualMachineID-1).getDS();
+			ArrayList<Integer> CS = virtualMachines.get(virtualMachineID-1).getCS();
+			ArrayList<Integer> SS = virtualMachines.get(virtualMachineID-1).getSS();
+			for(int i = 0 ; i < 6 ; i++){
+				//Blokas pasidalina: 6 DS, 6 CS ir 3 SS
+				DS.add(0);
+				CS.add(0);
+				if(i > 2){
+					SS.add(0);
+				}
+			}
+			virtualMachines.get(virtualMachineID).setDS(DS);
+			virtualMachines.get(virtualMachineID).setCS(CS);
+			virtualMachines.get(virtualMachineID).setSS(SS);
+		}
 	}
 	public static void createVMprogram(VirtualMachine virtualMachine){
 		

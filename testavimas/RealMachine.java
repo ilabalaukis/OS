@@ -1,7 +1,7 @@
 import java.util.*;
 public class RealMachine extends Machine
 {
-	private int[] userMemory = new int[1500];
+	private static int[] userMemory = new int[1500];
 	//Puslapiavimo lentelė:
 	private static List<Integer[]> PT = new ArrayList<Integer[]>();
 	//Bloko numeris 0-99; VM numeriai 5 bitai, t.y. negali viršyti 31; bloko numeris 3 bitai, t.y. negali viršyti 7.
@@ -23,7 +23,11 @@ public class RealMachine extends Machine
 	//private int SF = 0000;
 	//Constructor
 	RealMachine(){	
-		while(PT.size() < 100) PT.add(new Integer[2]);
+		while(PT.size() < 100){
+			PT.add(new Integer[2]); //Bloko numeris yra indeksas
+			PT.get(PT.size()-1)[0] = 0; //VM numeris > 0
+			PT.get(PT.size()-1)[1] = 0; //Bloko VM-e numeris 0-7
+		}
 	}
 	//getters and setters
 	public int getTI()

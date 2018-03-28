@@ -14,12 +14,13 @@ public class VirtualMachine extends Machine
 	private ArrayList<Integer> dataSegment = new ArrayList<Integer>();
 	private ArrayList<Integer> codeSegment = new ArrayList<Integer>();
 	private ArrayList<Integer> stackSegment = new ArrayList<Integer>();
-	public int blocksTaken = 2;
 	private int[] virtualMemory = new int[15];
 	public VirtualMachine(RealMachine realMachine){
 		this.realMachine = realMachine;
 	}
-	//public int[] getRegisterSpace
+	public int[] getRegisterSpace(){
+		return this.registerSpace;
+	}
 	public void saveRegisters()
 	{
 		this.registerSpace[0] = realMachine.getDRA();
@@ -35,5 +36,23 @@ public class VirtualMachine extends Machine
 		this.setIC(this.registerSpace[2]);
 		this.setSF(this.registerSpace[3]);
 		this.setSP(this.registerSpace[4]);
+	}
+	public ArrayList<Integer> getDS(){
+		return this.dataSegment;
+	}
+	public ArrayList<Integer> getCS(){
+		return this.codeSegment;
+	}
+	public ArrayList<Integer> getSS(){
+		return this.stackSegment;
+	}
+	public void setDS(ArrayList<Integer> DS){
+		this.dataSegment = DS;
+	}
+	public void setCS(ArrayList<Integer> CS){
+		this.codeSegment = CS;
+	}
+	public void setSS(ArrayList<Integer> SS){
+		this.stackSegment = SS;
 	}
 }

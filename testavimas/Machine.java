@@ -150,6 +150,9 @@ public class Machine
 	{
 		switch(reg)
 		{
+			case "IC":
+				this.IC = par1 | par2;
+				break;
 			case "SF":
 				this.SF = par1 | par2;
 				break;
@@ -167,6 +170,9 @@ public class Machine
 	{
 		switch(reg)
 		{
+			case "IC":
+				this.IC = par1 ^ par2;
+				break;
 			case "SF":
 				this.SF = par1 ^ par2;
 				break;
@@ -184,6 +190,9 @@ public class Machine
 	{
 		switch(reg)
 		{
+			case "IC":
+				this.IC = par1 & par2;
+				break;
 			case "SF":
 				this.SF = par1 & par2;
 				break;
@@ -201,6 +210,9 @@ public class Machine
 	{
 		switch(reg)
 		{
+			case "IC":
+				this.IC = par1 + 1;
+				break;
 			case "SF":
 				this.SF = par1 + 1;
 				break;
@@ -223,6 +235,9 @@ public class Machine
 
 		switch(reg)
 		{
+			case "IC":
+				this.IC = par1 * (-1);
+				break;
 			case "SF":
 				this.SF = par1 * (-1);
 				break;
@@ -246,11 +261,7 @@ public class Machine
 		{
 			if (_par < 0)
 			{
-				_par = _par * (-1) + 5000;
-			}
-			if (_par > 5000)
-			{
-				_par = (_par - 5000) * (-1);
+				_par = _par + 10000;
 			}
 		}
 		return _par;	
