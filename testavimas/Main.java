@@ -4,14 +4,14 @@ public class Main
 {
 	static int vmIterator = 0;
 	static Scanner input = new Scanner(System.in);
+	static RealMachine realMachine = new RealMachine();
+	static ArrayList<VirtualMachine> virtualMachines = new ArrayList<VirtualMachine>();
 	public static void main(String[] args)
-	{
-		String 		command;
-		String 		register, register2;
-		RealMachine realMachine = new RealMachine();
+	{		
+		
 		//Machine 	machine		= new Machine(); //TODO: ištrinti testavimas
 		HashMap<String, Integer> command = new HashMap<String, Integer>();
-		ArrayList<VirtualMachine> virtualMachines = new ArrayList<VirtualMachine>();
+
 		//Registras + Registras
 /*
 		command.put("ADD", new Integer(0001));
@@ -97,18 +97,18 @@ public class Main
 	}
 		System.out.println("Hello, this is Atlas machine.");
 /////////////////////////////SANDBOX////////////////////////////////
-/*
+/**/
 virtualMachines.add(new VirtualMachine(realMachine));
 virtualMachines.add(new VirtualMachine(realMachine));
 virtualMachines.add(new VirtualMachine(realMachine));
 virtualMachines.add(new VirtualMachine(realMachine));
 //virtualMachines.get(1).blocksTaken = 1;
 //System.out.println(virtualMachines.get(3).blocksTaken);
-
+/**/
 virtualMachines.get(0).setDRA(5);
 System.out.println(virtualMachines.get(1).getDRA());
 System.out.println(realMachine.getDRA());
-
+/*
 //virtualMachines.get(2).realMachine.setTI(5);
 //System.out.println(virtualMachines.get(1).realMachine.getTI());
 //System.out.println(realMachine.getTI());
@@ -194,6 +194,14 @@ System.out.println(realMachine.getDRA());
 	public static void executeCommand( VirtualMachine virtualMachine )
 	{
 		int IC = virtualMachine.getIC();
+	}
+	public static void createVirtualMachine(){
+		virtualMachines.add(new VirtualMachine(realMachine));
+		// SUPRATAU! virtualMachines.get(1).realMachine.;
+	}
+	public static VirtualMachine addBlocks(VirtualMachine virtualMachine){
+		
+		return virtualMachine;
 	}
 	public static void createVMprogram(VirtualMachine virtualMachine){
 		
