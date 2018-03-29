@@ -918,10 +918,216 @@ public static ArrayList<Integer> parseCommands(String line)
 		//machine.ADD("DRB", -1, 11); //TODO: ištrinti testavimas
 	//System.out.println(machine.DRB); //TODO: ištrinti testavimas
 	}
-	public static void executeCommand( VirtualMachine virtualMachine )
+	public static void executeCommand( int VM_ID )
 	{
-		int IC = virtualMachine.getIC();
+		
+		int IC = virtualMachines.get(VM_ID).getIC();
+		ArrayList<Integer> code = virtualMachines.get(VM_ID).getCS();
+		System.out.println("jdfhsjg"+code.get(0));
+		switch(code.get(0))
+		{
+			case 1000:
+				virtualMachines.get(VM_ID).ADD("DRA", virtualMachines.get(VM_ID).getDRA(), virtualMachines.get(VM_ID).getDRB());
+				virtualMachines.get(VM_ID).setIC(IC+1);
+				break;
+			case 1001:
+				virtualMachines.get(VM_ID).ADD("DRB", virtualMachines.get(VM_ID).getDRB(), virtualMachines.get(VM_ID).getDRA());
+				virtualMachines.get(VM_ID).setIC(IC+1);
+				break;
+			case 1002:
+				virtualMachines.get(VM_ID).ADD("SF", virtualMachines.get(VM_ID).getSF(), virtualMachines.get(VM_ID).getDRA());
+				virtualMachines.get(VM_ID).setIC(IC+1);
+				break;
+			case 1003:
+				virtualMachines.get(VM_ID).ADD("SF", virtualMachines.get(VM_ID).getSF(), virtualMachines.get(VM_ID).getDRB());
+				virtualMachines.get(VM_ID).setIC(IC+1);
+				break;
+			case 1004:
+				virtualMachines.get(VM_ID).ADD("DRA", virtualMachines.get(VM_ID).getDRA(), code.get(1));
+				virtualMachines.get(VM_ID).setIC(IC+2);
+				break;
+			case 1005: 
+				virtualMachines.get(VM_ID).ADD("DRB", virtualMachines.get(VM_ID).getDRB(), code.get(1));
+				virtualMachines.get(VM_ID).setIC(IC+2);
+				break;
+			case 1006:
+				virtualMachines.get(VM_ID).ADD("SF", virtualMachines.get(VM_ID).getSF(), code.get(1));
+				virtualMachines.get(VM_ID).setIC(IC+2);
+				break;
+			case 4000:
+				virtualMachines.get(VM_ID).OR("DRA", virtualMachines.get(VM_ID).getDRA(), virtualMachines.get(VM_ID).getDRB());
+				virtualMachines.get(VM_ID).setIC(IC+1);
+				break;
+			case 4001:
+				virtualMachines.get(VM_ID).OR("DRB", virtualMachines.get(VM_ID).getDRB(), virtualMachines.get(VM_ID).getDRA());
+				virtualMachines.get(VM_ID).setIC(IC+1);
+				break;
+			case 4002:
+				virtualMachines.get(VM_ID).OR("SF", virtualMachines.get(VM_ID).getSF(), virtualMachines.get(VM_ID).getDRA());
+				virtualMachines.get(VM_ID).setIC(IC+1);
+				break;
+			case 4003:
+				virtualMachines.get(VM_ID).OR("SF", virtualMachines.get(VM_ID).getSF(), virtualMachines.get(VM_ID).getDRB());
+				virtualMachines.get(VM_ID).setIC(IC+1);
+				break;
+			case 4004:
+				virtualMachines.get(VM_ID).OR("DRA", virtualMachines.get(VM_ID).getDRA(), code.get(1));
+				virtualMachines.get(VM_ID).setIC(IC+2);
+				break;
+			case 4005: 
+				virtualMachines.get(VM_ID).OR("DRB", virtualMachines.get(VM_ID).getDRB(), code.get(1));
+				virtualMachines.get(VM_ID).setIC(IC+2);
+				break;
+			case 4006:
+				virtualMachines.get(VM_ID).OR("SF", virtualMachines.get(VM_ID).getSF(), code.get(1));
+				virtualMachines.get(VM_ID).setIC(IC+2);
+				break;
+			case 4100:
+				virtualMachines.get(VM_ID).AND("DRA", virtualMachines.get(VM_ID).getDRA(), virtualMachines.get(VM_ID).getDRB());
+				virtualMachines.get(VM_ID).setIC(IC+1);
+				break;
+			case 4101:
+				virtualMachines.get(VM_ID).AND("DRB", virtualMachines.get(VM_ID).getDRB(), virtualMachines.get(VM_ID).getDRA());
+				virtualMachines.get(VM_ID).setIC(IC+1);
+				break;
+			case 4102:
+				virtualMachines.get(VM_ID).AND("SF", virtualMachines.get(VM_ID).getSF(), virtualMachines.get(VM_ID).getDRA());
+				virtualMachines.get(VM_ID).setIC(IC+1);
+				break;
+			case 4103:
+				virtualMachines.get(VM_ID).AND("SF", virtualMachines.get(VM_ID).getSF(), virtualMachines.get(VM_ID).getDRB());
+				virtualMachines.get(VM_ID).setIC(IC+1);
+				break;
+			case 4104:
+				virtualMachines.get(VM_ID).AND("DRA", virtualMachines.get(VM_ID).getDRA(), code.get(1));
+				virtualMachines.get(VM_ID).setIC(IC+2);
+				break;
+			case 4105: 
+				virtualMachines.get(VM_ID).AND("DRB", virtualMachines.get(VM_ID).getDRB(), code.get(1));
+				virtualMachines.get(VM_ID).setIC(IC+2);
+				break;
+			case 4106:
+				virtualMachines.get(VM_ID).AND("SF", virtualMachines.get(VM_ID).getSF(), code.get(1));
+				virtualMachines.get(VM_ID).setIC(IC+2);
+				break;
+			case 4200:
+				virtualMachines.get(VM_ID).XOR("DRA", virtualMachines.get(VM_ID).getDRA(), virtualMachines.get(VM_ID).getDRB());
+				virtualMachines.get(VM_ID).setIC(IC+1);
+				break;
+			case 4201:
+				virtualMachines.get(VM_ID).XOR("DRB", virtualMachines.get(VM_ID).getDRB(), virtualMachines.get(VM_ID).getDRA());
+				virtualMachines.get(VM_ID).setIC(IC+1);
+				break;
+			case 4202:
+				virtualMachines.get(VM_ID).XOR("SF", virtualMachines.get(VM_ID).getSF(), virtualMachines.get(VM_ID).getDRA());
+				virtualMachines.get(VM_ID).setIC(IC+1);
+				break;
+			case 4203:
+				virtualMachines.get(VM_ID).XOR("SF", virtualMachines.get(VM_ID).getSF(), virtualMachines.get(VM_ID).getDRB());
+				virtualMachines.get(VM_ID).setIC(IC+1);
+				break;
+			case 4204:
+				virtualMachines.get(VM_ID).XOR("DRA", virtualMachines.get(VM_ID).getDRA(), code.get(1));
+				virtualMachines.get(VM_ID).setIC(IC+2);
+				break;
+			case 4205: 
+				virtualMachines.get(VM_ID).AND("DRB", virtualMachines.get(VM_ID).getDRB(), code.get(1));
+				virtualMachines.get(VM_ID).setIC(IC+2);
+				break;
+			case 4206:
+				virtualMachines.get(VM_ID).AND("SF", virtualMachines.get(VM_ID).getSF(), code.get(1));
+				virtualMachines.get(VM_ID).setIC(IC+2);
+				break;
+			case 4300:
+				virtualMachines.get(VM_ID).NOT("DRA", virtualMachines.get(VM_ID).getDRA());
+				virtualMachines.get(VM_ID).setIC(IC+1);
+				break;
+			case 4301:
+				virtualMachines.get(VM_ID).NOT("DRB", virtualMachines.get(VM_ID).getDRB());
+				virtualMachines.get(VM_ID).setIC(IC+1);
+				break;
+			case 4302:
+				virtualMachines.get(VM_ID).NOT("SF", virtualMachines.get(VM_ID).getSF());
+				virtualMachines.get(VM_ID).setIC(IC+1);
+				break;
+			case 4400:
+				virtualMachines.get(VM_ID).NEG("DRA", virtualMachines.get(VM_ID).getDRA());
+				virtualMachines.get(VM_ID).setIC(IC+1);
+				break;
+			case 4401:
+				virtualMachines.get(VM_ID).NEG("DRB", virtualMachines.get(VM_ID).getDRB());
+				virtualMachines.get(VM_ID).setIC(IC+1);
+				break;
+			case 4402:
+				virtualMachines.get(VM_ID).NEG("SF", virtualMachines.get(VM_ID).getSF());
+				virtualMachines.get(VM_ID).setIC(IC+1);
+				break;
+/*
+			case 4500:
+				virtualMachines.get(VM_ID).CMP("DRA", virtualMachines.get(VM_ID).getDRA(), virtualMachines.get(VM_ID).getDRB());
+				virtualMachines.get(VM_ID).setIC(IC+1);
+				break;
+			case 4501:
+				virtualMachines.get(VM_ID).CMP("DRB", virtualMachines.get(VM_ID).getDRB(), virtualMachines.get(VM_ID).getDRA());
+				virtualMachines.get(VM_ID).setIC(IC+1);
+				break;
+			case 4502:
+				virtualMachines.get(VM_ID).CMP("SF", virtualMachines.get(VM_ID).getSF(), virtualMachines.get(VM_ID).getDRA());
+				virtualMachines.get(VM_ID).setIC(IC+1);
+				break;
+			case 4503:
+				virtualMachines.get(VM_ID).CMP("SF", virtualMachines.get(VM_ID).getSF(), virtualMachines.get(VM_ID).getDRB());
+				virtualMachines.get(VM_ID).setIC(IC+1);
+				break;
+			case 4504:
+				virtualMachines.get(VM_ID).CMP("DRA", virtualMachines.get(VM_ID).getDRA(), code.get(1));
+				virtualMachines.get(VM_ID).setIC(IC+2);
+				break;
+			case 4505: 
+				virtualMachines.get(VM_ID).CMP("DRB", virtualMachines.get(VM_ID).getDRB(), code.get(1));
+				virtualMachines.get(VM_ID).setIC(IC+2);
+				break;
+			case 4506:
+				virtualMachines.get(VM_ID).CMP("SF", virtualMachines.get(VM_ID).getSF(), code.get(1));
+				virtualMachines.get(VM_ID).setIC(IC+2);
+			case 5000:
+				virtualMachines.get(VM_ID).JMP(code.get(1));
+				virtualMachines.get(VM_ID).setIC(IC+2);
+				break;
+			case 5100:
+				virtualMachines.get(VM_ID).JMP(code.get(1));
+				virtualMachines.get(VM_ID).setIC(IC+2);
+				break;
+			case 5200:
+				virtualMachines.get(VM_ID).JMP(code.get(1));
+				virtualMachines.get(VM_ID).setIC(IC+2);
+				break;
+			case 6000:
+				System.out.println("HALTAS");
+				break;
+			case 7000:
+				virtualMachines.get(VM_ID).PRNT("DRA", virtualMachines.get(VM_ID).getDRA());
+				virtualMachines.get(VM_ID).setIC(IC+1);
+				break;
+			case 7001: 
+				virtualMachines.get(VM_ID).PRNT("DRB", virtualMachines.get(VM_ID).getDRB());
+				virtualMachines.get(VM_ID).setIC(IC+1);
+				break;
+			case 7002:
+				virtualMachines.get(VM_ID).PRNT("SF", virtualMachines.get(VM_ID).getSF());
+				virtualMachines.get(VM_ID).setIC(IC+1);
+			case 8000:
+				virtualMachines.get(VM_ID).LUM(code.get(1), code.get(2));
+				virtualMachines.get(VM_ID).setIC(IC+3);
+				break;
+			case 8001: 
+				virtualMachines.get(VM_ID).LEM(code.get(1), code.get(2));
+				virtualMachines.get(VM_ID).setIC(IC+3);
+				break;*/
+			
+		}
 	}
+
 	public static void createVirtualMachine(){
 		//Sukuria mašiną
 		virtualMachines.add(new VirtualMachine(realMachine));
