@@ -56,32 +56,32 @@ createVirtualMachine();
 //virtualMachines.get(0).setDRA(5);
 System.out.println(virtualMachines.get(0).getCS().size());
 System.out.println("2");
-addBlock(1);
+virtualMachines.get(0).addBlock();
 System.out.println(virtualMachines.get(0).getCS().size());
 System.out.println("3");
-addBlock(1);
+virtualMachines.get(0).addBlock();
 System.out.println(virtualMachines.get(0).getCS().size());
 System.out.println("4");
-addBlock(1);
+virtualMachines.get(0).addBlock();
 System.out.println(virtualMachines.get(0).getCS().size());
 System.out.println("5");
-addBlock(1);
+virtualMachines.get(0).addBlock();
 System.out.println(virtualMachines.get(0).getCS().size());
 System.out.println("6");
-addBlock(1);
+virtualMachines.get(0).addBlock();
 System.out.println(virtualMachines.get(0).getCS().size());
 System.out.println("7");
-addBlock(1);
+virtualMachines.get(0).addBlock();
 System.out.println(virtualMachines.get(0).getCS().size());
 System.out.println("8");
-addBlock(1);
+virtualMachines.get(0).addBlock();
 System.out.println(virtualMachines.get(0).getCS().size());
 System.out.println("9+");
-addBlock(1);
+virtualMachines.get(0).addBlock();
 System.out.println(virtualMachines.get(0).getCS().size());
-addBlock(1);
+virtualMachines.get(0).addBlock();
 System.out.println(virtualMachines.get(0).getCS().size());
-addBlock(1);
+virtualMachines.get(0).addBlock();
 System.out.println(virtualMachines.get(0).getCS().size());
 //System.out.println(realMachine.getDRA());
 /*
@@ -906,7 +906,7 @@ public static ArrayList<Integer> parseCommands(String line)
 				dontStop = input.next();
 			}
 			//Do Commands
-			//virtualMachines.get(vmIterator)
+			executeCommand(vmIterator);
 			vmIterator =  (++vmIterator == virtualMachines.size()) ? 0 : vmIterator;
 			
 		}
@@ -1251,40 +1251,6 @@ public static ArrayList<Integer> parseCommands(String line)
 		virtualMachines.get(virtualMachines.size()-1).setDS(DS);
 		virtualMachines.get(virtualMachines.size()-1).setCS(CS);
 		virtualMachines.get(virtualMachines.size()-1).setSS(SS);
-	}
-	public static void addBlock(int virtualMachineID){
-		List<Integer[]> alteredPT = realMachine.getPT();
-		int numberOfBlock = 0; // 0-7
-		for(int i = 0 ; i < 100 ; i++){
-			if( alteredPT.get(i)[0] == virtualMachineID ){
-				numberOfBlock = alteredPT.get(i)[1] > numberOfBlock ? alteredPT.get(i)[1] : numberOfBlock;
-			}
-		}
-		if(numberOfBlock < 7){
-			for(int i=0 ; i<100 ; i++){
-				if( alteredPT.get(i)[0] == 0 ){
-					alteredPT.get(i)[0] = virtualMachineID;
-					alteredPT.get(i)[1] = ++numberOfBlock;
-					break;
-				}
-			}
-			realMachine.setPT(alteredPT);
-			//Išskirsto bloką į virtualios mašinos segmentus
-			ArrayList<Integer> DS = virtualMachines.get(virtualMachineID-1).getDS();
-			ArrayList<Integer> CS = virtualMachines.get(virtualMachineID-1).getCS();
-			ArrayList<Integer> SS = virtualMachines.get(virtualMachineID-1).getSS();
-			for(int i = 0 ; i < 6 ; i++){
-				//Blokas pasidalina: 6 DS, 6 CS ir 3 SS
-				DS.add(0);
-				CS.add(0);
-				if(i > 2){
-					SS.add(0);
-				}
-			}
-			virtualMachines.get(virtualMachineID).setDS(DS);
-			virtualMachines.get(virtualMachineID).setCS(CS);
-			virtualMachines.get(virtualMachineID).setSS(SS);
-		}
 	}
 	public static void createVMprogram(VirtualMachine virtualMachine){
 		
