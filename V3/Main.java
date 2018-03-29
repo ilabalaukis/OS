@@ -11,7 +11,7 @@ public class Main
 		
 		//Machine 	machine		= new Machine(); //TODO: ištrinti testavimas
 		HashMap<String, Integer> command = new HashMap<String, Integer>();
-
+		executeCommand(0);
 		//Registras + Registras
 /*
 		command.put("ADD", new Integer(0001));
@@ -918,9 +918,44 @@ public static ArrayList<Integer> parseCommands(String line)
 		//machine.ADD("DRB", -1, 11); //TODO: ištrinti testavimas
 	//System.out.println(machine.DRB); //TODO: ištrinti testavimas
 	}
-	public static void executeCommand( VirtualMachine virtualMachine )
+	public static void executeCommand( int VM_ID )
 	{
-		int IC = virtualMachine.getIC();
+		
+		int IC = virtualMachines.get(VM_ID).getIC();
+		ArrayList<Integer> code = virtualMachines.get(VM_ID).getCS();
+		System.out.println("jdfhsjg"+code.get(0));
+		switch(code.get(0))
+		{
+			case 1000:
+				virtualMachines.get(VM_ID).ADD("DRA", virtualMachines.get(VM_ID).getDRA(), virtualMachines.get(VM_ID).getDRB());
+				virtualMachines.get(VM_ID).setIC(IC+1);
+				break;
+			case 1001:
+				virtualMachines.get(VM_ID).ADD("DRB", virtualMachines.get(VM_ID).getDRB(), virtualMachines.get(VM_ID).getDRA());
+				virtualMachines.get(VM_ID).setIC(IC+1);
+				break;
+			case 1002:
+				virtualMachines.get(VM_ID).ADD("SF", virtualMachines.get(VM_ID).getSF(), virtualMachines.get(VM_ID).getDRA());
+				virtualMachines.get(VM_ID).setIC(IC+1);
+				break;
+			case 1003:
+				virtualMachines.get(VM_ID).ADD("SF", virtualMachines.get(VM_ID).getSF(), virtualMachines.get(VM_ID).getDRB());
+				virtualMachines.get(VM_ID).setIC(IC+1);
+				break;
+			case 1004:
+				virtualMachines.get(VM_ID).ADD("DRA", virtualMachines.get(VM_ID).getDRA(), code.get(1));
+				virtualMachines.get(VM_ID).setIC(IC+2);
+				break;
+			case 1005: 
+				virtualMachines.get(VM_ID).ADD("DRB", virtualMachines.get(VM_ID).getDRB(), code.get(1));
+				virtualMachines.get(VM_ID).setIC(IC+2);
+				break;
+			case 1006:
+				virtualMachines.get(VM_ID).ADD("SF", virtualMachines.get(VM_ID).getSF(), code.get(1));
+				virtualMachines.get(VM_ID).setIC(IC+2);
+				break;
+
+		}
 	}
 	public static void createVirtualMachine(){
 		//Sukuria mašiną
