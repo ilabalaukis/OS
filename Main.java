@@ -43,6 +43,107 @@ public class Main
 		command.put("LUM", new Integer(0071));
 		command.put("LEM", new Integer(0072));
 */
+
+		System.out.println("Hello, this is Atlas machine.");
+/////////////////////////////SANDBOX////////////////////////////////
+/**/
+createVirtualMachine();
+createVirtualMachine();
+createVirtualMachine();
+createVirtualMachine();
+//virtualMachines.get(1).blocksTaken = 1;
+//System.out.println(virtualMachines.get(3).blocksTaken);
+/**/
+//virtualMachines.get(0).setDRA(5);
+System.out.println(virtualMachines.get(0).getCS().size());
+System.out.println("2");
+addBlock(1);
+System.out.println(virtualMachines.get(0).getCS().size());
+System.out.println("3");
+addBlock(1);
+System.out.println(virtualMachines.get(0).getCS().size());
+System.out.println("4");
+addBlock(1);
+System.out.println(virtualMachines.get(0).getCS().size());
+System.out.println("5");
+addBlock(1);
+System.out.println(virtualMachines.get(0).getCS().size());
+System.out.println("6");
+addBlock(1);
+System.out.println(virtualMachines.get(0).getCS().size());
+System.out.println("7");
+addBlock(1);
+System.out.println(virtualMachines.get(0).getCS().size());
+System.out.println("8");
+addBlock(1);
+System.out.println(virtualMachines.get(0).getCS().size());
+System.out.println("9+");
+addBlock(1);
+System.out.println(virtualMachines.get(0).getCS().size());
+addBlock(1);
+System.out.println(virtualMachines.get(0).getCS().size());
+addBlock(1);
+System.out.println(virtualMachines.get(0).getCS().size());
+//System.out.println(realMachine.getDRA());
+/*
+//virtualMachines.get(2).realMachine.setTI(5);
+//System.out.println(virtualMachines.get(1).realMachine.getTI());
+//System.out.println(realMachine.getTI());
+
+//realMachine.setMODE(true);
+//System.out.println(virtualMachines.get(1).realMachine.getMODE());
+
+*////////////////////////////SANDBOX ENDS////////////////////////////
+	
+		showCommands();
+		while(true)
+		{
+			String comm = input.next().toUpperCase();
+			if( comm.equals("EXIT") ){
+				System.out.println("Goodbye.");
+				break;
+			}
+			switch(comm){
+				case "NEW":
+					System.out.println("NEW called.");
+					break;
+				case "NEWV":
+					System.out.println("NEWV called.");
+					virtualMachines.add(new VirtualMachine(realMachine));
+					createVMprogram(virtualMachines.get(virtualMachines.size()-1));
+					break;
+				case "START":
+					System.out.println("START called.");
+					if( virtualMachines.isEmpty() )
+					{
+						System.out.println("vm is empty");
+						//System.out.println(vmIterator);
+					}
+					else
+					{
+						System.out.println("vm is not empty");
+						vmExecutionMode(virtualMachines);
+					}
+					
+					break;
+				case "HELP":
+					showCommands();
+					break;
+				default:
+					System.out.println("Command not found.");
+			}
+			
+		}
+	}
+	
+	public static void showCommands(){
+		System.out.println("Available Commands:");
+		System.out.println("HELP - this help page.");
+		System.out.println("NEW - creates new program.");
+		System.out.println("NEWV - creates new virtual machine.");
+		System.out.println("START - start programs execution mode.");
+		System.out.println("EXIT - turn off the machine.");
+	}
 public static ArrayList<Integer> parseCommands(String line)
 	{
 		String[] parts = line.split(" ");
@@ -792,107 +893,7 @@ public static ArrayList<Integer> parseCommands(String line)
 				break;   
 		}
 	return A;
-	}
-		System.out.println("Hello, this is Atlas machine.");
-/////////////////////////////SANDBOX////////////////////////////////
-/**/
-createVirtualMachine();
-createVirtualMachine();
-createVirtualMachine();
-createVirtualMachine();
-//virtualMachines.get(1).blocksTaken = 1;
-//System.out.println(virtualMachines.get(3).blocksTaken);
-/**/
-//virtualMachines.get(0).setDRA(5);
-System.out.println(virtualMachines.get(0).getCS().size());
-System.out.println("2");
-addBlock(1);
-System.out.println(virtualMachines.get(0).getCS().size());
-System.out.println("3");
-addBlock(1);
-System.out.println(virtualMachines.get(0).getCS().size());
-System.out.println("4");
-addBlock(1);
-System.out.println(virtualMachines.get(0).getCS().size());
-System.out.println("5");
-addBlock(1);
-System.out.println(virtualMachines.get(0).getCS().size());
-System.out.println("6");
-addBlock(1);
-System.out.println(virtualMachines.get(0).getCS().size());
-System.out.println("7");
-addBlock(1);
-System.out.println(virtualMachines.get(0).getCS().size());
-System.out.println("8");
-addBlock(1);
-System.out.println(virtualMachines.get(0).getCS().size());
-System.out.println("9+");
-addBlock(1);
-System.out.println(virtualMachines.get(0).getCS().size());
-addBlock(1);
-System.out.println(virtualMachines.get(0).getCS().size());
-addBlock(1);
-System.out.println(virtualMachines.get(0).getCS().size());
-//System.out.println(realMachine.getDRA());
-/*
-//virtualMachines.get(2).realMachine.setTI(5);
-//System.out.println(virtualMachines.get(1).realMachine.getTI());
-//System.out.println(realMachine.getTI());
-
-//realMachine.setMODE(true);
-//System.out.println(virtualMachines.get(1).realMachine.getMODE());
-
-*////////////////////////////SANDBOX ENDS////////////////////////////
-	
-		showCommands();
-		while(true)
-		{
-			String comm = input.next().toUpperCase();
-			if( comm.equals("EXIT") ){
-				System.out.println("Goodbye.");
-				break;
-			}
-			switch(comm){
-				case "NEW":
-					System.out.println("NEW called.");
-					break;
-				case "NEWV":
-					System.out.println("NEWV called.");
-					virtualMachines.add(new VirtualMachine(realMachine));
-					createVMprogram(virtualMachines.get(virtualMachines.size()-1));
-					break;
-				case "START":
-					System.out.println("START called.");
-					if( virtualMachines.isEmpty() )
-					{
-						System.out.println("vm is empty");
-						//System.out.println(vmIterator);
-					}
-					else
-					{
-						System.out.println("vm is not empty");
-						vmExecutionMode(virtualMachines);
-					}
-					
-					break;
-				case "HELP":
-					showCommands();
-					break;
-				default:
-					System.out.println("Command not found.");
-			}
-			
-		}
-	}
-	
-	public static void showCommands(){
-		System.out.println("Available Commands:");
-		System.out.println("HELP - this help page.");
-		System.out.println("NEW - creates new program.");
-		System.out.println("NEWV - creates new virtual machine.");
-		System.out.println("START - start programs execution mode.");
-		System.out.println("EXIT - turn off the machine.");
-	}
+	}	
 	public static void vmExecutionMode(ArrayList<VirtualMachine> virtualMachines)
 	{
 		VirtualMachine currentMachine = virtualMachines.get(vmIterator);
