@@ -143,24 +143,32 @@ System.out.println(virtualMachines.get(0).getCS().size());
 		System.out.println("START - start programs execution mode.");
 		System.out.println("EXIT - turn off the machine.");
 	}
-public static ArrayList<Integer> parseCommands(String line)
+	public static ArrayList<Integer> parseCommands(String line)
 	{
 		String[] parts = line.split(" ");
 		ArrayList<Integer> A = new ArrayList<Integer>();
 		A.add(0, 9999);
 		int SK = 0;
 		int SK1 = 0;
+		int address = 0;
+		int address1 = 0;
 		String regex = "\\d+";
+		String regexAddress = "\\[\\d+\\]";
+		String str1 = "";
+		String str2 = "";
+		
 		if (parts.length > 1)
 		{
-			if (parts[1].equals("SK"))
+			str1 = parts[1].replaceAll("[^-?0-9]+", "");
+			if (parts[1].equals("SK") || parts[1].equals("ADDRESS"))
 			{
 				return A;
 			}
 		}
 		if (parts.length > 2)
 		{
-			if (parts[2].equals("SK"))
+			str2 = parts[2].replaceAll("[^-?0-9]+", "");
+			if (parts[2].equals("SK") || parts[2].equals("ADDRESS"))
 			{
 				return A;
 			}
@@ -172,6 +180,11 @@ public static ArrayList<Integer> parseCommands(String line)
 				SK = Integer.parseInt(parts[2]);
 				parts[2] = "SK";
 			}
+			if (parts[2].matches(regexAddress))
+			{
+				address = Integer.parseInt(str2);
+				parts[2] = "ADDRESS";
+			}
 		}
 		if (parts.length > 1)
 		{
@@ -179,6 +192,11 @@ public static ArrayList<Integer> parseCommands(String line)
 			{
 				SK1 = Integer.parseInt(parts[1]);
 				parts[1] = "SK";
+			}
+			if (parts[1].matches(regexAddress))
+			{
+				address1 = Integer.parseInt(str1);
+				parts[1] = "ADDRESS";
 			}
 		}
 		switch (parts[0])
@@ -248,7 +266,7 @@ public static ArrayList<Integer> parseCommands(String line)
 							A.add(0, 9999);
 							break;   
 				}
-					break;
+			break;
 			case "SUB":
 				switch (parts[1])
 				{
@@ -399,34 +417,117 @@ public static ArrayList<Integer> parseCommands(String line)
 				switch (parts[1])
 				{
 					case "DRA":
-						A.clear();	
-						A.add(0, 2000);
-						return A;						
+						switch (parts[2])
+						{
+							case "DRB":
+								A.clear();	
+								A.add(0, 2000);
+								return A;
+							case "SK":
+								A.clear();
+								A.add(0, 2004);
+								A.add(1, SK);
+								return A;
+							case "SF":
+								A.clear();
+								A.add(0, 2006);
+								return A;
+							case "ADDRESS":
+								A.clear();
+								A.add(0,2008);
+								A.add(1, address);
+								return A;
+							default:
+								A.clear();
+								A.add(0, 9999);
+								break;     
+						}
+					break;
 					case "DRB":
-						A.clear();
-						A.add(0, 2001);
-						return A;
-					default:
-						A.clear();
-						A.add(0, 9999);
-						break;   
+						switch (parts[2])
+						{
+							case "DRA":
+								A.clear();
+								A.add(0, 2001);
+								return A;  
+							case "SK":
+								A.clear();
+								A.add(0, 2005);
+								A.add(1, SK);
+								return A;
+							case "SF":
+								A.clear();
+								A.add(0, 2007);
+								return A;
+							case "ADDRESS":
+								A.clear();
+								A.add(0,2009);
+								A.add(1, address);
+								return A;
+							default:
+								A.clear();
+								A.add(0, 9999);
+								break;       
+						}
+					break;
+					case "SF":
+						switch (parts[2])
+						{
+							case "DRA":
+								A.add(0, 2002);
+								return A;  
+							case "DRB":
+								A.add(0, 2003);
+								return A;
+							case "ADDRESS":
+								A.clear();
+								A.add(0,2010);
+								A.add(1, address);
+								return A;
+							case "SK":
+								A.clear();
+								A.add(0, 2011);
+								A.add(1, SK);
+								return A;
+							default:
+								A.clear();
+								A.add(0, 9999);
+								break;   
+						}
+							break;
+						default:
+							A.clear();
+							A.add(0, 9999);
+							break;   
 				}
+				break;
 			case "SR":
 				switch (parts[1])
 				{
 					case "DRA":
-						A.clear();	
-						A.add(0, 2100);
-						return A;						
+						switch (parts[2])
+						{
+							case "ADDRESS":
+								A.clear();	
+								A.add(0, 2100);
+								A.add(1, address);
+								return A;		
+						}					
 					case "DRB":
-						A.clear();
-						A.add(0, 2101);
-						return A;
+						switch(parts[2])
+						{
+							case "ADDRESS":
+								A.clear();
+								A.add(0, 2101);
+								A.add(1, address);
+								return A;	
+						}
 					default:
 						A.clear();
 						A.add(0, 9999);
 						break;   
 				}
+				break;
 			case "PUSH":
 				switch (parts[1])
 				{
@@ -448,6 +549,7 @@ public static ArrayList<Integer> parseCommands(String line)
 						A.add(0, 9999);
 						break;   
 				}
+				break;
 			case "POP":
 				switch (parts[1])
 				{
@@ -464,6 +566,7 @@ public static ArrayList<Integer> parseCommands(String line)
 						A.add(0, 9999);
 						break;   
 				}
+				break;
 			case "OR":
 				switch (parts[1])
 				{
@@ -799,14 +902,15 @@ public static ArrayList<Integer> parseCommands(String line)
 			case "LUM":
 					switch (parts[1])
 					{
-						case "SK":
+						case "ADDRESS":
 						switch (parts[2])
 						{
-							case "SK":
+							case "ADDRESS":
 									A.clear();	
 									A.add(0, 8000);
-									A.add(1, SK1);
-									A.add(2, SK);
+									A.add(1, address1);
+									A.add(2, address);
+									
 									return A;
 							default:
 								A.clear();
@@ -823,14 +927,15 @@ public static ArrayList<Integer> parseCommands(String line)
 			case "LEM":
 					switch (parts[1])
 					{
-						case "SK":
+						case "ADDRESS":
 							switch (parts[2])
 							{
-								case "SK":
+								case "ADDRESS":
 										A.clear();	
 										A.add(0, 8100);
-										A.add(1, SK1);
-										A.add(2, SK);
+										A.add(1, address1);
+										A.add(2, address);
+										
 										return A;
 								default:
 									A.clear();
@@ -849,8 +954,12 @@ public static ArrayList<Integer> parseCommands(String line)
 				{
 					case "SK":	
 						A.clear();
-						A.add(0, 5000);
+						A.add(0, 5001);
 						A.add(1, SK1);
+						return A;
+					case "ADDRESS":
+						A.add(0, 5000);
+						A.add(1, address1);
 						return A;
 					default:
 						A.clear();
@@ -863,8 +972,13 @@ public static ArrayList<Integer> parseCommands(String line)
 				{
 					case "SK":	
 						A.clear();
-						A.add(0, 5100);
+						A.add(0, 5101);
 						A.add(1, SK1);
+						return A;
+					case "ADDRESS":	
+						A.clear();
+						A.add(0, 5100);
+						A.add(1, address);
 						return A;
 					default:
 						A.clear();
@@ -877,8 +991,13 @@ public static ArrayList<Integer> parseCommands(String line)
 				{
 					case "SK":	
 						A.clear();
-						A.add(0, 5200);
+						A.add(0, 5201);
 						A.add(1, SK1);
+						return A;
+					case "ADDRESS":	
+						A.clear();
+						A.add(0, 5200);
+						A.add(1, address);
 						return A;
 					default:
 						A.clear();
