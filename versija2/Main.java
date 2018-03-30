@@ -1179,14 +1179,15 @@ System.out.println(virtualMachines.get(0).getCS().size());
 				virtualMachines.get(VM_ID).LR("SF", "NA", code.get(IC+1));
 				virtualMachines.get(VM_ID).setIC(IC+2);
 				break;
-			/*case 2100:
-				virtualMachines.get(VM_ID).SR("DRA", virtualMachines.get(VM_ID).getDRA());
-				virtualMachines.get(VM_ID).setIC(IC+1);
+			case 2100:
+				virtualMachines.get(VM_ID).SR("DRA", code.get(IC+1));
+				virtualMachines.get(VM_ID).setIC(IC+2);
 				break;
 			case 2101:
-				virtualMachines.get(VM_ID).SR("DRB", virtualMachines.get(VM_ID).getDRB());
-				virtualMachines.get(VM_ID).setIC(IC+1);
+				virtualMachines.get(VM_ID).SR("DRB", code.get(IC+1));
+				virtualMachines.get(VM_ID).setIC(IC+2);
 				break;
+			/*
 			case 3001:
 				virtualMachines.get(VM_ID).PUSH(virtualMachines.get(VM_ID).getDRA());
 				virtualMachines.get(VM_ID).setIC(IC+1);
