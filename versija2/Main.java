@@ -103,13 +103,9 @@ System.out.println(virtualMachines.get(0).getCS().size());
 				break;
 			}
 			switch(comm){
-				case "NEW":
-					System.out.println("NEW called.");
-					break;
 				case "NEWV":
-					System.out.println("NEWV called.");
 					virtualMachines.add(new VirtualMachine(realMachine));
-					createVMprogram(virtualMachines.get(virtualMachines.size()-1));
+					createVMprogram();
 					break;
 				case "START":
 					System.out.println("START called.");
@@ -121,7 +117,7 @@ System.out.println(virtualMachines.get(0).getCS().size());
 					else
 					{
 						System.out.println("vm is not empty");
-						vmExecutionMode(virtualMachines);
+						vmExecutionMode();
 					}
 					
 					break;
@@ -1012,24 +1008,25 @@ System.out.println(virtualMachines.get(0).getCS().size());
 		}
 	return A;
 	}	
-	public static void vmExecutionMode(ArrayList<VirtualMachine> virtualMachines)
+	public static void vmExecutionMode()
 	{
-		VirtualMachine currentMachine = virtualMachines.get(vmIterator);
-		currentMachine.realMachine.setTI(10);
+		virtualMachines.get(vmIterator).realMachine.setTI(10);
 		//Loopas sustos kiekvienu stepu, nebent parašysi SKIP
-		String dontStop = "";
-		while( currentMachine.realMachine.getTI() > 0 )
-		{
-			if( !dontStop.equals("SKIP"))
+		String opt = "";
+		boolean done = false;
+		while( done == true ){
+			while( currentMachine.realMachine.getTI() > 0 )
 			{
-				dontStop = input.next();
+				if( !opt.equals("SKIP"))
+				{
+					opt = input.next();
+				}
+				//Do Commands
+				executeCommand(vmIterator);
 			}
-			//Do Commands
-			executeCommand(vmIterator);
 			vmIterator =  (++vmIterator == virtualMachines.size()) ? 0 : vmIterator;
 			
 		}
-
 		//Set set = command.entrySet();
 		
 		//Iterator i = set.iterator();
@@ -1408,7 +1405,50 @@ System.out.println(virtualMachines.get(0).getCS().size());
 		virtualMachines.get(virtualMachines.size()-1).setCS(CS);
 		virtualMachines.get(virtualMachines.size()-1).setSS(SS);
 	}
-	public static void createVMprogram(VirtualMachine virtualMachine){
-		
+	public static void createVMprogram(){
+		String currentCommand = "";
+		String lastCommand = "";
+		ArrayList<Integer> dataSegment = new ArrayList<Integer>();
+		ArrayList<Integer> codeSegment = new ArrayList<Integer>();
+		ArrayList<Integer> stackSegment = new ArrayList<Integer>();
+		int wordCount = 1;
+		//DS pildymas
+		while( !lastCommand.equals("DONE")){
+			currentCommand = input.nextLine();
+			if(!currentCommand.equals("DONE")){
+				String[] line = currentCommand.split("");
+				String data = "";
+				for(int i = 0; i < line.length ; i++){
+					if( i%2 == 0 ){
+						data = "";
+						data += line[i];	
+					}else{
+						data += line[i];
+						dataSegment.add(Integer.parseInt(line[i]));
+						wordCount++;
+					}
+					if( i%2 == 0 && i == line.length-1){
+						data += "00";
+						dataSegment.add(Integer.parseInt(line[i]));
+						wordCount++;
+					}
+				}
+			}
+			lastCommand = currentCommand;
+		}
+		lastCommand = "";
+		while( !lastCommand.equals("HALT")){
+			currentCommand = input.nextLine();
+			ArrayList<Integer> machineCode = parseCommands(currentCommand);
+			
+			lastCommand = currentCommand.substring(0, 4);
+		}
+		virtualMachines.get(virtualMachines.size()-1).setDS(dataSegment);
+		virtualMachines.get(virtualMachines.size()-1).setCS(codeSegment);
+		virtualMachines.get(virtualMachines.size()-1).setSS(stackSegment);
+
+
+
+
 	}
 }
