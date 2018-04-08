@@ -982,17 +982,13 @@ public class Main
 				cont = false;
 			}
 		}
-		//Set set = command.entrySet();
-		
-		//Iterator i = set.iterator();
-		//machine.ADD("DRB", -1, 11); //TODO: ištrinti testavimas
-	//System.out.println(machine.DRB); //TODO: ištrinti testavimas
 	}
 	public static boolean executeCommand( int VM_ID )
 	{
 		
 		int IC = virtualMachines.get(VM_ID).getIC();
 		ArrayList<Integer> code = virtualMachines.get(VM_ID).getCS();
+		System.out.println(VM_ID + " " + virtualMachines.get(VM_ID).getIC() + " DRA: " + virtualMachines.get(VM_ID).getDRA());
 		switch(code.get(IC))
 		{
 			case 1000:
@@ -1309,9 +1305,11 @@ public class Main
 				virtualMachines.get(VM_ID).JMP(code.get(IC+1));
 				virtualMachines.get(VM_ID).setIC(IC+2);
 				return false;
+*/
 			case 6000:
 				System.out.println("HALTAS");
 				return true;
+/*
 			case 7000:
 				virtualMachines.get(VM_ID).PRNT("DRA", virtualMachines.get(VM_ID).getDRA());
 				virtualMachines.get(VM_ID).setIC(IC+1);
@@ -1402,11 +1400,14 @@ public class Main
 			ArrayList<Integer> machineCode = parseCommands(currentCommand);
 			
 			lastCommand = currentCommand.substring(0, 4);
+			codeSegment.addAll(machineCode);
 		}
 		virtualMachines.get(virtualMachines.size()-1).setDS(dataSegment);
 		virtualMachines.get(virtualMachines.size()-1).setCS(codeSegment);
 		virtualMachines.get(virtualMachines.size()-1).setSS(stackSegment);
-		System.out.println("Virtual Machine created successfully.");
+		
+		System.out.println("Virtual Machine created successfully." + virtualMachines.get(virtualMachines.size()-1).getCS());
+
 
 
 

@@ -60,7 +60,6 @@ public class Machine
 
 		par1 = this.validateNumber(par1);
 		par2 = this.validateNumber(par2);
-		System.out.println(par1 + " " + par2); //TODO: ištrinti testavimas
 		int add = par1 + par2;
 		if (add > 9999)
 		{
