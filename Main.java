@@ -1314,7 +1314,6 @@ System.out.println(virtualMachines.get(0).getCS().size());
 				virtualMachines.get(VM_ID).NEG("SF", virtualMachines.get(VM_ID).getSF());
 				virtualMachines.get(VM_ID).setIC(IC+1);
 				return false;
-/*
 			case 4500:
 				virtualMachines.get(VM_ID).CMP("DRA", virtualMachines.get(VM_ID).getDRA(), virtualMachines.get(VM_ID).getDRB());
 				virtualMachines.get(VM_ID).setIC(IC+1);
@@ -1343,6 +1342,7 @@ System.out.println(virtualMachines.get(0).getCS().size());
 				virtualMachines.get(VM_ID).CMP("SF", virtualMachines.get(VM_ID).getSF(), code.get(IC+1));
 				virtualMachines.get(VM_ID).setIC(IC+2);
 			case 5000:
+/*
 				virtualMachines.get(VM_ID).JMP(code.get(IC+1));
 				virtualMachines.get(VM_ID).setIC(IC+2);
 				return false;

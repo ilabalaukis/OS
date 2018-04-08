@@ -103,6 +103,27 @@ public class Machine
 				System.out.println("Incorrect register");
 		}
 	}
+	public void CMP(String reg, int par1, int par2)
+	{
+		int cmp = par1 - par2;
+
+		par1 = this.validateNumber(par1);
+		par2 = this.validateNumber(par2);
+		switch(reg)
+		{
+			case "DRA":
+				this.DRA = cmp;
+				break;
+			case "DRB":
+				this.DRB = cmp;
+				break;
+			case "SF":
+				this.SF = cmp;
+				break;
+			default:
+				System.out.println("Incorrect register");
+		}
+	}
 	public void MUL(String reg, int par1, int par2)
 	{
 		par1 = this.validateNumber(par1);
