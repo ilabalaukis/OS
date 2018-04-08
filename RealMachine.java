@@ -1,4 +1,4 @@
-import java.util.*;
+ import java.util.*;
 public class RealMachine extends Machine
 {
 	private static int[] userMemory = new int[1500];
@@ -6,11 +6,6 @@ public class RealMachine extends Machine
 	private static List<Integer[]> PT = new ArrayList<Integer[]>();
 	//Bloko numeris 0-99; VM numeriai 5 bitai, t.y. negali viršyti 31; bloko numeris 3 bitai, t.y. negali viršyti 7.
 	//PTR susideda iš 4 skaičių: VM_Skaičius 2 skaičiai ir Einamosios_VM_Numeris 2 skaičiai.
-	//Interrupt Registers
-	private int TI = 0;
-	private int PI = 0;
-	private int IOI = 0;
-	private int SI = 0;
 	//Segment Registers
 	private int DS = 0;
 	private int CS = 700;

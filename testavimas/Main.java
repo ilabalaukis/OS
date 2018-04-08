@@ -1014,8 +1014,8 @@ System.out.println(virtualMachines.get(0).getCS().size());
 		//Loopas sustos kiekvienu stepu, nebent parašysi SKIP
 		String opt = "";
 		boolean done = false;
-		/*while( done == true ){
-			while( currentMachine.realMachine.getTI() > 0 )
+		while( done == true ){
+			while( realMachine.getTI() > 0 )
 			{
 				if( !opt.equals("SKIP"))
 				{
@@ -1026,7 +1026,7 @@ System.out.println(virtualMachines.get(0).getCS().size());
 			}
 			vmIterator =  (++vmIterator == virtualMachines.size()) ? 0 : vmIterator;
 			
-		}*/
+		}
 		//Set set = command.entrySet();
 		
 		//Iterator i = set.iterator();

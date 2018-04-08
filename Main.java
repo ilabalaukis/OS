@@ -11,7 +11,6 @@ public class Main
 		
 		//Machine 	machine		= new Machine(); //TODO: ištrinti testavimas
 		HashMap<String, Integer> command = new HashMap<String, Integer>();
-
 		//Registras + Registras
 /*
 		command.put("ADD", new Integer(0001));
@@ -57,32 +56,32 @@ createVirtualMachine();
 //virtualMachines.get(0).setDRA(5);
 System.out.println(virtualMachines.get(0).getCS().size());
 System.out.println("2");
-addBlock(1);
+virtualMachines.get(0).addBlock();
 System.out.println(virtualMachines.get(0).getCS().size());
 System.out.println("3");
-addBlock(1);
+virtualMachines.get(0).addBlock();
 System.out.println(virtualMachines.get(0).getCS().size());
 System.out.println("4");
-addBlock(1);
+virtualMachines.get(0).addBlock();
 System.out.println(virtualMachines.get(0).getCS().size());
 System.out.println("5");
-addBlock(1);
+virtualMachines.get(0).addBlock();
 System.out.println(virtualMachines.get(0).getCS().size());
 System.out.println("6");
-addBlock(1);
+virtualMachines.get(0).addBlock();
 System.out.println(virtualMachines.get(0).getCS().size());
 System.out.println("7");
-addBlock(1);
+virtualMachines.get(0).addBlock();
 System.out.println(virtualMachines.get(0).getCS().size());
 System.out.println("8");
-addBlock(1);
+virtualMachines.get(0).addBlock();
 System.out.println(virtualMachines.get(0).getCS().size());
 System.out.println("9+");
-addBlock(1);
+virtualMachines.get(0).addBlock();
 System.out.println(virtualMachines.get(0).getCS().size());
-addBlock(1);
+virtualMachines.get(0).addBlock();
 System.out.println(virtualMachines.get(0).getCS().size());
-addBlock(1);
+virtualMachines.get(0).addBlock();
 System.out.println(virtualMachines.get(0).getCS().size());
 //System.out.println(realMachine.getDRA());
 /*
@@ -104,13 +103,9 @@ System.out.println(virtualMachines.get(0).getCS().size());
 				break;
 			}
 			switch(comm){
-				case "NEW":
-					System.out.println("NEW called.");
-					break;
 				case "NEWV":
-					System.out.println("NEWV called.");
 					virtualMachines.add(new VirtualMachine(realMachine));
-					createVMprogram(virtualMachines.get(virtualMachines.size()-1));
+					createVMprogram();
 					break;
 				case "START":
 					System.out.println("START called.");
@@ -122,7 +117,7 @@ System.out.println(virtualMachines.get(0).getCS().size());
 					else
 					{
 						System.out.println("vm is not empty");
-						vmExecutionMode(virtualMachines);
+						vmExecutionMode();
 					}
 					
 					break;
@@ -144,24 +139,32 @@ System.out.println(virtualMachines.get(0).getCS().size());
 		System.out.println("START - start programs execution mode.");
 		System.out.println("EXIT - turn off the machine.");
 	}
-public static ArrayList<Integer> parseCommands(String line)
+	public static ArrayList<Integer> parseCommands(String line)
 	{
 		String[] parts = line.split(" ");
 		ArrayList<Integer> A = new ArrayList<Integer>();
 		A.add(0, 9999);
 		int SK = 0;
 		int SK1 = 0;
+		int address = 0;
+		int address1 = 0;
 		String regex = "\\d+";
+		String regexAddress = "\\[\\d+\\]";
+		String str1 = "";
+		String str2 = "";
+		
 		if (parts.length > 1)
 		{
-			if (parts[1].equals("SK"))
+			str1 = parts[1].replaceAll("[^-?0-9]+", "");
+			if (parts[1].equals("SK") || parts[1].equals("ADDRESS"))
 			{
 				return A;
 			}
 		}
 		if (parts.length > 2)
 		{
-			if (parts[2].equals("SK"))
+			str2 = parts[2].replaceAll("[^-?0-9]+", "");
+			if (parts[2].equals("SK") || parts[2].equals("ADDRESS"))
 			{
 				return A;
 			}
@@ -173,6 +176,11 @@ public static ArrayList<Integer> parseCommands(String line)
 				SK = Integer.parseInt(parts[2]);
 				parts[2] = "SK";
 			}
+			if (parts[2].matches(regexAddress))
+			{
+				address = Integer.parseInt(str2);
+				parts[2] = "ADDRESS";
+			}
 		}
 		if (parts.length > 1)
 		{
@@ -180,6 +188,11 @@ public static ArrayList<Integer> parseCommands(String line)
 			{
 				SK1 = Integer.parseInt(parts[1]);
 				parts[1] = "SK";
+			}
+			if (parts[1].matches(regexAddress))
+			{
+				address1 = Integer.parseInt(str1);
+				parts[1] = "ADDRESS";
 			}
 		}
 		switch (parts[0])
@@ -249,7 +262,7 @@ public static ArrayList<Integer> parseCommands(String line)
 							A.add(0, 9999);
 							break;   
 				}
-					break;
+			break;
 			case "SUB":
 				switch (parts[1])
 				{
@@ -400,34 +413,117 @@ public static ArrayList<Integer> parseCommands(String line)
 				switch (parts[1])
 				{
 					case "DRA":
-						A.clear();	
-						A.add(0, 2000);
-						return A;						
+						switch (parts[2])
+						{
+							case "DRB":
+								A.clear();	
+								A.add(0, 2000);
+								return A;
+							case "SK":
+								A.clear();
+								A.add(0, 2004);
+								A.add(1, SK);
+								return A;
+							case "SF":
+								A.clear();
+								A.add(0, 2006);
+								return A;
+							case "ADDRESS":
+								A.clear();
+								A.add(0,2008);
+								A.add(1, address);
+								return A;
+							default:
+								A.clear();
+								A.add(0, 9999);
+								break;     
+						}
+					break;
 					case "DRB":
-						A.clear();
-						A.add(0, 2001);
-						return A;
-					default:
-						A.clear();
-						A.add(0, 9999);
-						break;   
+						switch (parts[2])
+						{
+							case "DRA":
+								A.clear();
+								A.add(0, 2001);
+								return A;  
+							case "SK":
+								A.clear();
+								A.add(0, 2005);
+								A.add(1, SK);
+								return A;
+							case "SF":
+								A.clear();
+								A.add(0, 2007);
+								return A;
+							case "ADDRESS":
+								A.clear();
+								A.add(0,2009);
+								A.add(1, address);
+								return A;
+							default:
+								A.clear();
+								A.add(0, 9999);
+								break;       
+						}
+					break;
+					case "SF":
+						switch (parts[2])
+						{
+							case "DRA":
+								A.add(0, 2002);
+								return A;  
+							case "DRB":
+								A.add(0, 2003);
+								return A;
+							case "ADDRESS":
+								A.clear();
+								A.add(0,2010);
+								A.add(1, address);
+								return A;
+							case "SK":
+								A.clear();
+								A.add(0, 2011);
+								A.add(1, SK);
+								return A;
+							default:
+								A.clear();
+								A.add(0, 9999);
+								break;   
+						}
+							break;
+						default:
+							A.clear();
+							A.add(0, 9999);
+							break;   
 				}
+				break;
 			case "SR":
 				switch (parts[1])
 				{
 					case "DRA":
-						A.clear();	
-						A.add(0, 2100);
-						return A;						
+						switch (parts[2])
+						{
+							case "ADDRESS":
+								A.clear();	
+								A.add(0, 2100);
+								A.add(1, address);
+								return A;		
+						}					
 					case "DRB":
-						A.clear();
-						A.add(0, 2101);
-						return A;
+						switch(parts[2])
+						{
+							case "ADDRESS":
+								A.clear();
+								A.add(0, 2101);
+								A.add(1, address);
+								return A;	
+						}
 					default:
 						A.clear();
 						A.add(0, 9999);
 						break;   
 				}
+				break;
 			case "PUSH":
 				switch (parts[1])
 				{
@@ -449,6 +545,7 @@ public static ArrayList<Integer> parseCommands(String line)
 						A.add(0, 9999);
 						break;   
 				}
+				break;
 			case "POP":
 				switch (parts[1])
 				{
@@ -465,6 +562,7 @@ public static ArrayList<Integer> parseCommands(String line)
 						A.add(0, 9999);
 						break;   
 				}
+				break;
 			case "OR":
 				switch (parts[1])
 				{
@@ -800,14 +898,15 @@ public static ArrayList<Integer> parseCommands(String line)
 			case "LUM":
 					switch (parts[1])
 					{
-						case "SK":
+						case "ADDRESS":
 						switch (parts[2])
 						{
-							case "SK":
+							case "ADDRESS":
 									A.clear();	
 									A.add(0, 8000);
-									A.add(1, SK1);
-									A.add(2, SK);
+									A.add(1, address1);
+									A.add(2, address);
+									
 									return A;
 							default:
 								A.clear();
@@ -824,14 +923,15 @@ public static ArrayList<Integer> parseCommands(String line)
 			case "LEM":
 					switch (parts[1])
 					{
-						case "SK":
+						case "ADDRESS":
 							switch (parts[2])
 							{
-								case "SK":
+								case "ADDRESS":
 										A.clear();	
 										A.add(0, 8100);
-										A.add(1, SK1);
-										A.add(2, SK);
+										A.add(1, address1);
+										A.add(2, address);
+										
 										return A;
 								default:
 									A.clear();
@@ -850,8 +950,12 @@ public static ArrayList<Integer> parseCommands(String line)
 				{
 					case "SK":	
 						A.clear();
-						A.add(0, 5000);
+						A.add(0, 5001);
 						A.add(1, SK1);
+						return A;
+					case "ADDRESS":
+						A.add(0, 5000);
+						A.add(1, address1);
 						return A;
 					default:
 						A.clear();
@@ -864,8 +968,13 @@ public static ArrayList<Integer> parseCommands(String line)
 				{
 					case "SK":	
 						A.clear();
-						A.add(0, 5100);
+						A.add(0, 5101);
 						A.add(1, SK1);
+						return A;
+					case "ADDRESS":	
+						A.clear();
+						A.add(0, 5100);
+						A.add(1, address);
 						return A;
 					default:
 						A.clear();
@@ -878,8 +987,13 @@ public static ArrayList<Integer> parseCommands(String line)
 				{
 					case "SK":	
 						A.clear();
-						A.add(0, 5200);
+						A.add(0, 5201);
 						A.add(1, SK1);
+						return A;
+					case "ADDRESS":	
+						A.clear();
+						A.add(0, 5200);
+						A.add(1, address);
 						return A;
 					default:
 						A.clear();
@@ -894,33 +1008,376 @@ public static ArrayList<Integer> parseCommands(String line)
 		}
 	return A;
 	}	
-	public static void vmExecutionMode(ArrayList<VirtualMachine> virtualMachines)
+	public static void vmExecutionMode()
 	{
-		VirtualMachine currentMachine = virtualMachines.get(vmIterator);
-		currentMachine.realMachine.setTI(10);
+		virtualMachines.get(vmIterator).realMachine.setTI(10);
 		//Loopas sustos kiekvienu stepu, nebent parašysi SKIP
-		String dontStop = "";
-		while( currentMachine.realMachine.getTI() > 0 )
-		{
-			if( !dontStop.equals("SKIP"))
+		String opt = "";
+		boolean done = false;
+		while( done == true ){
+			while( realMachine.getTI() > 0 )
 			{
-				dontStop = input.next();
+				if( !opt.equals("SKIP"))
+				{
+					opt = input.next();
+				}
+				//Do Commands
+				executeCommand(vmIterator);
 			}
-			//Do Commands
-			//virtualMachines.get(vmIterator)
 			vmIterator =  (++vmIterator == virtualMachines.size()) ? 0 : vmIterator;
 			
 		}
-
 		//Set set = command.entrySet();
 		
 		//Iterator i = set.iterator();
 		//machine.ADD("DRB", -1, 11); //TODO: ištrinti testavimas
 	//System.out.println(machine.DRB); //TODO: ištrinti testavimas
 	}
-	public static void executeCommand( VirtualMachine virtualMachine )
+	public static boolean executeCommand( int VM_ID )
 	{
-		int IC = virtualMachine.getIC();
+		
+		int IC = virtualMachines.get(VM_ID).getIC();
+		ArrayList<Integer> code = virtualMachines.get(VM_ID).getCS();
+		switch(code.get(IC))
+		{
+			case 1000:
+				virtualMachines.get(VM_ID).ADD("DRA", virtualMachines.get(VM_ID).getDRA(), virtualMachines.get(VM_ID).getDRB());
+				virtualMachines.get(VM_ID).setIC(IC+1);
+				return false;
+			case 1001:
+				virtualMachines.get(VM_ID).ADD("DRB", virtualMachines.get(VM_ID).getDRB(), virtualMachines.get(VM_ID).getDRA());
+				virtualMachines.get(VM_ID).setIC(IC+1);
+				return false;
+			case 1002:
+				virtualMachines.get(VM_ID).ADD("SF", virtualMachines.get(VM_ID).getSF(), virtualMachines.get(VM_ID).getDRA());
+				virtualMachines.get(VM_ID).setIC(IC+1);
+				return false;
+			case 1003:
+				virtualMachines.get(VM_ID).ADD("SF", virtualMachines.get(VM_ID).getSF(), virtualMachines.get(VM_ID).getDRB());
+				virtualMachines.get(VM_ID).setIC(IC+1);
+				return false;
+			case 1004:
+				virtualMachines.get(VM_ID).ADD("DRA", virtualMachines.get(VM_ID).getDRA(), code.get(IC+1));
+				virtualMachines.get(VM_ID).setIC(IC+2);
+				return false;
+			case 1005: 
+				virtualMachines.get(VM_ID).ADD("DRB", virtualMachines.get(VM_ID).getDRB(), code.get(IC+1));
+				virtualMachines.get(VM_ID).setIC(IC+2);
+				return false;
+			case 1006:
+				virtualMachines.get(VM_ID).ADD("SF", virtualMachines.get(VM_ID).getSF(), code.get(IC+1));
+				virtualMachines.get(VM_ID).setIC(IC+2);
+				return false;
+			case 1100:
+				virtualMachines.get(VM_ID).SUB("DRA", virtualMachines.get(VM_ID).getDRA(), virtualMachines.get(VM_ID).getDRB());
+				virtualMachines.get(VM_ID).setIC(IC+1);
+				return false;
+			case 1101:
+				virtualMachines.get(VM_ID).SUB("DRB", virtualMachines.get(VM_ID).getDRB(), virtualMachines.get(VM_ID).getDRA());
+				virtualMachines.get(VM_ID).setIC(IC+1);
+				return false;
+			case 1102:
+				virtualMachines.get(VM_ID).SUB("SF", virtualMachines.get(VM_ID).getSF(), virtualMachines.get(VM_ID).getDRA());
+				virtualMachines.get(VM_ID).setIC(IC+1);
+				return false;
+			case 1103:
+				virtualMachines.get(VM_ID).SUB("SF", virtualMachines.get(VM_ID).getSF(), virtualMachines.get(VM_ID).getDRB());
+				virtualMachines.get(VM_ID).setIC(IC+1);
+				return false;
+			case 1104:
+				virtualMachines.get(VM_ID).SUB("DRA", virtualMachines.get(VM_ID).getDRA(), code.get(IC+1));
+				virtualMachines.get(VM_ID).setIC(IC+2);
+				return false;
+			case 1105: 
+				virtualMachines.get(VM_ID).SUB("DRB", virtualMachines.get(VM_ID).getDRB(), code.get(IC+1));
+				virtualMachines.get(VM_ID).setIC(IC+2);
+				return false;
+			case 1106:
+				virtualMachines.get(VM_ID).SUB("SF", virtualMachines.get(VM_ID).getSF(), code.get(IC+1));
+				virtualMachines.get(VM_ID).setIC(IC+2);
+				return false;
+			case 1200:
+				virtualMachines.get(VM_ID).MUL("DRA", virtualMachines.get(VM_ID).getDRA(), virtualMachines.get(VM_ID).getDRB());
+				virtualMachines.get(VM_ID).setIC(IC+1);
+				return false;
+			case 1201:
+				virtualMachines.get(VM_ID).MUL("DRB", virtualMachines.get(VM_ID).getDRB(), virtualMachines.get(VM_ID).getDRA());
+				virtualMachines.get(VM_ID).setIC(IC+1);
+				return false;
+			case 1202:
+				virtualMachines.get(VM_ID).MUL("DRA", virtualMachines.get(VM_ID).getDRA(), code.get(IC+1));
+				virtualMachines.get(VM_ID).setIC(IC+2);
+				return false;
+			case 1203:
+				virtualMachines.get(VM_ID).MUL("DRB", virtualMachines.get(VM_ID).getDRB(), code.get(IC+1));
+				virtualMachines.get(VM_ID).setIC(IC+2);
+				return false;
+			case 1300:
+				virtualMachines.get(VM_ID).DIV("DRA", virtualMachines.get(VM_ID).getDRA(), virtualMachines.get(VM_ID).getDRB());
+				virtualMachines.get(VM_ID).setIC(IC+1);
+				return false;
+			case 1301:
+				virtualMachines.get(VM_ID).DIV("DRB", virtualMachines.get(VM_ID).getDRB(), virtualMachines.get(VM_ID).getDRA());
+				virtualMachines.get(VM_ID).setIC(IC+1);
+				return false;
+			case 1302:
+				virtualMachines.get(VM_ID).DIV("DRA", virtualMachines.get(VM_ID).getDRA(), code.get(IC+1));
+				virtualMachines.get(VM_ID).setIC(IC+2);
+				return false;
+			case 1303:
+				virtualMachines.get(VM_ID).DIV("DRB", virtualMachines.get(VM_ID).getDRB(), code.get(IC+1));
+				virtualMachines.get(VM_ID).setIC(IC+2);
+				return false;
+			case 2000:
+				virtualMachines.get(VM_ID).LR("DRA", "NA",virtualMachines.get(VM_ID).getDRB());
+				virtualMachines.get(VM_ID).setIC(IC+1);
+				return false;
+			case 2001:
+				virtualMachines.get(VM_ID).LR("DRB", "NA",virtualMachines.get(VM_ID).getDRA());
+				virtualMachines.get(VM_ID).setIC(IC+1);
+				return false;
+			case 2002:
+				virtualMachines.get(VM_ID).LR("SF", "NA",virtualMachines.get(VM_ID).getDRA());
+				virtualMachines.get(VM_ID).setIC(IC+1);
+				return false;
+			case 2003:
+				virtualMachines.get(VM_ID).LR("SF", "NA",virtualMachines.get(VM_ID).getDRB());
+				virtualMachines.get(VM_ID).setIC(IC+1);
+				return false;
+			case 2004:
+				virtualMachines.get(VM_ID).LR("DRA", "NA",code.get(IC+1));
+				virtualMachines.get(VM_ID).setIC(IC+2);
+				return false;
+			case 2005:
+				virtualMachines.get(VM_ID).LR("DRB", "NA",code.get(IC+1));
+				virtualMachines.get(VM_ID).setIC(IC+2);
+				return false;
+			case 2006:
+				virtualMachines.get(VM_ID).LR("DRA", "NA",virtualMachines.get(VM_ID).getSF() );
+				virtualMachines.get(VM_ID).setIC(IC+1);
+				return false;
+			case 2007:
+				virtualMachines.get(VM_ID).LR("DRB", "NA",virtualMachines.get(VM_ID).getSF());
+				virtualMachines.get(VM_ID).setIC(IC+1);
+				return false;
+			case 2008:
+				virtualMachines.get(VM_ID).LR("DRA", "A",code.get(IC+1));
+				virtualMachines.get(VM_ID).setIC(IC+2);
+				return false;
+			case 2009:
+				virtualMachines.get(VM_ID).LR("DRB", "A",code.get(IC+1));
+				virtualMachines.get(VM_ID).setIC(IC+2);
+				return false;
+			case 2010:
+				virtualMachines.get(VM_ID).LR("SF", "A", code.get(IC+1));
+				virtualMachines.get(VM_ID).setIC(IC+2);
+				return false;
+			case 2011:
+				virtualMachines.get(VM_ID).LR("SF", "NA", code.get(IC+1));
+				virtualMachines.get(VM_ID).setIC(IC+2);
+				return false;
+			case 2100:
+				virtualMachines.get(VM_ID).SR("DRA", code.get(IC+1));
+				virtualMachines.get(VM_ID).setIC(IC+2);
+				return false;
+			case 2101:
+				virtualMachines.get(VM_ID).SR("DRB", code.get(IC+1));
+				virtualMachines.get(VM_ID).setIC(IC+2);
+				return false;
+			/*
+			case 3001:
+				virtualMachines.get(VM_ID).PUSH(virtualMachines.get(VM_ID).getDRA());
+				virtualMachines.get(VM_ID).setIC(IC+1);
+				return false;
+			case 3002:
+				virtualMachines.get(VM_ID).PUSH(virtualMachines.get(VM_ID).getDRB());
+				virtualMachines.get(VM_ID).setIC(IC+1);
+				return false;
+			case 3003:
+				virtualMachines.get(VM_ID).PUSH(code.get(IC+1));
+				virtualMachines.get(VM_ID).setIC(IC+2);
+				return false;
+			case 3100:
+				virtualMachines.get(VM_ID).POP("DRA");
+				virtualMachines.get(VM_ID).setIC(IC+1);
+				return false;
+			case 3101:
+				virtualMachines.get(VM_ID).POP("DRB");
+				virtualMachines.get(VM_ID).setIC(IC+1);
+				return false;
+			*/
+			case 4000:
+				virtualMachines.get(VM_ID).OR("DRA", virtualMachines.get(VM_ID).getDRA(), virtualMachines.get(VM_ID).getDRB());
+				virtualMachines.get(VM_ID).setIC(IC+1);
+				return false;
+			case 4001:
+				virtualMachines.get(VM_ID).OR("DRB", virtualMachines.get(VM_ID).getDRB(), virtualMachines.get(VM_ID).getDRA());
+				virtualMachines.get(VM_ID).setIC(IC+1);
+				return false;
+			case 4002:
+				virtualMachines.get(VM_ID).OR("SF", virtualMachines.get(VM_ID).getSF(), virtualMachines.get(VM_ID).getDRA());
+				virtualMachines.get(VM_ID).setIC(IC+1);
+				return false;
+			case 4003:
+				virtualMachines.get(VM_ID).OR("SF", virtualMachines.get(VM_ID).getSF(), virtualMachines.get(VM_ID).getDRB());
+				virtualMachines.get(VM_ID).setIC(IC+1);
+				return false;
+			case 4004:
+				virtualMachines.get(VM_ID).OR("DRA", virtualMachines.get(VM_ID).getDRA(), code.get(IC+1));
+				virtualMachines.get(VM_ID).setIC(IC+2);
+				return false;
+			case 4005: 
+				virtualMachines.get(VM_ID).OR("DRB", virtualMachines.get(VM_ID).getDRB(), code.get(IC+1));
+				virtualMachines.get(VM_ID).setIC(IC+2);
+				return false;
+			case 4006:
+				virtualMachines.get(VM_ID).OR("SF", virtualMachines.get(VM_ID).getSF(), code.get(IC+1));
+				virtualMachines.get(VM_ID).setIC(IC+2);
+				return false;
+			case 4100:
+				virtualMachines.get(VM_ID).AND("DRA", virtualMachines.get(VM_ID).getDRA(), virtualMachines.get(VM_ID).getDRB());
+				virtualMachines.get(VM_ID).setIC(IC+1);
+				return false;
+			case 4101:
+				virtualMachines.get(VM_ID).AND("DRB", virtualMachines.get(VM_ID).getDRB(), virtualMachines.get(VM_ID).getDRA());
+				virtualMachines.get(VM_ID).setIC(IC+1);
+				return false;
+			case 4102:
+				virtualMachines.get(VM_ID).AND("SF", virtualMachines.get(VM_ID).getSF(), virtualMachines.get(VM_ID).getDRA());
+				virtualMachines.get(VM_ID).setIC(IC+1);
+				return false;
+			case 4103:
+				virtualMachines.get(VM_ID).AND("SF", virtualMachines.get(VM_ID).getSF(), virtualMachines.get(VM_ID).getDRB());
+				virtualMachines.get(VM_ID).setIC(IC+1);
+				return false;
+			case 4104:
+				virtualMachines.get(VM_ID).AND("DRA", virtualMachines.get(VM_ID).getDRA(), code.get(IC+1));
+				virtualMachines.get(VM_ID).setIC(IC+2);
+				return false;
+			case 4105: 
+				virtualMachines.get(VM_ID).AND("DRB", virtualMachines.get(VM_ID).getDRB(), code.get(IC+1));
+				virtualMachines.get(VM_ID).setIC(IC+2);
+				return false;
+			case 4106:
+				virtualMachines.get(VM_ID).AND("SF", virtualMachines.get(VM_ID).getSF(), code.get(IC+1));
+				virtualMachines.get(VM_ID).setIC(IC+2);
+				return false;
+			case 4200:
+				virtualMachines.get(VM_ID).XOR("DRA", virtualMachines.get(VM_ID).getDRA(), virtualMachines.get(VM_ID).getDRB());
+				virtualMachines.get(VM_ID).setIC(IC+1);
+				return false;
+			case 4201:
+				virtualMachines.get(VM_ID).XOR("DRB", virtualMachines.get(VM_ID).getDRB(), virtualMachines.get(VM_ID).getDRA());
+				virtualMachines.get(VM_ID).setIC(IC+1);
+				return false;
+			case 4202:
+				virtualMachines.get(VM_ID).XOR("SF", virtualMachines.get(VM_ID).getSF(), virtualMachines.get(VM_ID).getDRA());
+				virtualMachines.get(VM_ID).setIC(IC+1);
+				return false;
+			case 4203:
+				virtualMachines.get(VM_ID).XOR("SF", virtualMachines.get(VM_ID).getSF(), virtualMachines.get(VM_ID).getDRB());
+				virtualMachines.get(VM_ID).setIC(IC+1);
+				return false;
+			case 4204:
+				virtualMachines.get(VM_ID).XOR("DRA", virtualMachines.get(VM_ID).getDRA(), code.get(IC+1));
+				virtualMachines.get(VM_ID).setIC(IC+2);
+				return false;
+			case 4205: 
+				virtualMachines.get(VM_ID).AND("DRB", virtualMachines.get(VM_ID).getDRB(), code.get(IC+1));
+				virtualMachines.get(VM_ID).setIC(IC+2);
+				return false;
+			case 4206:
+				virtualMachines.get(VM_ID).AND("SF", virtualMachines.get(VM_ID).getSF(), code.get(IC+1));
+				virtualMachines.get(VM_ID).setIC(IC+2);
+				return false;
+			case 4300:
+				virtualMachines.get(VM_ID).NOT("DRA", virtualMachines.get(VM_ID).getDRA());
+				virtualMachines.get(VM_ID).setIC(IC+1);
+				return false;
+			case 4301:
+				virtualMachines.get(VM_ID).NOT("DRB", virtualMachines.get(VM_ID).getDRB());
+				virtualMachines.get(VM_ID).setIC(IC+1);
+				return false;
+			case 4302:
+				virtualMachines.get(VM_ID).NOT("SF", virtualMachines.get(VM_ID).getSF());
+				virtualMachines.get(VM_ID).setIC(IC+1);
+				return false;
+			case 4400:
+				virtualMachines.get(VM_ID).NEG("DRA", virtualMachines.get(VM_ID).getDRA());
+				virtualMachines.get(VM_ID).setIC(IC+1);
+				return false;
+			case 4401:
+				virtualMachines.get(VM_ID).NEG("DRB", virtualMachines.get(VM_ID).getDRB());
+				virtualMachines.get(VM_ID).setIC(IC+1);
+				return false;
+			case 4402:
+				virtualMachines.get(VM_ID).NEG("SF", virtualMachines.get(VM_ID).getSF());
+				virtualMachines.get(VM_ID).setIC(IC+1);
+				return false;
+/*
+			case 4500:
+				virtualMachines.get(VM_ID).CMP("DRA", virtualMachines.get(VM_ID).getDRA(), virtualMachines.get(VM_ID).getDRB());
+				virtualMachines.get(VM_ID).setIC(IC+1);
+				return false;
+			case 4501:
+				virtualMachines.get(VM_ID).CMP("DRB", virtualMachines.get(VM_ID).getDRB(), virtualMachines.get(VM_ID).getDRA());
+				virtualMachines.get(VM_ID).setIC(IC+1);
+				return false;
+			case 4502:
+				virtualMachines.get(VM_ID).CMP("SF", virtualMachines.get(VM_ID).getSF(), virtualMachines.get(VM_ID).getDRA());
+				virtualMachines.get(VM_ID).setIC(IC+1);
+				return false;
+			case 4503:
+				virtualMachines.get(VM_ID).CMP("SF", virtualMachines.get(VM_ID).getSF(), virtualMachines.get(VM_ID).getDRB());
+				virtualMachines.get(VM_ID).setIC(IC+1);
+				return false;
+			case 4504:
+				virtualMachines.get(VM_ID).CMP("DRA", virtualMachines.get(VM_ID).getDRA(), code.get(IC+1));
+				virtualMachines.get(VM_ID).setIC(IC+2);
+				return false;
+			case 4505: 
+				virtualMachines.get(VM_ID).CMP("DRB", virtualMachines.get(VM_ID).getDRB(), code.get(IC+1));
+				virtualMachines.get(VM_ID).setIC(IC+2);
+				return false;
+			case 4506:
+				virtualMachines.get(VM_ID).CMP("SF", virtualMachines.get(VM_ID).getSF(), code.get(IC+1));
+				virtualMachines.get(VM_ID).setIC(IC+2);
+			case 5000:
+				virtualMachines.get(VM_ID).JMP(code.get(IC+1));
+				virtualMachines.get(VM_ID).setIC(IC+2);
+				return false;
+			case 5100:
+				virtualMachines.get(VM_ID).JMP(code.get(IC+1));
+				virtualMachines.get(VM_ID).setIC(IC+2);
+				return false;
+			case 5200:
+				virtualMachines.get(VM_ID).JMP(code.get(IC+1));
+				virtualMachines.get(VM_ID).setIC(IC+2);
+				return false;
+			case 6000:
+				System.out.println("HALTAS");
+				return true;
+			case 7000:
+				virtualMachines.get(VM_ID).PRNT("DRA", virtualMachines.get(VM_ID).getDRA());
+				virtualMachines.get(VM_ID).setIC(IC+1);
+				return false;
+			case 7001: 
+				virtualMachines.get(VM_ID).PRNT("DRB", virtualMachines.get(VM_ID).getDRB());
+				virtualMachines.get(VM_ID).setIC(IC+1);
+				return false;
+			case 7002:
+				virtualMachines.get(VM_ID).PRNT("SF", virtualMachines.get(VM_ID).getSF());
+				virtualMachines.get(VM_ID).setIC(IC+1);
+			case 8000:
+				virtualMachines.get(VM_ID).LUM(code.get(IC+1), code.get(IC+2));
+				virtualMachines.get(VM_ID).setIC(IC+3);
+				return false;
+			case 8001: 
+				virtualMachines.get(VM_ID).LEM(code.get(IC+1), code.get(IC+2));
+				virtualMachines.get(VM_ID).setIC(IC+3);
+				return false;*/
+		}
+	return false;
 	}
 	public static void createVirtualMachine(){
 		//Sukuria mašiną
@@ -950,41 +1407,50 @@ public static ArrayList<Integer> parseCommands(String line)
 		virtualMachines.get(virtualMachines.size()-1).setCS(CS);
 		virtualMachines.get(virtualMachines.size()-1).setSS(SS);
 	}
-	public static void addBlock(int virtualMachineID){
-		List<Integer[]> alteredPT = realMachine.getPT();
-		int numberOfBlock = 0; // 0-7
-		for(int i = 0 ; i < 100 ; i++){
-			if( alteredPT.get(i)[0] == virtualMachineID ){
-				numberOfBlock = alteredPT.get(i)[1] > numberOfBlock ? alteredPT.get(i)[1] : numberOfBlock;
-			}
-		}
-		if(numberOfBlock < 7){
-			for(int i=0 ; i<100 ; i++){
-				if( alteredPT.get(i)[0] == 0 ){
-					alteredPT.get(i)[0] = virtualMachineID;
-					alteredPT.get(i)[1] = ++numberOfBlock;
-					break;
+	public static void createVMprogram(){
+		String currentCommand = "";
+		String lastCommand = "";
+		ArrayList<Integer> dataSegment = new ArrayList<Integer>();
+		ArrayList<Integer> codeSegment = new ArrayList<Integer>();
+		ArrayList<Integer> stackSegment = new ArrayList<Integer>();
+		int wordCount = 1;
+		//DS pildymas
+		while( !lastCommand.equals("DONE")){
+			currentCommand = input.nextLine();
+			if(!currentCommand.equals("DONE")){
+				String[] line = currentCommand.split("");
+				String data = "";
+				for(int i = 0; i < line.length ; i++){
+					if( i%2 == 0 ){
+						data = "";
+						data += line[i];	
+					}else{
+						data += line[i];
+						dataSegment.add(Integer.parseInt(line[i]));
+						wordCount++;
+					}
+					if( i%2 == 0 && i == line.length-1){
+						data += "00";
+						dataSegment.add(Integer.parseInt(line[i]));
+						wordCount++;
+					}
 				}
 			}
-			realMachine.setPT(alteredPT);
-			//Išskirsto bloką į virtualios mašinos segmentus
-			ArrayList<Integer> DS = virtualMachines.get(virtualMachineID-1).getDS();
-			ArrayList<Integer> CS = virtualMachines.get(virtualMachineID-1).getCS();
-			ArrayList<Integer> SS = virtualMachines.get(virtualMachineID-1).getSS();
-			for(int i = 0 ; i < 6 ; i++){
-				//Blokas pasidalina: 6 DS, 6 CS ir 3 SS
-				DS.add(0);
-				CS.add(0);
-				if(i > 2){
-					SS.add(0);
-				}
-			}
-			virtualMachines.get(virtualMachineID).setDS(DS);
-			virtualMachines.get(virtualMachineID).setCS(CS);
-			virtualMachines.get(virtualMachineID).setSS(SS);
+			lastCommand = currentCommand;
 		}
-	}
-	public static void createVMprogram(VirtualMachine virtualMachine){
-		
+		lastCommand = "";
+		while( !lastCommand.equals("HALT")){
+			currentCommand = input.nextLine();
+			ArrayList<Integer> machineCode = parseCommands(currentCommand);
+			
+			lastCommand = currentCommand.substring(0, 4);
+		}
+		virtualMachines.get(virtualMachines.size()-1).setDS(dataSegment);
+		virtualMachines.get(virtualMachines.size()-1).setCS(codeSegment);
+		virtualMachines.get(virtualMachines.size()-1).setSS(stackSegment);
+
+
+
+
 	}
 }
