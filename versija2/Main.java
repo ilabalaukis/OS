@@ -1414,9 +1414,9 @@ System.out.println(virtualMachines.get(0).getCS().size());
 		ArrayList<Integer> stackSegment = new ArrayList<Integer>();
 		int wordCount = 1;
 		//DS pildymas
-		while( !lastCommand.equals("DONE")){
+		while( !lastCommand.equals("/DS")){
 			currentCommand = input.nextLine();
-			if(!currentCommand.equals("DONE")){
+			if(!currentCommand.equals("/DS")){
 				String[] line = currentCommand.split("");
 				String data = "";
 				for(int i = 0; i < line.length ; i++){
