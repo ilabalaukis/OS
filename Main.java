@@ -957,12 +957,12 @@ public class Main
 	}	
 	public static void vmExecutionMode()
 	{
-		virtualMachines.get(vmIterator).realMachine.setTI(10);
 		//Loopas sustos kiekvienu stepu, nebent parašysi SKIP
 		String opt = "";
 		boolean cont = true;
 		int numberOfMachinesFinished = 0;
 		while( cont == true ){
+			virtualMachines.get(vmIterator).realMachine.setTI(10);
 			while( realMachine.getTI() > 0 )
 			{
 				if( !opt.equals("SKIP"))
