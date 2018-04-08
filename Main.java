@@ -1308,6 +1308,7 @@ public class Main
 */
 			case 6000:
 				System.out.println("HALTAS");
+				virtualMachines.get(VM_ID).setTI(0);
 				return true;
 /*
 			case 7000:

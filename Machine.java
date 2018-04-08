@@ -37,6 +37,14 @@ public class Machine
 	{
 		this.IC = IC;
 	}
+	public int getTI()
+	{
+		return this.TI;
+	}
+	public void setTI(int TI)
+	{
+		this.TI = TI;
+	}
 	public int getSP()
 	{
 		return this.SP;
