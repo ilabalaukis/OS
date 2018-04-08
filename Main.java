@@ -1331,7 +1331,7 @@ public class Main
 				virtualMachines.get(VM_ID).setIC(IC+3);
 				return false;*/
 		}
-	return false;
+		return false;
 	}
 	public static void createVirtualMachine(){
 		//Sukuria mašiną
@@ -1413,5 +1413,57 @@ public class Main
 
 
 
+	}
+	public static void dealWithInterrupts(){
+		if( realMachine.getPI() != 0 ){
+			switch(realMachine.getPI()){
+				case 1:
+					//1 - adresacijos klaida (neegzistuoja adresas)
+					//Killas
+					break;
+				case 2:
+					//2 - komandų sekos pabaiga (sutikta HALT komanda)
+					//gali but kad nereiks bet kolkas tegu buna
+					break;
+				case 3:
+					//3 - neatpažinta komanda
+					//kvies execute command metodas - keis nerastą komandą į halt (arba kill?)
+					//tiesą sakant galima čia vietoj killint (pažymėt, kad nukillinta mašina pvz nustačius SF į 9999) ir su halt pabaigti.
+					break;
+				case 4:
+					//4 - dalyba iš nulio
+					//Killas arba dalinti iš 1
+					break;
+				case 5:
+					//5 - per mažai žodžių steke operacijai atlikti
+					//killas
+					break;
+				case 6:
+					//Į registrą bandyta patalpinti per didelį arba per mažą skaičių ( >9999 arba <-4499 )
+			}
+			realMachine.setPI(0);
+		}else if( realMachine.getSI() != 0 ){
+			switch(realMachine.getSI()){
+				case 1:
+					//Mašina prašo atminties.
+					//Trūksta vietos virtualiai mašinai, stekas nebetelpa. Jei mašina turi mažai blokų, tai galima
+					//duoti dar vieną. Jei turi tiek kiek galima - killas?
+					break;
+			}
+			realMachine.setSI(0);
+		}else if( realMachine.getIOI() != 0 ){
+			switch(realMachine.getIOI()){
+				case 1:
+					//Virtuali mašina prašo prieigos prie IŠVESTIES įrenginio
+					//Patikrinti, ar jis nėra užimtas, jei ne, duoti prieigą, jeigu užimtas, sustabdyti mašinos darbą (TI=0)
+					//ir galbūt IC grąžinti į print jei pasikeitė.
+					break;
+				case 2:
+					//Virtuali mašina prašo prieigos prie ĮVESTIES įrenginio.
+					//Patikrinti, ar jis užimtas, jei ne, duoti prieiga, jei užimtas atstatyti IC ir TI = 0
+					break;
+			}
+			realMachine.setIOI(0);
+		}
 	}
 }
