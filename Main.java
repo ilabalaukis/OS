@@ -45,58 +45,11 @@ public class Main
 
 		System.out.println("Hello, this is Atlas machine.");
 /////////////////////////////SANDBOX////////////////////////////////
-/**/
-createVirtualMachine();
-createVirtualMachine();
-createVirtualMachine();
-createVirtualMachine();
-//virtualMachines.get(1).blocksTaken = 1;
-//System.out.println(virtualMachines.get(3).blocksTaken);
-/**/
-//virtualMachines.get(0).setDRA(5);
-System.out.println(virtualMachines.get(0).getCS().size());
-System.out.println("2");
-virtualMachines.get(0).addBlock();
-System.out.println(virtualMachines.get(0).getCS().size());
-System.out.println("3");
-virtualMachines.get(0).addBlock();
-System.out.println(virtualMachines.get(0).getCS().size());
-System.out.println("4");
-virtualMachines.get(0).addBlock();
-System.out.println(virtualMachines.get(0).getCS().size());
-System.out.println("5");
-virtualMachines.get(0).addBlock();
-System.out.println(virtualMachines.get(0).getCS().size());
-System.out.println("6");
-virtualMachines.get(0).addBlock();
-System.out.println(virtualMachines.get(0).getCS().size());
-System.out.println("7");
-virtualMachines.get(0).addBlock();
-System.out.println(virtualMachines.get(0).getCS().size());
-System.out.println("8");
-virtualMachines.get(0).addBlock();
-System.out.println(virtualMachines.get(0).getCS().size());
-System.out.println("9+");
-virtualMachines.get(0).addBlock();
-System.out.println(virtualMachines.get(0).getCS().size());
-virtualMachines.get(0).addBlock();
-System.out.println(virtualMachines.get(0).getCS().size());
-virtualMachines.get(0).addBlock();
-System.out.println(virtualMachines.get(0).getCS().size());
-//System.out.println(realMachine.getDRA());
-/*
-//virtualMachines.get(2).realMachine.setTI(5);
-//System.out.println(virtualMachines.get(1).realMachine.getTI());
-//System.out.println(realMachine.getTI());
-
-//realMachine.setMODE(true);
-//System.out.println(virtualMachines.get(1).realMachine.getMODE());
-
-*////////////////////////////SANDBOX ENDS////////////////////////////
+////////////////////////////SANDBOX ENDS////////////////////////////
 	
-		showCommands();
 		while(true)
 		{
+			showCommands();
 			String comm = input.next().toUpperCase();
 			if( comm.equals("EXIT") ){
 				System.out.println("Goodbye.");
@@ -118,11 +71,7 @@ System.out.println(virtualMachines.get(0).getCS().size());
 					{
 						System.out.println("vm is not empty");
 						vmExecutionMode();
-					}
-					
-					break;
-				case "HELP":
-					showCommands();
+					}		
 					break;
 				default:
 					System.out.println("Command not found.");
@@ -133,8 +82,6 @@ System.out.println(virtualMachines.get(0).getCS().size());
 	
 	public static void showCommands(){
 		System.out.println("Available Commands:");
-		System.out.println("HELP - this help page.");
-		System.out.println("NEW - creates new program.");
 		System.out.println("NEWV - creates new virtual machine.");
 		System.out.println("START - start programs execution mode.");
 		System.out.println("EXIT - turn off the machine.");
@@ -1013,8 +960,9 @@ System.out.println(virtualMachines.get(0).getCS().size());
 		virtualMachines.get(vmIterator).realMachine.setTI(10);
 		//Loopas sustos kiekvienu stepu, nebent parašysi SKIP
 		String opt = "";
-		boolean done = false;
-		while( done == true ){
+		boolean cont = true;
+		int numberOfMachinesFinished = 0;
+		while( cont == true ){
 			while( realMachine.getTI() > 0 )
 			{
 				if( !opt.equals("SKIP"))
@@ -1022,10 +970,17 @@ System.out.println(virtualMachines.get(0).getCS().size());
 					opt = input.next();
 				}
 				//Do Commands
-				executeCommand(vmIterator);
+				boolean status  = executeCommand(vmIterator);
+				if( status == false ){
+					numberOfMachinesFinished = 0;
+				}else{
+					numberOfMachinesFinished++;
+				}
 			}
 			vmIterator =  (++vmIterator == virtualMachines.size()) ? 0 : vmIterator;
-			
+			if( numberOfMachinesFinished == virtualMachines.size() ){
+				cont = false;
+			}
 		}
 		//Set set = command.entrySet();
 		
@@ -1415,6 +1370,7 @@ System.out.println(virtualMachines.get(0).getCS().size());
 		ArrayList<Integer> stackSegment = new ArrayList<Integer>();
 		int wordCount = 1;
 		//DS pildymas
+		System.out.println("Fill data segment. When done filling, write DONE");
 		while( !lastCommand.equals("DONE")){
 			currentCommand = input.next();
 			if(!currentCommand.equals("DONE")){
@@ -1439,6 +1395,8 @@ System.out.println(virtualMachines.get(0).getCS().size());
 			lastCommand = currentCommand;
 		}
 		lastCommand = "";
+		input.nextLine();
+		System.out.println("Write virtual machine program. Don't forget to write HALT at the end.");
 		while( !lastCommand.equals("HALT")){
 			currentCommand = input.nextLine();
 			ArrayList<Integer> machineCode = parseCommands(currentCommand);
@@ -1448,6 +1406,7 @@ System.out.println(virtualMachines.get(0).getCS().size());
 		virtualMachines.get(virtualMachines.size()-1).setDS(dataSegment);
 		virtualMachines.get(virtualMachines.size()-1).setCS(codeSegment);
 		virtualMachines.get(virtualMachines.size()-1).setSS(stackSegment);
+		System.out.println("Virtual Machine created successfully.");
 
 
 
