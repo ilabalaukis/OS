@@ -1015,7 +1015,7 @@ System.out.println(virtualMachines.get(0).getCS().size());
 		String opt = "";
 		boolean done = false;
 		while( done == true ){
-			while( currentMachine.realMachine.getTI() > 0 )
+			while( realMachine.getTI() > 0 )
 			{
 				if( !opt.equals("SKIP"))
 				{

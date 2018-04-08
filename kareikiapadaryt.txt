@@ -5,14 +5,25 @@
    ->
    ->
 >Sukurti virtualios mašinos metodus (jie yra mūsų projektre)
->Sukurti metodą kuris įvykdytų komandą
->Pataisyti VM projektą (dingo VM segmentiniai registrai)
+	>PRINT
+	>CMP
+	>LEM
+	>LUM
+	>HALT -> setTI = 0;
+	>JMG
+	>JME
+	>JMP
+	>PUSH
+	>POP
+>Sukurti metodą kuris įvykdytų komandą (!!!)
 > Interuptai
+Pakurti interruptų įrenginį, kuris tvarkosi su interruptais kai jie atsiranda. Tai yra vienas metodas, kuris tikrina interruptų
+registrus ir atitinkamai kala switch. Jei nuliukai - nieko neįvyksta, jei nenulinės reikšmės - atitinkamai switch reaguoja. 
  -> 4 tipai: 
  	-Timerio tik vienas
  	-IOI: komanda prašo inputo ir ką su juo daryt? Viena komanda, kuri prašytų inputo ir jį kažkur padėtų.
  	Inputo interruptas žiūri, ar laisvas kanalas reikalingas.
- 	Visi interruptai kviečia supervizorinį režimą
+Pas mus supervizorinis rėžimas bus kviečiamas arba komandoje, arba tame interruptų metode - interruptų įrenginyje.
  	-Supervizoriaus: trūksta vietos mašinai(pasižiūri, ar dar galima duoti atminties).
  	-Programinis pertraukimas: programa per ilga, nėra halt, dalyba iš nulio, 
  	-Jei iškviečiamas Programinis interrupt'as - kilinam programą. 
@@ -20,12 +31,6 @@
 > Papildyti komandas. Parašyti kokie flagai pasikeitė. 
  	- Reikia komandos įvesčiai gauti (INP) - kviest interruptą. Jei užimtas kanalas, tai skipins savo eilę/ liks pakibus.
 Data Format flag'as reikalingas, kad galėtumėm garantuoti jog bus išspausdintos raidės. 
-> Ką darys supervizorius?
-> Inputo komanda deda arba į steką, arba į duomenų regsitrus, arba į DS. 
-Susidėt viską su cikliuku į DS. 
-
-
-
 SUPERVIZORINIAI INTERUPTAI!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
 PROGRAMINIAI:
