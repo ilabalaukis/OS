@@ -1416,7 +1416,7 @@ System.out.println(virtualMachines.get(0).getCS().size());
 		int wordCount = 1;
 		//DS pildymas
 		while( !lastCommand.equals("DONE")){
-			currentCommand = input.nextLine();
+			currentCommand = input.next();
 			if(!currentCommand.equals("DONE")){
 				String[] line = currentCommand.split("");
 				String data = "";
