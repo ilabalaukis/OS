@@ -64,17 +64,22 @@ public class Machine
 	}
 	//Commands
 	//Virtual Machine Commands Commands
+	public int overflow(int sk)
+	{
+		if (sk > 9999)
+		{
+			sk = sk % 10000;
+			this.SF = this.SF >= 1000 ? this.SF : this.SF+1000;
+		}
+		return sk;
+	}
 	public void ADD(String reg, int par1, int par2)
 	{
-
+		
 		par1 = this.validateNumber(par1);
 		par2 = this.validateNumber(par2);
 		int add = par1 + par2;
-		if (add > 9999)
-		{
-			add = add - 10000;
-			this.SF = this.SF >= 1000 ? this.SF : this.SF+1000;
-		}
+		add = overflow(add);
 		switch(reg)
 		{
 			case "DRA":
@@ -134,18 +139,21 @@ public class Machine
 	}
 	public void MUL(String reg, int par1, int par2)
 	{
+		int mul = 0;
 		par1 = this.validateNumber(par1);
 		par2 = this.validateNumber(par2);
+		mul = par1 * par2;
+		mul = overflow(mul);
 		switch(reg)
 		{
 			case "DRA":
-				this.DRA = par1 * par2;
+				this.DRA = mul;
 				break;
 			case "DRB":
-				this.DRB = par1 * par2;
+				this.DRB = mul;
 				break;
 			case "SF":
-				this.SF = par1 * par2;
+				this.SF = mul;
 				break;
 			default:
 				System.out.println("Incorrect register");
