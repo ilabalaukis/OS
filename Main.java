@@ -124,7 +124,7 @@ public class Main
 								return A;
 							default:
 								A.clear();
-								System.out.println("Invalid command");
+								A.add(0, 9999);
 								break;     
 						}
 					break;
