@@ -188,6 +188,14 @@ public class VirtualMachine extends Machine
 				break;
 		}
 	}
+	public void PUSH( int number ){
+		if( this.SP != this.stackSegment.size()-1 ){		
+				this.stackSegment.set( this.SP , number );
+			this.SP++;
+		}else{
+			//Kvieciamas interruptas.
+		}
+	}
 	public void addBlock(){
 		List<Integer[]> alteredPT = realMachine.getPT();
 		if(this.blocksTaken < 8){
