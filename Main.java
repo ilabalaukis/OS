@@ -1010,6 +1010,7 @@ public class Main
 	{
 		
 		int IC = virtualMachines.get(VM_ID).getIC();
+		int TI = virtualMachines.get(VM_ID).getTI();
 		ArrayList<Integer> code = virtualMachines.get(VM_ID).getCS();
 		System.out.println(VM_ID + " " + virtualMachines.get(VM_ID).getIC() + " DRA: " + virtualMachines.get(VM_ID).getDRA());
 		switch(code.get(IC))
@@ -1017,10 +1018,12 @@ public class Main
 			case 1000:
 				virtualMachines.get(VM_ID).ADD("DRA", virtualMachines.get(VM_ID).getDRA(), virtualMachines.get(VM_ID).getDRB());
 				virtualMachines.get(VM_ID).setIC(IC+1);
+				virtualMachines.get(VM_ID).setTI(TI-1);
 				return false;
 			case 1001:
 				virtualMachines.get(VM_ID).ADD("DRB", virtualMachines.get(VM_ID).getDRB(), virtualMachines.get(VM_ID).getDRA());
 				virtualMachines.get(VM_ID).setIC(IC+1);
+				virtualMachines.get(VM_ID).setTI(TI-1);
 				return false;
 			case 1002:
 				virtualMachines.get(VM_ID).ADD("SF", virtualMachines.get(VM_ID).getSF(), virtualMachines.get(VM_ID).getDRA());
@@ -1029,166 +1032,206 @@ public class Main
 			case 1003:
 				virtualMachines.get(VM_ID).ADD("SF", virtualMachines.get(VM_ID).getSF(), virtualMachines.get(VM_ID).getDRB());
 				virtualMachines.get(VM_ID).setIC(IC+1);
+				virtualMachines.get(VM_ID).setTI(TI-1);
 				return false;
 			case 1004:
 				virtualMachines.get(VM_ID).ADD("DRA", virtualMachines.get(VM_ID).getDRA(), code.get(IC+1));
 				virtualMachines.get(VM_ID).setIC(IC+2);
+				virtualMachines.get(VM_ID).setTI(TI-1);
 				return false;
 			case 1005: 
 				virtualMachines.get(VM_ID).ADD("DRB", virtualMachines.get(VM_ID).getDRB(), code.get(IC+1));
 				virtualMachines.get(VM_ID).setIC(IC+2);
+				virtualMachines.get(VM_ID).setTI(TI-1);
 				return false;
 			case 1006:
 				virtualMachines.get(VM_ID).ADD("SF", virtualMachines.get(VM_ID).getSF(), code.get(IC+1));
 				virtualMachines.get(VM_ID).setIC(IC+2);
+				virtualMachines.get(VM_ID).setTI(TI-1);
 				return false;
 			case 1100:
 				virtualMachines.get(VM_ID).SUB("DRA", virtualMachines.get(VM_ID).getDRA(), virtualMachines.get(VM_ID).getDRB());
 				virtualMachines.get(VM_ID).setIC(IC+1);
+				virtualMachines.get(VM_ID).setTI(TI-1);
 				return false;
 			case 1101:
 				virtualMachines.get(VM_ID).SUB("DRB", virtualMachines.get(VM_ID).getDRB(), virtualMachines.get(VM_ID).getDRA());
 				virtualMachines.get(VM_ID).setIC(IC+1);
+				virtualMachines.get(VM_ID).setTI(TI-1);
 				return false;
 			case 1102:
 				virtualMachines.get(VM_ID).SUB("SF", virtualMachines.get(VM_ID).getSF(), virtualMachines.get(VM_ID).getDRA());
 				virtualMachines.get(VM_ID).setIC(IC+1);
+				virtualMachines.get(VM_ID).setTI(TI-1);
 				return false;
 			case 1103:
 				virtualMachines.get(VM_ID).SUB("SF", virtualMachines.get(VM_ID).getSF(), virtualMachines.get(VM_ID).getDRB());
 				virtualMachines.get(VM_ID).setIC(IC+1);
+				virtualMachines.get(VM_ID).setTI(TI-1);
 				return false;
 			case 1104:
 				virtualMachines.get(VM_ID).SUB("DRA", virtualMachines.get(VM_ID).getDRA(), code.get(IC+1));
 				virtualMachines.get(VM_ID).setIC(IC+2);
+				virtualMachines.get(VM_ID).setTI(TI-1);
 				return false;
 			case 1105: 
 				virtualMachines.get(VM_ID).SUB("DRB", virtualMachines.get(VM_ID).getDRB(), code.get(IC+1));
 				virtualMachines.get(VM_ID).setIC(IC+2);
+				virtualMachines.get(VM_ID).setTI(TI-1);
 				return false;
 			case 1106:
 				virtualMachines.get(VM_ID).SUB("SF", virtualMachines.get(VM_ID).getSF(), code.get(IC+1));
 				virtualMachines.get(VM_ID).setIC(IC+2);
+				virtualMachines.get(VM_ID).setTI(TI-1);
 				return false;
 			case 1200:
 				virtualMachines.get(VM_ID).MUL("DRA", virtualMachines.get(VM_ID).getDRA(), virtualMachines.get(VM_ID).getDRB());
 				virtualMachines.get(VM_ID).setIC(IC+1);
+				virtualMachines.get(VM_ID).setTI(TI-1);
 				return false;
 			case 1201:
 				virtualMachines.get(VM_ID).MUL("DRB", virtualMachines.get(VM_ID).getDRB(), virtualMachines.get(VM_ID).getDRA());
 				virtualMachines.get(VM_ID).setIC(IC+1);
+				virtualMachines.get(VM_ID).setTI(TI-1);
 				return false;
 			case 1202:
 				virtualMachines.get(VM_ID).MUL("DRA", virtualMachines.get(VM_ID).getDRA(), code.get(IC+1));
 				virtualMachines.get(VM_ID).setIC(IC+2);
+				virtualMachines.get(VM_ID).setTI(TI-1);
 				return false;
 			case 1203:
 				virtualMachines.get(VM_ID).MUL("DRB", virtualMachines.get(VM_ID).getDRB(), code.get(IC+1));
 				virtualMachines.get(VM_ID).setIC(IC+2);
+				virtualMachines.get(VM_ID).setTI(TI-1);
 				return false;
 			case 1300:
 				virtualMachines.get(VM_ID).DIV("DRA", virtualMachines.get(VM_ID).getDRA(), virtualMachines.get(VM_ID).getDRB());
 				virtualMachines.get(VM_ID).setIC(IC+1);
+				virtualMachines.get(VM_ID).setTI(TI-1);
 				return false;
 			case 1301:
 				virtualMachines.get(VM_ID).DIV("DRB", virtualMachines.get(VM_ID).getDRB(), virtualMachines.get(VM_ID).getDRA());
 				virtualMachines.get(VM_ID).setIC(IC+1);
+				virtualMachines.get(VM_ID).setTI(TI-1);
 				return false;
 			case 1302:
 				virtualMachines.get(VM_ID).DIV("DRA", virtualMachines.get(VM_ID).getDRA(), code.get(IC+1));
 				virtualMachines.get(VM_ID).setIC(IC+2);
+				virtualMachines.get(VM_ID).setTI(TI-1);
 				return false;
 			case 1303:
 				virtualMachines.get(VM_ID).DIV("DRB", virtualMachines.get(VM_ID).getDRB(), code.get(IC+1));
 				virtualMachines.get(VM_ID).setIC(IC+2);
+				virtualMachines.get(VM_ID).setTI(TI-1);
 				return false;
 			case 2000:
 				virtualMachines.get(VM_ID).LR("DRA", "NA",virtualMachines.get(VM_ID).getDRB());
 				virtualMachines.get(VM_ID).setIC(IC+1);
+				virtualMachines.get(VM_ID).setTI(TI-1);
 				return false;
 			case 2001:
 				virtualMachines.get(VM_ID).LR("DRB", "NA",virtualMachines.get(VM_ID).getDRA());
 				virtualMachines.get(VM_ID).setIC(IC+1);
+				virtualMachines.get(VM_ID).setTI(TI-1);
 				return false;
 			case 2002:
 				virtualMachines.get(VM_ID).LR("SF", "NA",virtualMachines.get(VM_ID).getDRA());
 				virtualMachines.get(VM_ID).setIC(IC+1);
+				virtualMachines.get(VM_ID).setTI(TI-1);
 				return false;
 			case 2003:
 				virtualMachines.get(VM_ID).LR("SF", "NA",virtualMachines.get(VM_ID).getDRB());
 				virtualMachines.get(VM_ID).setIC(IC+1);
+				virtualMachines.get(VM_ID).setTI(TI-1);
 				return false;
 			case 2004:
 				virtualMachines.get(VM_ID).LR("DRA", "NA",code.get(IC+1));
 				virtualMachines.get(VM_ID).setIC(IC+2);
+				virtualMachines.get(VM_ID).setTI(TI-1);
 				return false;
 			case 2005:
 				virtualMachines.get(VM_ID).LR("DRB", "NA",code.get(IC+1));
 				virtualMachines.get(VM_ID).setIC(IC+2);
+				virtualMachines.get(VM_ID).setTI(TI-1);
 				return false;
 			case 2006:
 				virtualMachines.get(VM_ID).LR("DRA", "NA",virtualMachines.get(VM_ID).getSF() );
 				virtualMachines.get(VM_ID).setIC(IC+1);
+				virtualMachines.get(VM_ID).setTI(TI-1);
 				return false;
 			case 2007:
 				virtualMachines.get(VM_ID).LR("DRB", "NA",virtualMachines.get(VM_ID).getSF());
 				virtualMachines.get(VM_ID).setIC(IC+1);
+				virtualMachines.get(VM_ID).setTI(TI-1);
 				return false;
 			case 2008:
 				virtualMachines.get(VM_ID).LR("DRA", "A",code.get(IC+1));
 				virtualMachines.get(VM_ID).setIC(IC+2);
+				virtualMachines.get(VM_ID).setTI(TI-1);
 				return false;
 			case 2009:
 				virtualMachines.get(VM_ID).LR("DRB", "A",code.get(IC+1));
 				virtualMachines.get(VM_ID).setIC(IC+2);
+				virtualMachines.get(VM_ID).setTI(TI-1);
 				return false;
 			case 2010:
 				virtualMachines.get(VM_ID).LR("SF", "A", code.get(IC+1));
 				virtualMachines.get(VM_ID).setIC(IC+2);
+				virtualMachines.get(VM_ID).setTI(TI-1);
 				return false;
 			case 2011:
 				virtualMachines.get(VM_ID).LR("SF", "NA", code.get(IC+1));
 				virtualMachines.get(VM_ID).setIC(IC+2);
+				virtualMachines.get(VM_ID).setTI(TI-1);
 				return false;
 			case 2012:
 				System.out.println("Virtual Machine No. "+virtualMachines.get(vmIterator).getID()+" requests input.");
 				String var = input.next();
 				virtualMachines.get(VM_ID).LR("DRA", "NA", Integer.parseInt(var));
 				virtualMachines.get(VM_ID).setIC(IC+1);
+				virtualMachines.get(VM_ID).setTI(TI-1);
 				return false;
 			case 2013: 
 				System.out.println("Virtual Machine No. "+virtualMachines.get(vmIterator).getID()+" requests input.");
 				var = input.next();
 				virtualMachines.get(VM_ID).LR("DRB", "NA", Integer.parseInt(var));
 				virtualMachines.get(VM_ID).setIC(IC+1);
+				virtualMachines.get(VM_ID).setTI(TI-1);
 				return false;			
 			case 2100:
 				virtualMachines.get(VM_ID).SR("DRA", code.get(IC+1));
 				virtualMachines.get(VM_ID).setIC(IC+2);
+				virtualMachines.get(VM_ID).setTI(TI-1);
 				return false;
 			case 2101:
 				virtualMachines.get(VM_ID).SR("DRB", code.get(IC+1));
 				virtualMachines.get(VM_ID).setIC(IC+2);
+				virtualMachines.get(VM_ID).setTI(TI-1);
 				return false;
 			case 3001:
 				virtualMachines.get(VM_ID).PUSH(virtualMachines.get(VM_ID).getDRA());
 				virtualMachines.get(VM_ID).setIC(IC+1);
-				return false;
+				virtualMachines.get(VM_ID).setTI(TI-1);
+				return false;				
 			case 3002:
 				virtualMachines.get(VM_ID).PUSH(virtualMachines.get(VM_ID).getDRB());
 				virtualMachines.get(VM_ID).setIC(IC+1);
+				virtualMachines.get(VM_ID).setTI(TI-1);
 				return false;
 			case 3003:
 				virtualMachines.get(VM_ID).PUSH(code.get(IC+1));
 				virtualMachines.get(VM_ID).setIC(IC+2);
+				virtualMachines.get(VM_ID).setTI(TI-1);
 				return false;
 			case 3100:
 				virtualMachines.get(VM_ID).POP("DRA");
 				virtualMachines.get(VM_ID).setIC(IC+1);
+				virtualMachines.get(VM_ID).setTI(TI-1);
 				return false;
 			case 3101:
 				virtualMachines.get(VM_ID).POP("DRB");
 				virtualMachines.get(VM_ID).setIC(IC+1);
+				virtualMachines.get(VM_ID).setTI(TI-1);
 				return false;
 			case 4000:
 				virtualMachines.get(VM_ID).OR("DRA", virtualMachines.get(VM_ID).getDRA(), virtualMachines.get(VM_ID).getDRB());
@@ -1197,146 +1240,182 @@ public class Main
 			case 4001:
 				virtualMachines.get(VM_ID).OR("DRB", virtualMachines.get(VM_ID).getDRB(), virtualMachines.get(VM_ID).getDRA());
 				virtualMachines.get(VM_ID).setIC(IC+1);
+				virtualMachines.get(VM_ID).setTI(TI-1);
 				return false;
 			case 4002:
 				virtualMachines.get(VM_ID).OR("SF", virtualMachines.get(VM_ID).getSF(), virtualMachines.get(VM_ID).getDRA());
 				virtualMachines.get(VM_ID).setIC(IC+1);
+				virtualMachines.get(VM_ID).setTI(TI-1);
 				return false;
 			case 4003:
 				virtualMachines.get(VM_ID).OR("SF", virtualMachines.get(VM_ID).getSF(), virtualMachines.get(VM_ID).getDRB());
 				virtualMachines.get(VM_ID).setIC(IC+1);
+				virtualMachines.get(VM_ID).setTI(TI-1);
 				return false;
 			case 4004:
 				virtualMachines.get(VM_ID).OR("DRA", virtualMachines.get(VM_ID).getDRA(), code.get(IC+1));
 				virtualMachines.get(VM_ID).setIC(IC+2);
+				virtualMachines.get(VM_ID).setTI(TI-1);
 				return false;
 			case 4005: 
 				virtualMachines.get(VM_ID).OR("DRB", virtualMachines.get(VM_ID).getDRB(), code.get(IC+1));
 				virtualMachines.get(VM_ID).setIC(IC+2);
+				virtualMachines.get(VM_ID).setTI(TI-1);
 				return false;
 			case 4006:
 				virtualMachines.get(VM_ID).OR("SF", virtualMachines.get(VM_ID).getSF(), code.get(IC+1));
 				virtualMachines.get(VM_ID).setIC(IC+2);
+				virtualMachines.get(VM_ID).setTI(TI-1);
 				return false;
 			case 4100:
 				virtualMachines.get(VM_ID).AND("DRA", virtualMachines.get(VM_ID).getDRA(), virtualMachines.get(VM_ID).getDRB());
 				virtualMachines.get(VM_ID).setIC(IC+1);
+				virtualMachines.get(VM_ID).setTI(TI-1);
 				return false;
 			case 4101:
 				virtualMachines.get(VM_ID).AND("DRB", virtualMachines.get(VM_ID).getDRB(), virtualMachines.get(VM_ID).getDRA());
 				virtualMachines.get(VM_ID).setIC(IC+1);
+				virtualMachines.get(VM_ID).setTI(TI-1);
 				return false;
 			case 4102:
 				virtualMachines.get(VM_ID).AND("SF", virtualMachines.get(VM_ID).getSF(), virtualMachines.get(VM_ID).getDRA());
 				virtualMachines.get(VM_ID).setIC(IC+1);
+				virtualMachines.get(VM_ID).setTI(TI-1);
 				return false;
 			case 4103:
 				virtualMachines.get(VM_ID).AND("SF", virtualMachines.get(VM_ID).getSF(), virtualMachines.get(VM_ID).getDRB());
 				virtualMachines.get(VM_ID).setIC(IC+1);
+				virtualMachines.get(VM_ID).setTI(TI-1);
 				return false;
 			case 4104:
 				virtualMachines.get(VM_ID).AND("DRA", virtualMachines.get(VM_ID).getDRA(), code.get(IC+1));
 				virtualMachines.get(VM_ID).setIC(IC+2);
+				virtualMachines.get(VM_ID).setTI(TI-1);
 				return false;
 			case 4105: 
 				virtualMachines.get(VM_ID).AND("DRB", virtualMachines.get(VM_ID).getDRB(), code.get(IC+1));
 				virtualMachines.get(VM_ID).setIC(IC+2);
+				virtualMachines.get(VM_ID).setTI(TI-1);
 				return false;
 			case 4106:
 				virtualMachines.get(VM_ID).AND("SF", virtualMachines.get(VM_ID).getSF(), code.get(IC+1));
 				virtualMachines.get(VM_ID).setIC(IC+2);
+				virtualMachines.get(VM_ID).setTI(TI-1);			
 				return false;
 			case 4200:
 				virtualMachines.get(VM_ID).XOR("DRA", virtualMachines.get(VM_ID).getDRA(), virtualMachines.get(VM_ID).getDRB());
 				virtualMachines.get(VM_ID).setIC(IC+1);
+				virtualMachines.get(VM_ID).setTI(TI-1);
 				return false;
 			case 4201:
 				virtualMachines.get(VM_ID).XOR("DRB", virtualMachines.get(VM_ID).getDRB(), virtualMachines.get(VM_ID).getDRA());
 				virtualMachines.get(VM_ID).setIC(IC+1);
+				virtualMachines.get(VM_ID).setTI(TI-1);
 				return false;
 			case 4202:
 				virtualMachines.get(VM_ID).XOR("SF", virtualMachines.get(VM_ID).getSF(), virtualMachines.get(VM_ID).getDRA());
 				virtualMachines.get(VM_ID).setIC(IC+1);
+				virtualMachines.get(VM_ID).setTI(TI-1);
 				return false;
 			case 4203:
 				virtualMachines.get(VM_ID).XOR("SF", virtualMachines.get(VM_ID).getSF(), virtualMachines.get(VM_ID).getDRB());
 				virtualMachines.get(VM_ID).setIC(IC+1);
+				virtualMachines.get(VM_ID).setTI(TI-1);
 				return false;
 			case 4204:
 				virtualMachines.get(VM_ID).XOR("DRA", virtualMachines.get(VM_ID).getDRA(), code.get(IC+1));
 				virtualMachines.get(VM_ID).setIC(IC+2);
+				virtualMachines.get(VM_ID).setTI(TI-1);
 				return false;
 			case 4205: 
 				virtualMachines.get(VM_ID).AND("DRB", virtualMachines.get(VM_ID).getDRB(), code.get(IC+1));
 				virtualMachines.get(VM_ID).setIC(IC+2);
+				virtualMachines.get(VM_ID).setTI(TI-1);
 				return false;
 			case 4206:
 				virtualMachines.get(VM_ID).AND("SF", virtualMachines.get(VM_ID).getSF(), code.get(IC+1));
 				virtualMachines.get(VM_ID).setIC(IC+2);
+				virtualMachines.get(VM_ID).setTI(TI-1);
 				return false;
 			case 4300:
 				virtualMachines.get(VM_ID).NOT("DRA", virtualMachines.get(VM_ID).getDRA());
 				virtualMachines.get(VM_ID).setIC(IC+1);
+				virtualMachines.get(VM_ID).setTI(TI-1);
 				return false;
 			case 4301:
 				virtualMachines.get(VM_ID).NOT("DRB", virtualMachines.get(VM_ID).getDRB());
 				virtualMachines.get(VM_ID).setIC(IC+1);
+				virtualMachines.get(VM_ID).setTI(TI-1);
 				return false;
 			case 4302:
 				virtualMachines.get(VM_ID).NOT("SF", virtualMachines.get(VM_ID).getSF());
 				virtualMachines.get(VM_ID).setIC(IC+1);
+				virtualMachines.get(VM_ID).setTI(TI-1);
 				return false;
 			case 4400:
 				virtualMachines.get(VM_ID).NEG("DRA", virtualMachines.get(VM_ID).getDRA());
 				virtualMachines.get(VM_ID).setIC(IC+1);
+				virtualMachines.get(VM_ID).setTI(TI-1);
 				return false;
 			case 4401:
 				virtualMachines.get(VM_ID).NEG("DRB", virtualMachines.get(VM_ID).getDRB());
 				virtualMachines.get(VM_ID).setIC(IC+1);
+				virtualMachines.get(VM_ID).setTI(TI-1);
 				return false;
 			case 4402:
 				virtualMachines.get(VM_ID).NEG("SF", virtualMachines.get(VM_ID).getSF());
 				virtualMachines.get(VM_ID).setIC(IC+1);
+				virtualMachines.get(VM_ID).setTI(TI-1);
 				return false;
 			case 4500:
 				virtualMachines.get(VM_ID).CMP("DRA", virtualMachines.get(VM_ID).getDRA(), virtualMachines.get(VM_ID).getDRB());
 				virtualMachines.get(VM_ID).setIC(IC+1);
+				virtualMachines.get(VM_ID).setTI(TI-1);
 				return false;
 			case 4501:
 				virtualMachines.get(VM_ID).CMP("DRB", virtualMachines.get(VM_ID).getDRB(), virtualMachines.get(VM_ID).getDRA());
 				virtualMachines.get(VM_ID).setIC(IC+1);
+				virtualMachines.get(VM_ID).setTI(TI-1);
 				return false;
 			case 4502:
 				virtualMachines.get(VM_ID).CMP("SF", virtualMachines.get(VM_ID).getSF(), virtualMachines.get(VM_ID).getDRA());
 				virtualMachines.get(VM_ID).setIC(IC+1);
+				virtualMachines.get(VM_ID).setTI(TI-1);
 				return false;
 			case 4503:
 				virtualMachines.get(VM_ID).CMP("SF", virtualMachines.get(VM_ID).getSF(), virtualMachines.get(VM_ID).getDRB());
 				virtualMachines.get(VM_ID).setIC(IC+1);
+				virtualMachines.get(VM_ID).setTI(TI-1);
 				return false;
 			case 4504:
 				virtualMachines.get(VM_ID).CMP("DRA", virtualMachines.get(VM_ID).getDRA(), code.get(IC+1));
 				virtualMachines.get(VM_ID).setIC(IC+2);
+				virtualMachines.get(VM_ID).setTI(TI-1);
 				return false;
 			case 4505: 
 				virtualMachines.get(VM_ID).CMP("DRB", virtualMachines.get(VM_ID).getDRB(), code.get(IC+1));
 				virtualMachines.get(VM_ID).setIC(IC+2);
+				virtualMachines.get(VM_ID).setTI(TI-1);
 				return false;
 			case 4506:
 				virtualMachines.get(VM_ID).CMP("SF", virtualMachines.get(VM_ID).getSF(), code.get(IC+1));
 				virtualMachines.get(VM_ID).setIC(IC+2);
+				virtualMachines.get(VM_ID).setTI(TI-1);
 			case 5000:
 /*
 				virtualMachines.get(VM_ID).JMP(code.get(IC+1));
 				virtualMachines.get(VM_ID).setIC(IC+2);
+				virtualMachines.get(VM_ID).setTI(TI-1);
 				return false;
 			case 5100:
 				virtualMachines.get(VM_ID).JMP(code.get(IC+1));
 				virtualMachines.get(VM_ID).setIC(IC+2);
+				virtualMachines.get(VM_ID).setTI(TI-1);
 				return false;
 			case 5200:
 				virtualMachines.get(VM_ID).JMP(code.get(IC+1));
 				virtualMachines.get(VM_ID).setIC(IC+2);
+				virtualMachines.get(VM_ID).setTI(TI-1);
 				return false;
 */
 			case 6000:
@@ -1347,21 +1426,27 @@ public class Main
 			case 7000:
 				virtualMachines.get(VM_ID).PRNT("DRA", virtualMachines.get(VM_ID).getDRA());
 				virtualMachines.get(VM_ID).setIC(IC+1);
+				virtualMachines.get(VM_ID).setTI(TI-1);
 				return false;
 			case 7001: 
 				virtualMachines.get(VM_ID).PRNT("DRB", virtualMachines.get(VM_ID).getDRB());
 				virtualMachines.get(VM_ID).setIC(IC+1);
+				virtualMachines.get(VM_ID).setTI(TI-1);
 				return false;
 			case 7002:
 				virtualMachines.get(VM_ID).PRNT("SF", virtualMachines.get(VM_ID).getSF());
 				virtualMachines.get(VM_ID).setIC(IC+1);
+				virtualMachines.get(VM_ID).setTI(TI-1);
+				return false;
 			case 8000:
 				virtualMachines.get(VM_ID).LUM(code.get(IC+1), code.get(IC+2));
 				virtualMachines.get(VM_ID).setIC(IC+3);
+				virtualMachines.get(VM_ID).setTI(TI-3);
 				return false;
 			case 8001: 
 				virtualMachines.get(VM_ID).LEM(code.get(IC+1), code.get(IC+2));
 				virtualMachines.get(VM_ID).setIC(IC+3);
+				virtualMachines.get(VM_ID).setTI(TI-3);
 				return false;*/
 		}
 		return false;
