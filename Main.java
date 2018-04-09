@@ -964,7 +964,7 @@ public class Main
 		while( cont == true ){
 			virtualMachines.get(vmIterator).realMachine.setTI(10);
 			virtualMachines.get(vmIterator).loadRegisters();
-			realMachine.setMode(false);
+			realMachine.setMODE(false);
 			while( realMachine.getTI() > 0 )
 			{
 				if( !opt.equals("SKIP"))
@@ -982,7 +982,7 @@ public class Main
 					numberOfMachinesFinished++;
 				}
 			}
-			realMachine.setMode(true);
+			realMachine.setMODE(true);
 			virtualMachines.get(vmIterator).saveRegisters();
 			vmIterator =  (++vmIterator == virtualMachines.size()) ? 0 : vmIterator;
 			if( numberOfMachinesFinished == virtualMachines.size() ){
@@ -1136,8 +1136,8 @@ public class Main
 				return false;
 			case 2012:
 				System.out.println("Įveskite skaičių: \n");
-				var = input.next();
-				virtualMachines.get(VM_ID).LR("DRA", "NA", code.get(IC+1));
+				String var = input.next();
+				virtualMachines.get(VM_ID).LR("DRA", "NA", Integer.parseInt(var));
 				virtualMachines.get(VM_ID).setIC(IC+2);
 				return false;
 			case 2013: 
@@ -1434,7 +1434,7 @@ public class Main
 
 	}
 	public static void dealWithInterrupts(){
-		realMachine.setMode(true);
+		realMachine.setMODE(true);
 		if( realMachine.getPI() != 0 ){
 			switch(realMachine.getPI()){
 				case 1:
@@ -1486,6 +1486,6 @@ public class Main
 			}
 			realMachine.setIOI(0);
 		}
-		realMachine.setMode(true);
+		realMachine.setMODE(true);
 	}
 }
