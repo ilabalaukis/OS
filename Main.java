@@ -964,6 +964,7 @@ public class Main
 		while( cont == true ){
 			virtualMachines.get(vmIterator).realMachine.setTI(10);
 			virtualMachines.get(vmIterator).loadRegisters();
+			realMachine.setMode(false);
 			while( realMachine.getTI() > 0 )
 			{
 				if( !opt.equals("SKIP"))
@@ -981,6 +982,7 @@ public class Main
 					numberOfMachinesFinished++;
 				}
 			}
+			realMachine.setMode(true);
 			virtualMachines.get(vmIterator).saveRegisters();
 			vmIterator =  (++vmIterator == virtualMachines.size()) ? 0 : vmIterator;
 			if( numberOfMachinesFinished == virtualMachines.size() ){
@@ -1420,11 +1422,12 @@ public class Main
 
 	}
 	public static void dealWithInterrupts(){
+		realMachine.setMode(true);
 		if( realMachine.getPI() != 0 ){
 			switch(realMachine.getPI()){
 				case 1:
 					//1 - adresacijos klaida (neegzistuoja adresas)
-					//Killas
+					
 					break;
 				case 2:
 					//2 - komandų sekos pabaiga (sutikta HALT komanda)
@@ -1445,7 +1448,7 @@ public class Main
 					break;
 				case 6:
 					//Į registrą bandyta patalpinti per didelį arba per mažą skaičių ( >9999 arba <-4499 )
-				break;
+					break;
 			}
 			realMachine.setPI(0);
 		}else if( realMachine.getSI() != 0 ){
@@ -1471,5 +1474,6 @@ public class Main
 			}
 			realMachine.setIOI(0);
 		}
+		realMachine.setMode(true);
 	}
 }
