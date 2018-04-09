@@ -6,15 +6,11 @@
    ->
 >Sukurti virtualios mašinos metodus (jie yra mūsų projektre)
 	>PRINT
-	>CMP
 	>LEM
 	>LUM
-	>HALT -> setTI = 0;
 	>JMG
 	>JME
 	>JMP
-	>PUSH
-	>POP
 >Sukurti metodą kuris įvykdytų komandą (!!!)
 > Interuptai
 Pakurti interruptų įrenginį, kuris tvarkosi su interruptais kai jie atsiranda. Tai yra vienas metodas, kuris tikrina interruptų

@@ -79,13 +79,12 @@ public class VirtualMachine extends Machine
 			case "SF":
 				switch(type)
 				{
-					//Not and adress
+					//Not an adress
 					case "NA":
 						this.SF = operand;
 						break;
 					//Adress
 					case "A":
-// CONSTANTS - USE THEM, DONT BE IDIOTS - WTF IS 4+6*THIS.BLOCKSTAKEN - UPPER_SF_LIMIT IS MUCH MORE CLEAR
 						if( operand < (4 + 6*this.blocksTaken) && operand >= 0){
 							this.SF = this.dataSegment.get(operand);
 						}else if( operand < (8 + 12*this.blocksTaken) && operand >= 0){
@@ -104,7 +103,7 @@ public class VirtualMachine extends Machine
 			case "DRA":
 				switch(type)
 				{
-					//Not and adress
+					//Not an adress
 					case "NA":
 						this.DRA = operand;
 						break;
@@ -128,7 +127,7 @@ public class VirtualMachine extends Machine
 			case "DRB":
 				switch(type)
 				{
-					//Not and adress
+					//Not an adress
 					case "NA":
 						this.DRB = operand;
 						break;
