@@ -69,6 +69,7 @@ public class Machine
 		if (sk > 9999)
 		{
 			sk = sk % 10000;
+			this.SF = 0000;
 			this.SF = this.SF >= 1000 ? this.SF : this.SF+1000;
 		}
 		return sk;
@@ -116,25 +117,14 @@ public class Machine
 				System.out.println("Incorrect register");
 		}
 	}
-	public void CMP(String reg, int par1, int par2)
+	public void CMP(int par1, int par2)
 	{
 		int cmp = par1 - par2;
-
-		par1 = this.validateNumber(par1);
-		par2 = this.validateNumber(par2);
-		switch(reg)
-		{
-			case "DRA":
-				this.DRA = cmp;
-				break;
-			case "DRB":
-				this.DRB = cmp;
-				break;
-			case "SF":
-				this.SF = cmp;
-				break;
-			default:
-				System.out.println("Incorrect register");
+		this.SF = 0000;
+		if( cmp < 0 ){
+			this.SF = this.SF%100 != 0 ? this.SF : this.SF+10;
+		}else if(cmp == 0){
+			this.SF = this.SF%10 != 0 ? this.SF : this.SF+1;
 		}
 	}
 	public void MUL(String reg, int par1, int par2)
