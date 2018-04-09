@@ -938,7 +938,7 @@ public class Main
 	public static void vmExecutionMode()
 	{
 		//Loopas sustos kiekvienu stepu, nebent parašysi SKIP
-		String opt = "";
+		String opt = "a";
 		boolean cont = true;
 		int numberOfMachinesFinished = 0;
 		while( cont == true ){
@@ -947,8 +947,11 @@ public class Main
 			realMachine.setMODE(false);
 			while( realMachine.getTI() > 0 )
 			{
+				//Do Commands
+				boolean status  = executeCommand(vmIterator);
 				if( !opt.equals("SKIP"))
 				{	
+					System.out.println("Virtual Machine No. "+virtualMachines.get(vmIterator).getID()+" work cycle."); 
 					if (opt.equals("REGISTERS") || opt.equals("ALL") || opt.equals("r") || opt.equals("R") || opt.equals("A") || opt.equals("a")){
 						System.out.println("DRA " + realMachine.getDRA() + " DRB " + realMachine.getDRB()
 							+ " SP: " + realMachine.getSP() + " SF: "+realMachine.getSF() + " IC: "+realMachine.getIC()
@@ -959,18 +962,15 @@ public class Main
 						//System.out.println(realMachine.getMODE());
 					} 
 					if (opt.equals("DUMP") || opt.equals("ALL") || opt.equals("d") || opt.equals("D") || opt.equals("A") || opt.equals("a")){
-						System.out.println("CS: " + virtualMachines.get(virtualMachines.size()-1).getCS());
-						System.out.println("DS: " + virtualMachines.get(virtualMachines.size()-1).getDS());
-						System.out.println("SS: " + virtualMachines.get(virtualMachines.size()-1).getSS());
+						System.out.println("CS: " + virtualMachines.get(vmIterator).getCS());
+						System.out.println("DS: " + virtualMachines.get(vmIterator).getDS());
+						System.out.println("SS: " + virtualMachines.get(vmIterator).getSS());
 					}
 					//Išvedama vykdoma komanda
 					//Išvesti registrus
 					//išvesti atmintį
 					opt = input.next();
 				}
-
-				//Do Commands
-				boolean status  = executeCommand(vmIterator);
 				if( status == false ){
 					numberOfMachinesFinished = 0;
 				}else{
@@ -991,7 +991,6 @@ public class Main
 		int IC = virtualMachines.get(VM_ID).getIC();
 		int TI = virtualMachines.get(VM_ID).getTI();
 		ArrayList<Integer> code = virtualMachines.get(VM_ID).getCS();
-		System.out.println(VM_ID + " " + virtualMachines.get(VM_ID).getIC() + " DRA: " + virtualMachines.get(VM_ID).getDRA());
 		switch(code.get(IC))
 		{
 			case 1000:
@@ -1431,8 +1430,8 @@ public class Main
 				//interruptina - nerasta komanda
 				realMachine.setPI(3);
 				dealWithInterrupts();
+				return true;
 		}
-		return false;
 	}
 	public static void createVMprogram(){
 		String currentCommand = "";
@@ -1532,7 +1531,7 @@ public class Main
 					//3 - neatpažinta komanda
 					//kvies execute command metodas - keis nerastą komandą į halt (arba kill?)
 					//tiesą sakant galima čia vietoj killint (pažymėt, kad nukillinta mašina pvz nustačius SF į 9999) ir su halt pabaigti.
-					virtualMachines.get(vmIterator).setSF("9999");
+					virtualMachines.get(vmIterator).setSF(9999);
 					realMachine.setTI(0);
 					break;
 				case 4:

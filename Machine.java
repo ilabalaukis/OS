@@ -12,6 +12,7 @@ public class Machine
 	protected static int IC = 0;
 	protected static int SP = 0;
 	protected static int SF = 0;
+	//SF reiksmes [OF][DF][NF][ZF]
 	//getters and setters
 	public int getDRA()
 	{
@@ -72,7 +73,7 @@ public class Machine
 		if (add > 9999)
 		{
 			add = add - 10000;
-			//TODO: OF keičiasi
+			this.SF = this.SF >= 1000 ? this.SF : this.SF+1000;
 		}
 		switch(reg)
 		{
