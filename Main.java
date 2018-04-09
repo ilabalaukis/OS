@@ -433,9 +433,11 @@ public class Main
 						switch (parts[2])
 						{
 							case "DRA":
+								A.clear();
 								A.add(0, 2002);
 								return A;  
 							case "DRB":
+								A.clear();
 								A.add(0, 2003);
 								return A;
 							case "ADDRESS":
@@ -985,16 +987,19 @@ public class Main
 			{
 				if( !opt.equals("SKIP"))
 				{	
-					if (opt.equals("REGISTERS")){
+					if (opt.equals("REGISTERS") || opt.equals("ALL") || opt.equals("r") || opt.equals("R") || opt.equals("A") || opt.equals("a")){
 						System.out.println("DRA " + realMachine.getDRA() + " DRB " + realMachine.getDRB()
-							+ " SP: " + realMachine.getSP() + " SF "+realMachine.getSF() + " IC "+realMachine.getIC()
+							+ " SP " + realMachine.getSP() + " SF "+realMachine.getSF() + " IC "+realMachine.getIC()
 							+ " SI " + realMachine.getSI() + " PI "+realMachine.getPI() + " IOI "+realMachine.getIOI()
 							+ "TI " + realMachine.getTI());
 						//System.out.println(realMachine.getCHST());
 						//System.out.println(realMachine.getPLR());
 						//System.out.println(realMachine.getMode());
-					} else if (opt.equals("DUMP")){
-
+					} 
+					if (opt.equals("DUMP") || opt.equals("ALL") || opt.equals("d") || opt.equals("D") || opt.equals("A") || opt.equals("a")){
+						System.out.println("CS: " + virtualMachines.get(virtualMachines.size()-1).getCS());
+						System.out.println("DS: " + virtualMachines.get(virtualMachines.size()-1).getDS());
+						System.out.println("SS: " + virtualMachines.get(virtualMachines.size()-1).getSS());
 					}
 					//Išvedama vykdoma komanda
 					//Išvesti registrus
@@ -1543,6 +1548,7 @@ public class Main
 		virtualMachines.get(virtualMachines.size()-1).setCS(codeSegment);		
 		System.out.println("Virtual Machine created successfully." + virtualMachines.get(virtualMachines.size()-1).getSS());
 	}
+
 	public static void dealWithInterrupts(){
 		realMachine.setMODE(true);
 		if( realMachine.getPI() != 0 ){
