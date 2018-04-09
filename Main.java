@@ -1518,7 +1518,6 @@ public class Main
 			lastCommand = currentCommand.substring(0, 4);
 			for( int i = 0 ; i < machineCode.size() ; i++){
 				if( CSiterator >= (4+virtualMachines.get(virtualMachines.size()-1).getBlocks()*6)){
-System.out.println(">>>>"+i);
 						virtualMachines.get(virtualMachines.size()-1).setCS(codeSegment);
 						virtualMachines.get(virtualMachines.size()-1).addBlock();
 						codeSegment = virtualMachines.get(virtualMachines.size()-1).getCS();
@@ -1530,7 +1529,7 @@ System.out.println(">>>>"+i);
 		}
 		virtualMachines.get(virtualMachines.size()-1).setDS(dataSegment);
 		virtualMachines.get(virtualMachines.size()-1).setCS(codeSegment);		
-		System.out.println("Virtual Machine created successfully." + virtualMachines.get(virtualMachines.size()-1).getCS());
+		System.out.println("Virtual Machine created successfully." + virtualMachines.get(virtualMachines.size()-1).getSS());
 	}
 	public static void dealWithInterrupts(){
 		realMachine.setMODE(true);

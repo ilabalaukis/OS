@@ -159,11 +159,11 @@ public class VirtualMachine extends Machine
 			switch (reg)
 			{
 				case "DRA":
-					this.DRA = this.stackSegment.get(SP);
+					this.DRA = this.stackSegment.get(SP-1);
 					SP = SP - 1;
 					break;
 				case "DRB":
-					this.DRB = this.stackSegment.get(SP);
+					this.DRB = this.stackSegment.get(SP-1);
 					SP = SP - 1;
 					break;
 				default:
