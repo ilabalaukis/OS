@@ -1457,10 +1457,11 @@ public class Main
 		ArrayList<Integer> dataSegment = virtualMachines.get(virtualMachines.size()-1).getDS();
 		ArrayList<Integer> codeSegment = virtualMachines.get(virtualMachines.size()-1).getCS();
 		ArrayList<Integer> stackSegment = virtualMachines.get(virtualMachines.size()-1).getSS();
-		int wordCount = 1;
 		String regex = "\\d+";
 		//DS pildymas
+		int DSiterator = 0;
 		System.out.println("Fill data segment. When done filling, write DONE");
+		System.out.println("Maximum of 46 words are allowed in data segment.");
 		while( !lastCommand.toUpperCase().equals("DONE")){
 			currentCommand = input.next();
 			if(!currentCommand.toUpperCase().equals("DONE")){
@@ -1468,19 +1469,35 @@ public class Main
 				{
 					String[] line = currentCommand.split("");
 					String data = "";
-					for(int i = 0; i < line.length ; i++){
-						if( i%2 == 0 ){
-							data = "";
+					for(int i = 0; i < line.length ; i++){									
+						if( (i+1)%4 != 0 ){
 							data += line[i];	
 						}else{
 							data += line[i];
-							dataSegment.add(Integer.parseInt(line[i]));
-							wordCount++;
+							if( DSiterator >= (4+virtualMachines.get(virtualMachines.size()-1).getBlocks()*6)){
+								virtualMachines.get(virtualMachines.size()-1).setDS(dataSegment);
+								virtualMachines.get(virtualMachines.size()-1).addBlock();
+								dataSegment = virtualMachines.get(virtualMachines.size()-1).getDS();
+							}
+							dataSegment.set(DSiterator, Integer.parseInt(data));
+							DSiterator++;
+							data = "";
 						}
-						if( i%2 == 0 && i == line.length-1){
-							data += "00";
-							dataSegment.add(Integer.parseInt(line[i]));
-							wordCount++;
+						if( (i+1)%4 != 0 && i == line.length-1 && data.length() > 0){
+							if( DSiterator >= (4+virtualMachines.get(virtualMachines.size()-1).getBlocks()*6)){
+								virtualMachines.get(virtualMachines.size()-1).setDS(dataSegment);
+								virtualMachines.get(virtualMachines.size()-1).addBlock();
+								dataSegment = virtualMachines.get(virtualMachines.size()-1).getDS();
+							}
+							if( data.length() == 1 ){
+								data = "000"+data;
+							}else if( data.length() == 2 ){
+								data = "00"+data;
+							}else if( data.length() == 3 ){
+								data = "0"+data;
+							}
+							dataSegment.set(DSiterator ,Integer.parseInt(data));
+							DSiterator++;
 						}
 					}
 				}

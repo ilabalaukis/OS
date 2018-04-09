@@ -16,7 +16,7 @@ public class VirtualMachine extends Machine
 	private ArrayList<Integer> codeSegment = new ArrayList<Integer>();
 	private ArrayList<Integer> stackSegment = new ArrayList<Integer>();
 	private int[] virtualMemory = new int[15];
-	private int blocksTaken = 0;
+	private int blocksTaken = -1;
 
 	public VirtualMachine(RealMachine realMachine){
 		this.realMachine = realMachine;
@@ -62,6 +62,9 @@ public class VirtualMachine extends Machine
 	}
 	public int getID(){
 		return this.VM_Id;
+	}
+	public int getBlocks(){
+		return this.blocksTaken;
 	}
 	/**
 	 * Loads Register
@@ -220,19 +223,17 @@ public class VirtualMachine extends Machine
 	}
 	public void addBlock(){
 		List<Integer[]> alteredPT = realMachine.getPT();
-		if(this.blocksTaken < 8){
+		if(this.blocksTaken < 7){
 			for(int i=0 ; i<100 ; i++){
 				if( alteredPT.get(i)[0] == 0 ){
 					alteredPT.get(i)[0] = this.VM_Id;
-					alteredPT.get(i)[1] = this.blocksTaken++;
+					alteredPT.get(i)[1] = ++this.blocksTaken;
 					break;
 				}
 			}
-System.out.println("pries");
 			realMachine.setPT(alteredPT);
 			//Išskirsto bloką į virtualios mašinos segmentus
-			if( this.blocksTaken > 1 ){ 
-System.out.println(">1");
+			if( this.blocksTaken > 0 ){ 
 				for(int i = 0 ; i < 6 ; i++){
 					//Blokas pasidalina: 6 DS, 6 CS ir 3 SS
 					this.dataSegment.add(0);
@@ -242,7 +243,6 @@ System.out.println(">1");
 					}
 				}
 			}else{
-System.out.println("else");
 				for(int i = 0 ; i < 4 ; i++){
 					//Blokas pasidalina: 4 DS, 4 CS ir 2 SS
 					this.dataSegment.add(0);
@@ -251,7 +251,6 @@ System.out.println("else");
 						this.stackSegment.add(0);
 					}
 				}
-System.out.println(this.stackSegment.size());
 			}
 		}
 	}
