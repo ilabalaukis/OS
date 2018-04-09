@@ -249,6 +249,7 @@ public class VirtualMachine extends Machine
 					}
 				}
 			}
+			this.blocksTaken++;
 		}
 	}
 }
