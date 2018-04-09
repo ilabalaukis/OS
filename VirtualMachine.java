@@ -150,6 +150,28 @@ public class VirtualMachine extends Machine
 				System.out.println("LR method: Incorrect register");
 		}
 	}
+	public void POP(String reg){
+		if (this.SP != 0)
+		{
+			switch (reg)
+			{
+				case "DRA":
+					this.DRA = this.stackSegment.get(SP);
+					SP = SP - 1;
+					break;
+				case "DRB":
+					this.DRB = this.stackSegment.get(SP);
+					SP = SP - 1;
+					break;
+				default:
+					break;
+			}
+		}
+		else
+		{
+			//Interuptas
+		}
+	}
 	public void SR(String reg, int address){
 		switch(reg)
 		{

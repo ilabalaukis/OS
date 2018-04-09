@@ -1170,7 +1170,6 @@ public class Main
 				virtualMachines.get(VM_ID).SR("DRB", code.get(IC+1));
 				virtualMachines.get(VM_ID).setIC(IC+2);
 				return false;
-			/*
 			case 3001:
 				virtualMachines.get(VM_ID).PUSH(virtualMachines.get(VM_ID).getDRA());
 				virtualMachines.get(VM_ID).setIC(IC+1);
@@ -1191,7 +1190,6 @@ public class Main
 				virtualMachines.get(VM_ID).POP("DRB");
 				virtualMachines.get(VM_ID).setIC(IC+1);
 				return false;
-			*/
 			case 4000:
 				virtualMachines.get(VM_ID).OR("DRA", virtualMachines.get(VM_ID).getDRA(), virtualMachines.get(VM_ID).getDRB());
 				virtualMachines.get(VM_ID).setIC(IC+1);
