@@ -1427,6 +1427,10 @@ public class Main
 				virtualMachines.get(VM_ID).setIC(IC+3);
 				virtualMachines.get(VM_ID).setTI(TI-3);
 				return false;*/
+			default:
+				//interruptina - nerasta komanda
+				realMachine.setPI(3);
+				dealWithInterrupts();
 		}
 		return false;
 	}
@@ -1494,7 +1498,8 @@ public class Main
 		while( !lastCommand.toUpperCase().equals("HALT")){
 			currentCommand = input.nextLine();
 			ArrayList<Integer> machineCode = parseCommands(currentCommand);
-			lastCommand = currentCommand.substring(0, 4);
+			String[] currentLine = currentCommand.split(" ");
+			lastCommand = currentLine[0];
 			for( int i = 0 ; i < machineCode.size() ; i++){
 				if( CSiterator >= (4+virtualMachines.get(virtualMachines.size()-1).getBlocks()*6)){
 						virtualMachines.get(virtualMachines.size()-1).setCS(codeSegment);
@@ -1527,6 +1532,8 @@ public class Main
 					//3 - neatpažinta komanda
 					//kvies execute command metodas - keis nerastą komandą į halt (arba kill?)
 					//tiesą sakant galima čia vietoj killint (pažymėt, kad nukillinta mašina pvz nustačius SF į 9999) ir su halt pabaigti.
+					virtualMachines.get(vmIterator).setSF("9999");
+					realMachine.setTI(0);
 					break;
 				case 4:
 					//4 - dalyba iš nulio

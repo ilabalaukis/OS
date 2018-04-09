@@ -153,7 +153,7 @@ public class VirtualMachine extends Machine
 		}
 	}
 	public void POP(String reg){
-		if (this.SP != 0)
+		if (this.SP > 0)
 		{
 			switch (reg)
 			{
@@ -171,7 +171,8 @@ public class VirtualMachine extends Machine
 		}
 		else
 		{
-			//Interuptas
+			realMachine.setPI(5);
+		//	dealWithInterrupts();
 		}
 	}
 	public void SR(String reg, int address){
