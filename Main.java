@@ -951,12 +951,12 @@ public class Main
 				{	
 					if (opt.equals("REGISTERS") || opt.equals("ALL") || opt.equals("r") || opt.equals("R") || opt.equals("A") || opt.equals("a")){
 						System.out.println("DRA " + realMachine.getDRA() + " DRB " + realMachine.getDRB()
-							+ " SP " + realMachine.getSP() + " SF "+realMachine.getSF() + " IC "+realMachine.getIC()
-							+ " SI " + realMachine.getSI() + " PI "+realMachine.getPI() + " IOI "+realMachine.getIOI()
-							+ "TI " + realMachine.getTI());
+							+ " SP: " + realMachine.getSP() + " SF: "+realMachine.getSF() + " IC: "+realMachine.getIC()
+							+ " SI: " + realMachine.getSI() + " PI: "+realMachine.getPI() + " IOI: "+realMachine.getIOI()
+							+ " TI: " + realMachine.getTI() + " MODE: " + realMachine.getMODE() + " PTR: " + realMachine.getPTR());
 						//System.out.println(realMachine.getCHST());
-						//System.out.println(realMachine.getPLR());
-						//System.out.println(realMachine.getMode());
+						//System.out.println(realMachine.getPTR());
+						//System.out.println(realMachine.getMODE());
 					} 
 					if (opt.equals("DUMP") || opt.equals("ALL") || opt.equals("d") || opt.equals("D") || opt.equals("A") || opt.equals("a")){
 						System.out.println("CS: " + virtualMachines.get(virtualMachines.size()-1).getCS());
