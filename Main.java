@@ -1151,13 +1151,13 @@ public class Main
 				virtualMachines.get(VM_ID).setIC(IC+2);
 				return false;
 			case 2012:
-				System.out.println("Įveskite skaičių: \n");
+				System.out.println("Virtual Machine No. "+virtualMachines.get(vmIterator).getID()+" requests input.");
 				String var = input.next();
 				virtualMachines.get(VM_ID).LR("DRA", "NA", Integer.parseInt(var));
 				virtualMachines.get(VM_ID).setIC(IC+1);
 				return false;
 			case 2013: 
-				System.out.println("Įveskite skaičių: \n");
+				System.out.println("Virtual Machine No. "+virtualMachines.get(vmIterator).getID()+" requests input.");
 				var = input.next();
 				virtualMachines.get(VM_ID).LR("DRB", "NA", Integer.parseInt(var));
 				virtualMachines.get(VM_ID).setIC(IC+1);
