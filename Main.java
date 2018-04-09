@@ -963,10 +963,14 @@ public class Main
 		int numberOfMachinesFinished = 0;
 		while( cont == true ){
 			virtualMachines.get(vmIterator).realMachine.setTI(10);
+			virtualMachines.get(vmIterator).loadRegisters();
 			while( realMachine.getTI() > 0 )
 			{
 				if( !opt.equals("SKIP"))
 				{
+					//Išvedama vykdoma komanda
+					//Išvesti registrus
+					//išvesti atmintį
 					opt = input.next();
 				}
 				//Do Commands
@@ -977,6 +981,7 @@ public class Main
 					numberOfMachinesFinished++;
 				}
 			}
+			virtualMachines.get(vmIterator).saveRegisters();
 			vmIterator =  (++vmIterator == virtualMachines.size()) ? 0 : vmIterator;
 			if( numberOfMachinesFinished == virtualMachines.size() ){
 				cont = false;
