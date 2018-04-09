@@ -64,7 +64,16 @@ public class Machine
 	}
 	//Commands
 	//Virtual Machine Commands Commands
-	public int overflow(int sk)
+	public int negativeFlag(int sk)
+	{
+		if( sk < 0)
+		{
+			sk = sk * (-1) + 5000;
+			this.SF = 0000;
+			this.SF = this.SF >= 1000 ? this.SF : this.SF+1000;
+		}
+	}
+	public int overflowFlag(int sk)
 	{
 		if (sk > 9999)
 		{
@@ -74,11 +83,20 @@ public class Machine
 		}
 		return sk;
 	}
+	public int negativeNumber(int sk)
+	{
+		if (((this.SF % 1000) % 100) >= 10)
+		{
+			sk = sk * (-1) + 5000;
+		}
+	}
 	public void ADD(String reg, int par1, int par2)
 	{
 		
 		par1 = this.validateNumber(par1);
 		par2 = this.validateNumber(par2);
+		par1 = this.negativeNumber(par1);
+		par2 = this.negativeNumber(par2);
 		int add = par1 + par2;
 		add = overflow(add);
 		switch(reg)
@@ -98,10 +116,10 @@ public class Machine
 	}
 	public void SUB(String reg, int par1, int par2)
 	{
-		int sub = par1 - par2;
-
+		
 		par1 = this.validateNumber(par1);
 		par2 = this.validateNumber(par2);
+		int sub = par1 - par2;
 		switch(reg)
 		{
 			case "DRA":
