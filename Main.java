@@ -1456,7 +1456,6 @@ public class Main
 		String lastCommand = "";
 		ArrayList<Integer> dataSegment = virtualMachines.get(virtualMachines.size()-1).getDS();
 		ArrayList<Integer> codeSegment = virtualMachines.get(virtualMachines.size()-1).getCS();
-		ArrayList<Integer> stackSegment = virtualMachines.get(virtualMachines.size()-1).getSS();
 		String regex = "\\d+";
 		//DS pildymas
 		int DSiterator = 0;
@@ -1511,17 +1510,26 @@ public class Main
 		}
 		lastCommand = "";
 		input.nextLine();
+		int CSiterator = 0;
 		System.out.println("Write virtual machine program. Don't forget to write HALT at the end.");
 		while( !lastCommand.toUpperCase().equals("HALT")){
 			currentCommand = input.nextLine();
 			ArrayList<Integer> machineCode = parseCommands(currentCommand);
 			lastCommand = currentCommand.substring(0, 4);
-			codeSegment.addAll(machineCode);
+			for( int i = 0 ; i < machineCode.size() ; i++){
+				if( CSiterator >= (4+virtualMachines.get(virtualMachines.size()-1).getBlocks()*6)){
+System.out.println(">>>>"+i);
+						virtualMachines.get(virtualMachines.size()-1).setCS(codeSegment);
+						virtualMachines.get(virtualMachines.size()-1).addBlock();
+						codeSegment = virtualMachines.get(virtualMachines.size()-1).getCS();
+				}
+				codeSegment.set(CSiterator , machineCode.get(i));
+				CSiterator++;
+			}
+			//codeSegment.addAll(machineCode);
 		}
 		virtualMachines.get(virtualMachines.size()-1).setDS(dataSegment);
-		virtualMachines.get(virtualMachines.size()-1).setCS(codeSegment);
-		virtualMachines.get(virtualMachines.size()-1).setSS(stackSegment);
-		
+		virtualMachines.get(virtualMachines.size()-1).setCS(codeSegment);		
 		System.out.println("Virtual Machine created successfully." + virtualMachines.get(virtualMachines.size()-1).getCS());
 	}
 	public static void dealWithInterrupts(){
