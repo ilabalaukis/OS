@@ -1489,9 +1489,9 @@ public class Main
 		String regex = "\\d+";
 		//DS pildymas
 		System.out.println("Fill data segment. When done filling, write DONE");
-		while( !lastCommand.equals("DONE")){
+		while( !lastCommand.toUpperCase().equals("DONE")){
 			currentCommand = input.next();
-			if(!currentCommand.equals("DONE")){
+			if(!currentCommand.toUpperCase().equals("DONE")){
 				if (currentCommand.matches(regex))
 				{
 					String[] line = currentCommand.split("");
@@ -1523,7 +1523,7 @@ public class Main
 		lastCommand = "";
 		input.nextLine();
 		System.out.println("Write virtual machine program. Don't forget to write HALT at the end.");
-		while( !lastCommand.equals("HALT")){
+		while( !lastCommand.toUpperCase().equals("HALT")){
 			currentCommand = input.nextLine();
 			ArrayList<Integer> machineCode = parseCommands(currentCommand);
 			
