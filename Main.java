@@ -360,57 +360,73 @@ public class Main
 				switch (parts[1])
 				{
 					case "DRA":
-						switch (parts[2])
+						if (parts.length > 2)
 						{
-							case "DRB":
-								A.clear();	
-								A.add(0, 2000);
-								return A;
-							case "SK":
-								A.clear();
-								A.add(0, 2004);
-								A.add(1, SK);
-								return A;
-							case "SF":
-								A.clear();
-								A.add(0, 2006);
-								return A;
-							case "ADDRESS":
-								A.clear();
-								A.add(0,2008);
-								A.add(1, address);
-								return A;
-							default:
-								A.clear();
-								A.add(0, 9999);
-								break;     
+							switch (parts[2])
+							{
+								case "DRB":
+									A.clear();	
+									A.add(0, 2000);
+									return A;
+								case "SK":
+									A.clear();
+									A.add(0, 2004);
+									A.add(1, SK);
+									return A;
+								case "SF":
+									A.clear();
+									A.add(0, 2006);
+									return A;
+								case "ADDRESS":
+									A.clear();
+									A.add(0,2008);
+									A.add(1, address);
+									return A;
+								default:
+									A.clear();
+									A.add(0, 9999);
+									break;     
+							}
 						}
+						else
+						{
+							A.clear();
+							A.add(0, 2012);
+						}	
 					break;
 					case "DRB":
-						switch (parts[2])
+						if (parts.length > 2)
 						{
-							case "DRA":
-								A.clear();
-								A.add(0, 2001);
-								return A;  
-							case "SK":
-								A.clear();
-								A.add(0, 2005);
-								A.add(1, SK);
-								return A;
-							case "SF":
-								A.clear();
-								A.add(0, 2007);
-								return A;
-							case "ADDRESS":
-								A.clear();
-								A.add(0,2009);
-								A.add(1, address);
-								return A;
-							default:
-								A.clear();
-								A.add(0, 9999);
-								break;       
+							switch (parts[2])
+							{
+								case "DRA":
+									A.clear();
+									A.add(0, 2001);
+									return A;  
+								case "SK":
+									A.clear();
+									A.add(0, 2005);
+									A.add(1, SK);
+									return A;
+								case "SF":
+									A.clear();
+									A.add(0, 2007);
+									return A;
+								case "ADDRESS":
+									A.clear();
+									A.add(0,2009);
+									A.add(1, address);
+									return A;
+								default:
+									A.clear();
+									A.add(0, 9999);
+									break;
+							}
+						}
+						else
+       					{
+							A.clear();
+							A.add(0, 2013);	
 						}
 					break;
 					case "SF":
