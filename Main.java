@@ -1134,6 +1134,18 @@ public class Main
 				virtualMachines.get(VM_ID).LR("SF", "NA", code.get(IC+1));
 				virtualMachines.get(VM_ID).setIC(IC+2);
 				return false;
+			case 2012:
+				System.out.println("Įveskite skaičių: \n");
+				var = input.next();
+				virtualMachines.get(VM_ID).LR("DRA", "NA", code.get(IC+1));
+				virtualMachines.get(VM_ID).setIC(IC+2);
+				return false;
+			case 2013: 
+				System.out.println("Įveskite skaičių: \n");
+				var = input.next();
+				virtualMachines.get(VM_ID).LR("DRB", "NA", code.get(IC+1));
+				virtualMachines.get(VM_ID).setIC(IC+2);
+				return false;			
 			case 2100:
 				virtualMachines.get(VM_ID).SR("DRA", code.get(IC+1));
 				virtualMachines.get(VM_ID).setIC(IC+2);
