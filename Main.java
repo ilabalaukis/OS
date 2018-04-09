@@ -984,12 +984,24 @@ public class Main
 			while( realMachine.getTI() > 0 )
 			{
 				if( !opt.equals("SKIP"))
-				{
+				{	
+					if (opt.equals("REGISTERS")){
+						System.out.println("DRA " + realMachine.getDRA() + " DRB " + realMachine.getDRB()
+							+ " SP: " + realMachine.getSP() + " SF "+realMachine.getSF() + " IC "+realMachine.getIC()
+							+ " SI " + realMachine.getSI() + " PI "+realMachine.getPI() + " IOI "+realMachine.getIOI()
+							+ "TI " + realMachine.getTI());
+						//System.out.println(realMachine.getCHST());
+						//System.out.println(realMachine.getPLR());
+						//System.out.println(realMachine.getMode());
+					} else if (opt.equals("DUMP")){
+
+					}
 					//Išvedama vykdoma komanda
 					//Išvesti registrus
 					//išvesti atmintį
 					opt = input.next();
 				}
+
 				//Do Commands
 				boolean status  = executeCommand(vmIterator);
 				if( status == false ){
