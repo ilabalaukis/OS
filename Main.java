@@ -980,6 +980,7 @@ public class Main
 		while( cont == true ){
 			virtualMachines.get(vmIterator).realMachine.setTI(10);
 			virtualMachines.get(vmIterator).loadRegisters();
+			realMachine.setMODE(false);
 			while( realMachine.getTI() > 0 )
 			{
 				if( !opt.equals("SKIP"))
@@ -997,6 +998,7 @@ public class Main
 					numberOfMachinesFinished++;
 				}
 			}
+			realMachine.setMODE(true);
 			virtualMachines.get(vmIterator).saveRegisters();
 			vmIterator =  (++vmIterator == virtualMachines.size()) ? 0 : vmIterator;
 			if( numberOfMachinesFinished == virtualMachines.size() ){
@@ -1148,6 +1150,18 @@ public class Main
 				virtualMachines.get(VM_ID).LR("SF", "NA", code.get(IC+1));
 				virtualMachines.get(VM_ID).setIC(IC+2);
 				return false;
+			case 2012:
+				System.out.println("Įveskite skaičių: \n");
+				String var = input.next();
+				virtualMachines.get(VM_ID).LR("DRA", "NA", Integer.parseInt(var));
+				virtualMachines.get(VM_ID).setIC(IC+2);
+				return false;
+			case 2013: 
+				System.out.println("Įveskite skaičių: \n");
+				var = input.next();
+				virtualMachines.get(VM_ID).LR("DRB", "NA", code.get(IC+1));
+				virtualMachines.get(VM_ID).setIC(IC+2);
+				return false;			
 			case 2100:
 				virtualMachines.get(VM_ID).SR("DRA", code.get(IC+1));
 				virtualMachines.get(VM_ID).setIC(IC+2);
@@ -1436,11 +1450,12 @@ public class Main
 
 	}
 	public static void dealWithInterrupts(){
+		realMachine.setMODE(true);
 		if( realMachine.getPI() != 0 ){
 			switch(realMachine.getPI()){
 				case 1:
 					//1 - adresacijos klaida (neegzistuoja adresas)
-					//Killas
+					
 					break;
 				case 2:
 					//2 - komandų sekos pabaiga (sutikta HALT komanda)
@@ -1461,7 +1476,7 @@ public class Main
 					break;
 				case 6:
 					//Į registrą bandyta patalpinti per didelį arba per mažą skaičių ( >9999 arba <-4499 )
-				break;
+					break;
 			}
 			realMachine.setPI(0);
 		}else if( realMachine.getSI() != 0 ){
@@ -1487,5 +1502,6 @@ public class Main
 			}
 			realMachine.setIOI(0);
 		}
+		realMachine.setMODE(true);
 	}
 }

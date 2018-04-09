@@ -13,8 +13,8 @@ public class RealMachine extends Machine
 	//Other Registers
 	//private int IC = 0000;
 	//private int SP = 0000;
-	private int PTR = 0;
-	private boolean MODE = false;
+	private static int PTR = 0;
+	private static boolean MODE = false;
 	//private int SF = 0000;
 	//Constructor
 	RealMachine(){	
