@@ -1158,7 +1158,7 @@ public class Main
 				return false;
 			case 2013: 
 				System.out.println("Įveskite skaičių: \n");
-				String var = input.next();
+				var = input.next();
 				virtualMachines.get(VM_ID).LR("DRB", "NA", Integer.parseInt(var));
 				virtualMachines.get(VM_ID).setIC(IC+1);
 				return false;			
@@ -1403,27 +1403,36 @@ public class Main
 		ArrayList<Integer> codeSegment = new ArrayList<Integer>();
 		ArrayList<Integer> stackSegment = new ArrayList<Integer>();
 		int wordCount = 1;
+		String regex = "\\d+";
 		//DS pildymas
 		System.out.println("Fill data segment. When done filling, write DONE");
 		while( !lastCommand.equals("DONE")){
 			currentCommand = input.next();
 			if(!currentCommand.equals("DONE")){
-				String[] line = currentCommand.split("");
-				String data = "";
-				for(int i = 0; i < line.length ; i++){
-					if( i%2 == 0 ){
-						data = "";
-						data += line[i];	
-					}else{
-						data += line[i];
-						dataSegment.add(Integer.parseInt(line[i]));
-						wordCount++;
+				if (currentCommand.matches(regex))
+				{
+					String[] line = currentCommand.split("");
+					String data = "";
+					for(int i = 0; i < line.length ; i++){
+						if( i%2 == 0 ){
+							data = "";
+							data += line[i];	
+						}else{
+							data += line[i];
+							dataSegment.add(Integer.parseInt(line[i]));
+							wordCount++;
+						}
+						if( i%2 == 0 && i == line.length-1){
+							data += "00";
+							dataSegment.add(Integer.parseInt(line[i]));
+							wordCount++;
+						}
 					}
-					if( i%2 == 0 && i == line.length-1){
-						data += "00";
-						dataSegment.add(Integer.parseInt(line[i]));
-						wordCount++;
-					}
+				}
+				else
+				{
+					System.out.println("Input has to be a number.");
+					//TODO: koduotės
 				}
 			}
 			lastCommand = currentCommand;
