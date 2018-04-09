@@ -212,7 +212,7 @@ public class VirtualMachine extends Machine
 	}
 	public void PUSH( int number ){
 		if( this.SP != this.stackSegment.size()-1 ){		
-				this.stackSegment.set( this.SP , number );
+			this.stackSegment.set( this.SP , number );
 			this.SP++;
 		}else{
 			//Kvieciamas interruptas.
@@ -249,6 +249,7 @@ public class VirtualMachine extends Machine
 					}
 				}
 			}
+			this.blocksTaken++;
 		}
 	}
 }
