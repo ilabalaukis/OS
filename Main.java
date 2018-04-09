@@ -1451,34 +1451,6 @@ public class Main
 		}
 		return false;
 	}
-	/*public static void createVirtualMachine(){
-		//Sukuria mašiną
-		virtualMachines.add(new VirtualMachine(realMachine));
-		//Priskiria puslapiavimo lentelėje mašinai pirmąjį bloką.
-		List<Integer[]> alteredPT = realMachine.getPT();
-		for(int i=0 ; i<100 ; i++){
-			if( alteredPT.get(i)[0] == 0 ){
-				alteredPT.get(i)[0] = virtualMachines.size();
-				break;
-			}
-		}
-		realMachine.setPT(alteredPT);
-		//Išskirsto pirmą bloką į virtualios mašinos segmentus
-		ArrayList<Integer> DS = new ArrayList<Integer>();
-		ArrayList<Integer> CS = new ArrayList<Integer>();
-		ArrayList<Integer> SS = new ArrayList<Integer>();
-		for(int i = 0 ; i < 4 ; i++){
-			//Pirmas blokas pasidalina: 5 rezervas registrams, 4 DS, 4 CS ir 2 SS
-			DS.add(0);
-			CS.add(0);
-			if(i > 1){
-				SS.add(0);
-			}
-		}
-		virtualMachines.get(virtualMachines.size()-1).setDS(DS);
-		virtualMachines.get(virtualMachines.size()-1).setCS(CS);
-		virtualMachines.get(virtualMachines.size()-1).setSS(SS);
-	}*/
 	public static void createVMprogram(){
 		String currentCommand = "";
 		String lastCommand = "";
