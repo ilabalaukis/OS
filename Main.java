@@ -492,15 +492,15 @@ public class Main
 				{
 					case "DRA":
 						A.clear();	
-						A.add(0, 3000);
+						A.add(0, 3001);
 						return A;						
 					case "DRB":
 						A.clear();
-						A.add(0, 3001);
+						A.add(0, 3002);
 						return A;
 					case "SK":
 						A.clear();
-						A.add(0, 3002);
+						A.add(0, 3003);
 						A.add(1, SK1);
 						return A;
 					default:
