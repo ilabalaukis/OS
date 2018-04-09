@@ -1445,6 +1445,7 @@ public class Main
 					break;
 				case 6:
 					//Į registrą bandyta patalpinti per didelį arba per mažą skaičių ( >9999 arba <-4499 )
+				break;
 			}
 			realMachine.setPI(0);
 		}else if( realMachine.getSI() != 0 ){
