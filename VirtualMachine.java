@@ -211,7 +211,7 @@ public class VirtualMachine extends Machine
 		}
 	}
 	public void PUSH( int number ){
-		if( this.SP < this.stackSegment.size()-1 ){		
+		if( this.SP < this.stackSegment.size() ){		
 			this.stackSegment.set( this.SP , number );
 			this.SP++;
 		}else{
@@ -228,9 +228,11 @@ public class VirtualMachine extends Machine
 					break;
 				}
 			}
+System.out.println("pries");
 			realMachine.setPT(alteredPT);
 			//Išskirsto bloką į virtualios mašinos segmentus
 			if( this.blocksTaken > 1 ){ 
+System.out.println(">1");
 				for(int i = 0 ; i < 6 ; i++){
 					//Blokas pasidalina: 6 DS, 6 CS ir 3 SS
 					this.dataSegment.add(0);
@@ -240,6 +242,7 @@ public class VirtualMachine extends Machine
 					}
 				}
 			}else{
+System.out.println("else");
 				for(int i = 0 ; i < 4 ; i++){
 					//Blokas pasidalina: 4 DS, 4 CS ir 2 SS
 					this.dataSegment.add(0);
@@ -248,6 +251,7 @@ public class VirtualMachine extends Machine
 						this.stackSegment.add(0);
 					}
 				}
+System.out.println(this.stackSegment.size());
 			}
 		}
 	}

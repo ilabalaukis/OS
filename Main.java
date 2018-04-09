@@ -1366,7 +1366,7 @@ public class Main
 		}
 		return false;
 	}
-	public static void createVirtualMachine(){
+	/*public static void createVirtualMachine(){
 		//Sukuria mašiną
 		virtualMachines.add(new VirtualMachine(realMachine));
 		//Priskiria puslapiavimo lentelėje mašinai pirmąjį bloką.
@@ -1393,13 +1393,13 @@ public class Main
 		virtualMachines.get(virtualMachines.size()-1).setDS(DS);
 		virtualMachines.get(virtualMachines.size()-1).setCS(CS);
 		virtualMachines.get(virtualMachines.size()-1).setSS(SS);
-	}
+	}*/
 	public static void createVMprogram(){
 		String currentCommand = "";
 		String lastCommand = "";
-		ArrayList<Integer> dataSegment = new ArrayList<Integer>();
-		ArrayList<Integer> codeSegment = new ArrayList<Integer>();
-		ArrayList<Integer> stackSegment = new ArrayList<Integer>();
+		ArrayList<Integer> dataSegment = virtualMachines.get(virtualMachines.size()-1).getDS();
+		ArrayList<Integer> codeSegment = virtualMachines.get(virtualMachines.size()-1).getCS();
+		ArrayList<Integer> stackSegment = virtualMachines.get(virtualMachines.size()-1).getSS();
 		int wordCount = 1;
 		String regex = "\\d+";
 		//DS pildymas
@@ -1441,7 +1441,6 @@ public class Main
 		while( !lastCommand.equals("HALT")){
 			currentCommand = input.nextLine();
 			ArrayList<Integer> machineCode = parseCommands(currentCommand);
-			
 			lastCommand = currentCommand.substring(0, 4);
 			codeSegment.addAll(machineCode);
 		}
@@ -1450,11 +1449,6 @@ public class Main
 		virtualMachines.get(virtualMachines.size()-1).setSS(stackSegment);
 		
 		System.out.println("Virtual Machine created successfully." + virtualMachines.get(virtualMachines.size()-1).getCS());
-
-
-
-
-
 	}
 	public static void dealWithInterrupts(){
 		realMachine.setMODE(true);
