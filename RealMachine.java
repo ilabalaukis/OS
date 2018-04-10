@@ -53,7 +53,7 @@ public class RealMachine extends Machine
 	{
 		return this.SI;
 	}
-	public void setSI(int setSI)
+	public void setSI(int SI)
 	{
 		this.SI = SI;
 	}
@@ -124,16 +124,5 @@ public class RealMachine extends Machine
 	public void setPT(List<Integer[]> PT){
 		this.PT = PT;
 	}
-
-	//Commands
-	public void ADD(String reg, int par1, int par2)
-	{
-		switch(reg){
-			case "DRA":
-				this.DRA = par1 + par2;
-			case "DRB":
-				this.DRB = par1 + par2;
-		}
-	} 
 }
 

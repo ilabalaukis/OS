@@ -219,6 +219,13 @@ public class VirtualMachine extends Machine
 			this.SP++;
 		}else{
 			//Kvieciamas interruptas.
+			realMachine.SI = 1;
+			this.dealWithInterrupts();
+			if( this.SP < this.stackSegment.size() ){		
+				this.stackSegment.set( this.SP , number );
+				this.SP++;
+			}
+
 		}
 	}
 	public void addBlock(){
@@ -252,6 +259,39 @@ public class VirtualMachine extends Machine
 					}
 				}
 			}
+		}
+	}
+	private void dealWithInterrupts(){
+		realMachine.setMODE(true);
+		if( realMachine.getSI() != 0 ){
+			switch(realMachine.getSI()){
+				case 1:
+					//Mašina prašo atminties.
+					//Trūksta vietos virtualiai mašinai, stekas nebetelpa. Jei mašina turi mažai blokų, tai galima
+					//duoti dar vieną. Jei turi tiek kiek galima - killas?
+					if(this.blocksTaken == 7){
+						this.setSF(9998);
+						realMachine.setTI(0);
+					}else{
+						this.addBlock();
+					}
+					break;
+			}
+			realMachine.setSI(0);
+		}
+		realMachine.setMODE(false);
+	}
+	public void JMP(int address){
+		this.IC = address;
+	}
+	public void JMG(int address){
+		if(this.SF%100 == 0	){
+			this.IC = address;
+		}
+	}
+	public void JME(int address){
+		if(this.SF%10 != 0	){
+			this.IC = address;
 		}
 	}
 }
