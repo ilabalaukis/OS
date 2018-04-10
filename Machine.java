@@ -66,12 +66,20 @@ public class Machine
 	//Virtual Machine Commands Commands
 	public int negativeFlag(int sk)
 	{
+		if (sk < -5000)
+		{
+			sk = (sk % 5000) * (-1);
+			this.SF = 1000;
+			return sk;
+		}
 		if( sk < 0)
 		{
-			sk = sk * (-1) + 5000;
-			this.SF = 0000;
-			this.SF = this.SF >= 1000 ? this.SF : this.SF+1000;
+			sk = (sk * (-1)) + 5000;
+			this.SF = 0010;
+			return sk;
 		}
+		return sk;
+		
 	}
 	public int overflowFlag(int sk)
 	{
@@ -79,26 +87,34 @@ public class Machine
 		{
 			sk = sk % 10000;
 			this.SF = 0000;
-			this.SF = this.SF >= 1000 ? this.SF : this.SF+1000;
+			this.SF += 1000;
 		}
 		return sk;
 	}
 	public int negativeNumber(int sk)
 	{
-		if (((this.SF % 1000) % 100) >= 10)
+		if (sk > 5000)
 		{
-			sk = sk * (-1) + 5000;
+			sk = sk * (-1) % 5000;
+			this.setSF(10);
 		}
+		return sk;
 	}
 	public void ADD(String reg, int par1, int par2)
 	{
-		
-		par1 = this.validateNumber(par1);
-		par2 = this.validateNumber(par2);
 		par1 = this.negativeNumber(par1);
 		par2 = this.negativeNumber(par2);
 		int add = par1 + par2;
-		add = overflow(add);
+		System.out.println(add);
+
+		if (add > 0)
+		{
+			add = this.overflowFlag(add);
+		}
+		else
+		{
+			add = this.negativeFlag(add);
+		}
 		switch(reg)
 		{
 			case "DRA":
@@ -116,10 +132,17 @@ public class Machine
 	}
 	public void SUB(String reg, int par1, int par2)
 	{
-		
-		par1 = this.validateNumber(par1);
-		par2 = this.validateNumber(par2);
+		par1 = this.negativeNumber(par1);
+		par2 = this.negativeNumber(par2);
 		int sub = par1 - par2;
+		if (sub > 0)
+		{
+			sub = this.overflowFlag(sub);
+		}
+		else
+		{
+			sub = this.negativeFlag(sub);
+		}
 		switch(reg)
 		{
 			case "DRA":
@@ -137,6 +160,8 @@ public class Machine
 	}
 	public void CMP(int par1, int par2)
 	{
+		par1 = this.negativeNumber(par1);
+		par2 = this.negativeNumber(par2);
 		int cmp = par1 - par2;
 		this.SF = 0000;
 		if( cmp < 0 ){
@@ -147,11 +172,17 @@ public class Machine
 	}
 	public void MUL(String reg, int par1, int par2)
 	{
-		int mul = 0;
-		par1 = this.validateNumber(par1);
-		par2 = this.validateNumber(par2);
-		mul = par1 * par2;
-		mul = overflow(mul);
+		par1 = this.negativeNumber(par1);
+		par2 = this.negativeNumber(par2);
+		int mul = par1 * par2;
+		if (mul > 0)
+		{
+			mul = this.overflowFlag(mul);
+		}
+		else
+		{
+			mul = this.negativeFlag(mul);
+		}
 		switch(reg)
 		{
 			case "DRA":
@@ -169,16 +200,25 @@ public class Machine
 	}
 	public void DIV(String reg, int par1, int par2)
 	{
-		par1 = this.validateNumber(par1);
-		par2 = this.validateNumber(par2);
+		par1 = this.negativeNumber(par1);
+		par2 = this.negativeNumber(par2);
+		int div = par1 / par2;
+		if (div > 0)
+		{
+			div = this.overflowFlag(div);
+		}
+		else
+		{
+			div = this.negativeFlag(div);
+		}
 		switch(reg)
 		{
 			case "DRA":
-				this.DRA = par1 / par2;
+				this.DRA = div;
 				this.DRB = par1 % par2;
 				break;
 			case "DRB":
-				this.DRA = par1 / par2;
+				this.DRA = div;
 				this.DRB = par1 % par2;
 				break;
 			default:
@@ -193,6 +233,7 @@ public class Machine
 	*/
 	public void OR(String reg, int par1, int par2)
 	{
+		
 		switch(reg)
 		{
 			case "IC":
@@ -252,7 +293,7 @@ public class Machine
 		}
 	}
 	public void NOT(String reg, int par1)
-	{
+	{	
 		switch(reg)
 		{
 			case "IC":
@@ -273,10 +314,6 @@ public class Machine
 	}
 	public void NEG(String reg, int par1)
 	{
-		//if (par1 < 0 || par1 > -5000)
-		//{	
-			//par1 = 10000 + par1;		
-		//}
 
 		switch(reg)
 		{
@@ -306,7 +343,12 @@ public class Machine
 		{
 			if (_par < 0)
 			{
-				_par = _par + 10000;
+				_par = (_par - 5000) * (-1);
+				this.setSF(10);
+			}
+			else
+			{
+				this.SF = 0000;
 			}
 		}
 		return _par;	

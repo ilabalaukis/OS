@@ -57,7 +57,7 @@ public class Main
 		int SK1 = 0;
 		int address = 0;
 		int address1 = 0;
-		String regex = "\\d+";
+		String regex = "-?\\d+";
 		String regexAddress = "\\[\\d+\\]";
 		String str1 = "";
 		String str2 = "";
@@ -84,6 +84,14 @@ public class Main
 			{
 				SK = Integer.parseInt(parts[2]);
 				parts[2] = "SK";
+				if (SK > 9999 || SK < -5000)
+				{
+					System.out.println ("Negalima");
+				}
+				if(SK < 0)
+				{
+				 	SK = (SK - 5000) * (-1);
+				}
 			}
 			if (parts[2].matches(regexAddress))
 			{
